@@ -1,0 +1,8 @@
+.contents {
+  float: left;
+  background-color: $background;
+  width: calc(100% - 180px);
+  height: calc(100vh - 50px);
+  padding: 20px;
+  overflow-y: scroll;
+}

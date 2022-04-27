@@ -1,0 +1,84 @@
+@charset 'utf-8';
+
+.modal {
+  z-index: 1000;
+  font-size: 13px;
+
+  .vm--overlay {
+    background: rgba(0, 0, 0, .1);
+  }
+
+  .vm--modal {
+    overflow: visible;
+  }
+
+  &.scrolling {
+    .content_wrap {
+      height: calc(100% - 36px);
+      overflow-y: scroll;
+      -ms-overflow-style: initial;
+      &::-webkit-scrollbar {
+        width: 10px;
+        display: initial !important;
+        background-color: initial;
+        color: initial;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba($gray, .5);
+        border-radius: 10px;  
+      }
+      &::-webkit-scrollbar-track {
+        background-color: $background;
+      }
+    }
+    &.action {
+      .content_wrap {
+        height: calc(100% - 12rem);
+      }
+    }
+  }
+
+  .form {
+    fieldset {
+      margin-bottom: 5px;
+    }
+  }
+
+  .header_wrap {
+    position: relative;
+    padding: 6px 14px 7px 14px;
+    background-color: #253966;
+    @include grab;
+    @include clearfix;
+  }
+
+  .header {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 400;
+    color: #fff;
+  }
+
+  .closeButton {
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .closeButton::before {
+    position: absolute;
+    top: .9rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    content: '✖️';
+  }
+
+  .content_wrap {
+    padding: 20px;
+    @include clearfix;
+  }
+
+  .action_wrap {
+    text-align: center;
+    margin: 20px 0 0 0;
+  }
+}

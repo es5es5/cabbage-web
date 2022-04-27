@@ -1,0 +1,94 @@
+@charset 'utf-8';
+
+.trees {
+  @include clearfix;
+
+  background-color: #fff;
+  border: 1px solid $border;
+  border-radius: 3px;
+}
+
+.folderImg {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin-right: 4px;
+  margin-left: -16px;
+}
+
+.noFolder {
+  margin-left: 12px;
+}
+
+.children {
+  margin: 0 4px;
+}
+
+.text {
+  color: #444;
+  font-size: 12px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.he-tree {
+  padding: 20px;
+}
+
+.tree-node {
+  @include clearfix;
+  position: relative;
+  margin-bottom: 4px;
+  border-radius: 3px;
+
+  &.active {
+    // border: 1px solid $primary;
+
+    .text {
+      color: $primary;
+    }
+  }
+  &.open, &.close {
+    background-color: #fbfbfb;
+  }
+}
+
+.tree-node-inner {
+  @include clearfix;
+  padding: 4px 10px 4px 24px;
+  border: 1px solid #fbfbfb;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #fbfbfb;
+
+  &:hover {
+    .text {
+      color: $primary;
+    }
+  }
+}
+
+.draggable-placeholder-inner{
+  border: 1px dashed #0088F8;
+  background: rgba(0, 136, 249, 0.09);
+  color: #0088f9;
+  text-align: center;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.draggable { @include grab; }
+
+.NoDraggable { @include clearfix; cursor: pointer; }
+
+.tree-node-inner-back {
+  margin-bottom: 0 !important;
+}
+
+.plusImg {
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  @include hover;
+}
