@@ -22,7 +22,6 @@
     "sass": "^1.43.4",
     "vee-validate": "^2.2.0",
     "vue": "^2.6.11",
-    "vue-azure-blob-upload": "0.0.6",
     "vue-cookies": "^1.7.4",
     "vue-ctk-date-time-picker": "^2.5.0",
     "vue-progressbar": "^0.7.5",

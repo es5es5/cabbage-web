@@ -14,28 +14,8 @@ export default {
         mixinUser () { return this.$store.getters['user/userInfo'] },
         mixinSelectedBrand () { return this.$store.getters['common/getSelectedBrand'] },
         mixinUserRoles () { return this.$store.getters.getRoles },
-        mixinAZURE_STORAGE () { return `${process.env.VUE_APP_AZURE_STORAGE_URL}/${process.env.VUE_APP_AZURE_STORAGE_CONTAINER}` }
       },
       methods: {
-        /**
-         * get Azure Sas token
-         * @returns {Promise}
-         * {
-         *  url: basUrl for blob file uri (i.e http://<accountName>.blob.core.windows.net/<container>/<blobname>)
-         *  token: access signature querystring key/value prefixed with "?"
-         * }
-         */
-        getSastoken () {
-          return new Promise((resolve, reject) => {
-            this.$http.get('/azure/sastoken/container', {
-              container: 'learning'
-            }).then(result => {
-              resolve(result)
-            }).catch(error => {
-              reject(error)
-            })
-          })
-        },
         // Object Deep Copy
         deepCopy (obj) {
           const clone = {}
