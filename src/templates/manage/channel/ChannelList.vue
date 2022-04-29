@@ -84,10 +84,13 @@
 
 <script>
 
+import { collection, getDocs } from 'firebase/firestore'
+import { firestore } from '@/plugins/firebase'
+
 export default {
   name: 'ChannelList',
   created () {
-    // this.getContents()
+    this.getContents()
   },
   watch: {
     mixinSelectedBrand () {
@@ -110,11 +113,35 @@ export default {
   computed: {
   },
   methods: {
-    getContents () {
-      this.$Progress.start()
-      this.$Progress.finish()
-      this.$Progress.fail()
+    searchDocList (options) {
+      const option = Object.assign({
+        route: this.$route,
+        router: this.$router,
+        form: this.searchForm,
+        callback: this.getDocList
+      }, options)
+
+      this.COMMON.searchPagination(option)
     },
+    showModal () {
+    },
+    async getContents () {
+      console.log(firestore)
+      const querySnapshot = await getDocs(collection(firestore, process.env.VUE_APP_FIRESTORE_COLLECTION))
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, ' => ', doc.data())
+      })
+      // const list = []
+      // const querySnapshot = await getDocs(collection(firestore, process.env.VUE_APP_FIRESTORE_COLLECTION))
+      // querySnapshot.forEach((doc) => {
+      //   list.push({
+      //     id: doc.id,
+      //     ...doc.data()
+      //   })
+      // })
+      // this.idol = list
+    }
   }
 }
 </script>
