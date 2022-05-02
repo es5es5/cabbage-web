@@ -11,9 +11,6 @@ export default {
         mixinRouteMetaGoList () { return this.$route.meta ? this.$route.meta.goList : false },
         mixinRouteMetaGoBack () { return this.$route.meta ? this.$route.meta.goBack : false },
         mixinRouteMetaTitle () { return this.$route.meta ? this.$route.meta.title : '' },
-        mixinUser () { return this.$store.getters['user/userInfo'] },
-        mixinSelectedBrand () { return this.$store.getters['common/getSelectedBrand'] },
-        mixinUserRoles () { return this.$store.getters.getRoles },
       },
       methods: {
         // Object Deep Copy

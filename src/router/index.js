@@ -30,21 +30,21 @@ const routes = [
   {
     path: '/main',
     name: 'Main',
-    redirect: 'main/manage',
+    redirect: 'main/microorganism',
     component: MainLayout,
     children: [
       {
-        path: 'manage',
-        name: '관리',
-        redirect: 'manage/channel',
+        path: 'microorganism',
+        name: '미생물',
+        redirect: 'microorganism/channel',
         component: ContentsLayout,
         meta: {
-          title: '관리'
+          title: '미생물'
         },
         children: [
           {
             path: 'channel',
-            name: '관리_농업균주관리',
+            name: '미생물_농업균주관리',
             redirect: 'channel/list',
             meta: {
               title: '농업균주'
@@ -53,7 +53,7 @@ const routes = [
             children: [
               {
                 path: 'list',
-                name: '관리_농업균주관리_리스트',
+                name: '미생물_농업균주관리_리스트',
                 meta: {
                   title: '농업균주 리스트'
                 },

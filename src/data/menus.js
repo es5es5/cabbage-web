@@ -1,7 +1,7 @@
 const MENUS = [
   {
-    name: '관리',
-    route: '관리',
+    name: '미생물',
+    route: '미생물',
     params: null,
     order: 0,
     icon: 'list-alt',

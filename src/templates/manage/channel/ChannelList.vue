@@ -8,7 +8,7 @@
       <button type="button" class="btn-search" @click="getContents">검색</button>
     </div>
     <div class="action_wrap">
-      <button type="button" class="btn primary" @click="showModal">등록</button>
+      <button type="button" class="btn primary" @click="showModalIdolCreate">등록</button>
       <!-- <button type="button" class="btn">엑셀다운로드</button> -->
     </div>
     <div class="table_wrap table-hover">
@@ -79,6 +79,7 @@
       </Pagination> -->
       <span class="total">Total: {{ (contents.count || 0) | numberWithComma }}</span>
     </div>
+    <ModalIdolCreate @callback="getContents" />
   </main>
 </template>
 
@@ -86,6 +87,7 @@
 
 import { collection, getDocs } from 'firebase/firestore'
 import { firestore } from '@/plugins/firebase'
+import ModalIdolCreate from './ModalIdolCreate'
 
 export default {
   name: 'ChannelList',
@@ -98,6 +100,7 @@ export default {
     }
   },
   components: {
+    ModalIdolCreate,
   },
   data () {
     return {
@@ -123,7 +126,12 @@ export default {
 
       this.COMMON.searchPagination(option)
     },
-    showModal () {
+    showModalIdolCreate () {
+      this.$modal.show('ModalIdolCreate')
+    },
+    showModalIdolUpdate (idolId) {
+      this.idolId = idolId
+      this.$modal.show('ModalIdolUpdate')
     },
     async getContents () {
       console.log(firestore)
