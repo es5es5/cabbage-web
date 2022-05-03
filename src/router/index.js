@@ -30,13 +30,13 @@ const routes = [
   {
     path: '/main',
     name: 'Main',
-    redirect: 'main/microorganism',
+    redirect: 'main/strain',
     component: MainLayout,
     children: [
       {
-        path: 'microorganism',
+        path: 'strain',
         name: '균주',
-        redirect: 'microorganism/agriculture',
+        redirect: 'strain/agriculture',
         component: ContentsLayout,
         meta: {
           title: '균주'
@@ -49,15 +49,15 @@ const routes = [
             meta: {
               title: '농업균주'
             },
-            component: () => import('@/templates/microorganism/MicroorganismLayout'),
+            component: () => import('@/templates/strain/StrainLayout'),
             children: [
               {
                 path: 'list',
                 name: '균주_농업균주관리_리스트',
                 meta: {
-                  title: '농업균주 리스트'
+                  title: '농업균주'
                 },
-                component: () => import('@/templates/microorganism/agriculture/AgricultureList')
+                component: () => import('@/templates/strain/agriculture/AgricultureList')
               },
             ]
           },
@@ -68,15 +68,15 @@ const routes = [
             meta: {
               title: '수산업균주'
             },
-            component: () => import('@/templates/microorganism/MicroorganismLayout'),
+            component: () => import('@/templates/strain/StrainLayout'),
             children: [
               {
                 path: 'list',
                 name: '균주_수산업균주관리_리스트',
                 meta: {
-                  title: '수산업균주 리스트'
+                  title: '수산업균주'
                 },
-                component: () => import('@/templates/microorganism/fisheries/FisheriesList')
+                component: () => import('@/templates/strain/fisheries/FisheriesList')
               },
             ]
           },
@@ -87,15 +87,83 @@ const routes = [
             meta: {
               title: '기타균주'
             },
-            component: () => import('@/templates/microorganism/MicroorganismLayout'),
+            component: () => import('@/templates/strain/StrainLayout'),
             children: [
               {
                 path: 'list',
                 name: '균주_기타균주관리_리스트',
                 meta: {
-                  title: '기타균주 리스트'
+                  title: '기타균주'
                 },
-                component: () => import('@/templates/microorganism/extra/ExtraList')
+                component: () => import('@/templates/strain/extra/ExtraList')
+              },
+            ]
+          },
+        ]
+      },
+      {
+        path: 'manage',
+        name: '관리',
+        redirect: 'manage/microorganism',
+        component: ContentsLayout,
+        meta: {
+          title: '관리'
+        },
+        children: [
+          {
+            path: 'microorganism',
+            name: '관리_균종관리',
+            redirect: 'microorganism/list',
+            meta: {
+              title: '균종 관리'
+            },
+            component: () => import('@/templates/manage/ManageLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '관리_균종관리_리스트',
+                meta: {
+                  title: '균종 관리'
+                },
+                component: () => import('@/templates/manage/microorganism/MicroorganismList')
+              },
+            ]
+          },
+          {
+            path: 'origin',
+            name: '관리_Origin관리',
+            redirect: 'origin/list',
+            meta: {
+              title: 'Origin 관리'
+            },
+            component: () => import('@/templates/manage/ManageLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '관리_Origin관리_리스트',
+                meta: {
+                  title: 'Origin 관리'
+                },
+                component: () => import('@/templates/manage/origin/OriginList')
+              },
+            ]
+          },
+          {
+            path: 'place',
+            name: '관리_장소관리',
+            redirect: 'place/list',
+            meta: {
+              title: '장소 관리'
+            },
+            component: () => import('@/templates/manage/ManageLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '관리_장소관리_리스트',
+                meta: {
+                  title: '장소 관리'
+                },
+                component: () => import('@/templates/manage/place/PlaceList')
               },
             ]
           },
@@ -113,7 +181,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = `${to.meta.title} | 미생물 관리` || '미생물 관리'
+  document.title = `${to.meta.title} | 큐옴바이오` || '큐옴바이오'
   next()
 })
 
