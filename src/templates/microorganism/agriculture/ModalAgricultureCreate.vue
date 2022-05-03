@@ -1,6 +1,6 @@
 <template>
   <modal
-    name="ModalIdolCreate"
+    name="ModalAgricultureCreate"
     class="modal"
     adaptive
     reset
@@ -14,7 +14,7 @@
 
     <div class="header_wrap">
       <h3 class="header">농업균주 등록</h3>
-      <div class="closeButton" @click="$modal.hide('ModalIdolCreate')"></div>
+      <div class="closeButton" @click="$modal.hide('ModalAgricultureCreate')"></div>
     </div>
 
     <div class="content_wrap">
@@ -46,7 +46,7 @@ import { doc, setDoc } from 'firebase/firestore'
 import { firestore } from '@/plugins/firebase'
 
 export default {
-  name: 'ModalIdolCreate',
+  name: 'ModalAgricultureCreate',
   created () {
   },
   computed: {

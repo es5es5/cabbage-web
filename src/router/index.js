@@ -35,29 +35,67 @@ const routes = [
     children: [
       {
         path: 'microorganism',
-        name: '미생물',
-        redirect: 'microorganism/channel',
+        name: '균주',
+        redirect: 'microorganism/agriculture',
         component: ContentsLayout,
         meta: {
-          title: '미생물'
+          title: '균주'
         },
         children: [
           {
-            path: 'channel',
-            name: '미생물_농업균주관리',
-            redirect: 'channel/list',
+            path: 'agriculture',
+            name: '균주_농업균주관리',
+            redirect: 'agriculture/list',
             meta: {
               title: '농업균주'
             },
-            component: () => import('@/templates/manage/ManageLayout'),
+            component: () => import('@/templates/microorganism/MicroorganismLayout'),
             children: [
               {
                 path: 'list',
-                name: '미생물_농업균주관리_리스트',
+                name: '균주_농업균주관리_리스트',
                 meta: {
                   title: '농업균주 리스트'
                 },
-                component: () => import('@/templates/manage/channel/ChannelList')
+                component: () => import('@/templates/microorganism/agriculture/AgricultureList')
+              },
+            ]
+          },
+          {
+            path: 'fisheries',
+            name: '균주_수산업균주관리',
+            redirect: 'fisheries/list',
+            meta: {
+              title: '수산업균주'
+            },
+            component: () => import('@/templates/microorganism/MicroorganismLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '균주_수산업균주관리_리스트',
+                meta: {
+                  title: '수산업균주 리스트'
+                },
+                component: () => import('@/templates/microorganism/fisheries/FisheriesList')
+              },
+            ]
+          },
+          {
+            path: 'extra',
+            name: '균주_기타균주관리',
+            redirect: 'extra/list',
+            meta: {
+              title: '기타균주'
+            },
+            component: () => import('@/templates/microorganism/MicroorganismLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '균주_기타균주관리_리스트',
+                meta: {
+                  title: '기타균주 리스트'
+                },
+                component: () => import('@/templates/microorganism/extra/ExtraList')
               },
             ]
           },

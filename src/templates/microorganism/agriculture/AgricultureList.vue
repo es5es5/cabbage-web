@@ -8,7 +8,7 @@
       <button type="button" class="btn-search" @click="getContents">검색</button>
     </div>
     <div class="action_wrap">
-      <button type="button" class="btn primary" @click="showModalIdolCreate">등록</button>
+      <button type="button" class="btn primary" @click="showModalAgricultureCreate">등록</button>
       <!-- <button type="button" class="btn">엑셀다운로드</button> -->
     </div>
     <div class="table_wrap table-hover">
@@ -79,7 +79,7 @@
       </Pagination> -->
       <span class="total">Total: {{ (contents.count || 0) | numberWithComma }}</span>
     </div>
-    <ModalIdolCreate @callback="getContents" />
+    <ModalAgricultureCreate @callback="getContents" />
   </main>
 </template>
 
@@ -87,10 +87,10 @@
 
 import { collection, getDocs } from 'firebase/firestore'
 import { firestore } from '@/plugins/firebase'
-import ModalIdolCreate from './ModalIdolCreate'
+import ModalAgricultureCreate from './ModalAgricultureCreate'
 
 export default {
-  name: 'ChannelList',
+  name: 'AgricultureList',
   created () {
     this.getContents()
   },
@@ -100,7 +100,7 @@ export default {
     }
   },
   components: {
-    ModalIdolCreate,
+    ModalAgricultureCreate,
   },
   data () {
     return {
@@ -126,12 +126,12 @@ export default {
 
       this.COMMON.searchPagination(option)
     },
-    showModalIdolCreate () {
-      this.$modal.show('ModalIdolCreate')
+    showModalAgricultureCreate () {
+      this.$modal.show('ModalAgricultureCreate')
     },
-    showModalIdolUpdate (idolId) {
+    showModalAgricultureUpdate (idolId) {
       this.idolId = idolId
-      this.$modal.show('ModalIdolUpdate')
+      this.$modal.show('ModalAgricultureUpdate')
     },
     async getContents () {
       console.log(firestore)

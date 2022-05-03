@@ -3,7 +3,7 @@
     <!-- <div class="bookmark_wrap"></div> -->
     <router-link tag="h1" class="logo_wrap" to="/">
       <!-- <img src="@/assets/images/logo.png" alt="logo" class="logoImg"> -->
-      <img src="@/assets/images/logo-white.svg" alt="logo" class="logoImg">
+      <img src="@/assets/images/logo.svg" alt="logo" class="logoImg">
       <span class="logoTxt"></span>
     </router-link>
     <div class="menu_wrap">
@@ -91,7 +91,8 @@ export default {
   // max-height: 66px;
 
   .logoImg {
-    display: inline-block;
+    width: 80%;
+    // display: inline-block;
     vertical-align: middle;
     height: 25px;
   }
