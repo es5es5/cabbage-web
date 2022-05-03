@@ -13,7 +13,7 @@
     </div>
     <div class="table_wrap table-hover">
       <table>
-        <caption>농업 균주 리스트</caption>
+        <caption>Origin 리스트</caption>
         <colgroup>
           <col style="width: 1rem;">
           <col style="width: 10rem;">

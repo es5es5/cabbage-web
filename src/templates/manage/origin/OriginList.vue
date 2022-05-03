@@ -13,57 +13,27 @@
     </div>
     <div class="table_wrap table-hover">
       <table>
-        <caption>농업 균주 리스트</caption>
+        <caption>Origin 리스트</caption>
         <colgroup>
           <col style="width: 1rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
+          <col style="width: 3rem;">
         </colgroup>
         <thead>
           <tr>
-            <th scope="col">분류번호</th>
-            <th scope="col">균종</th>
-            <th scope="col">균주번호</th>
-            <th scope="col">Origin</th>
-            <th scope="col">확보일</th>
-            <th scope="col">기탁여부</th>
-            <th scope="col">기탁장소</th>
-            <th scope="col">보관장소</th>
-            <th scope="col">stock 개수</th>
-            <th scope="col">현재 stock</th>
-            <th scope="col">활성테스트(병명/활성강도) [+++이상 표기함]</th>
-            <th scope="col">특허</th>
-            <th scope="col">특허내용</th>
-            <th scope="col">비고</th>
+            <th scope="col">ID</th>
+            <th scope="col">Origin명</th>
+            <th scope="col">메모</th>
+            <th scope="col">등록일</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>20-66</td>
-            <td>Brevibacillus formosus</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>큐옴바이오</td>
-            <td>2</td>
-            <td></td>
-            <td>Botrytis cinerea KACC 40573(잿빛곰팡이병/+++)</td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr v-for="(item, index) in contents.data" :key="index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.memo }}</td>
+            <td>{{ '2022-05-05' }}</td>
           </tr>
           <!-- <no-data-message :list="contents.list" :colspan="7"></no-data-message> -->
         </tbody>
@@ -105,7 +75,24 @@ export default {
   data () {
     return {
       selectedContent: {},
-      contents: {},
+      contents: {
+        data: [{
+          name: '김치',
+          memo: '그들의 눈이 청춘 옷을 바이며, 두기 낙원을 수 그들의 봄바람이다. 밥을 소금이라 과실이 뿐이다. 피는 심장의 그들을 있는 인생의 역사를 약동하다.'
+        }, {
+          name: '인체',
+          memo: '위하여, 수 모래뿐일 사막이다. 못하다 밥을 산야에 구할 원질이 피부가 봄바람이다. 보이는 인간의 얼마나 방황하여도, 천고에 그리하였는가?'
+        }, {
+          name: '산삼',
+          memo: '실현에 착목한는 지혜는 그들의 청춘 끓는다. 심장의 품었기 보는 피어나는 길을 생생하며, 얼마나 보이는 황금시대의 보라. 이는 열락의 이상 부패뿐이다.'
+        }, {
+          name: '여성질',
+          memo: '관현악이며, 역사를 보배를 그들의 소리다.이것은 사막이다. 가는 뜨고, 지혜는 위하여.'
+        }, {
+          name: 'stevia발효물',
+          memo: '이상의 그러므로 꽃이 할지니, 무엇을 봄바람이다. 생의 곧 인도하겠다는 불러 끓는 우리 따뜻한 찾아 사막이다. 너의 산야에 풀이 않는 피다.'
+        }]
+      },
       searchForm: {
         pageIndex: 1,
         pageSize: 15,

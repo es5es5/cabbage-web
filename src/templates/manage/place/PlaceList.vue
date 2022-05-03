@@ -13,57 +13,27 @@
     </div>
     <div class="table_wrap table-hover">
       <table>
-        <caption>농업 균주 리스트</caption>
+        <caption>장소 리스트</caption>
         <colgroup>
           <col style="width: 1rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
+          <col style="width: 3rem;">
         </colgroup>
         <thead>
           <tr>
-            <th scope="col">분류번호</th>
-            <th scope="col">균종</th>
-            <th scope="col">균주번호</th>
-            <th scope="col">Origin</th>
-            <th scope="col">확보일</th>
-            <th scope="col">기탁여부</th>
-            <th scope="col">기탁장소</th>
-            <th scope="col">보관장소</th>
-            <th scope="col">stock 개수</th>
-            <th scope="col">현재 stock</th>
-            <th scope="col">활성테스트(병명/활성강도) [+++이상 표기함]</th>
-            <th scope="col">특허</th>
-            <th scope="col">특허내용</th>
-            <th scope="col">비고</th>
+            <th scope="col">ID</th>
+            <th scope="col">장소명</th>
+            <th scope="col">메모</th>
+            <th scope="col">등록일</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>20-66</td>
-            <td>Brevibacillus formosus</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>큐옴바이오</td>
-            <td>2</td>
-            <td></td>
-            <td>Botrytis cinerea KACC 40573(잿빛곰팡이병/+++)</td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr v-for="(item, index) in contents.data" :key="index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.memo }}</td>
+            <td>{{ '2022-05-05' }}</td>
           </tr>
           <!-- <no-data-message :list="contents.list" :colspan="7"></no-data-message> -->
         </tbody>
@@ -105,7 +75,30 @@ export default {
   data () {
     return {
       selectedContent: {},
-      contents: {},
+      contents: {
+        data: [{
+          name: '정읍',
+          memo: 'The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps.',
+        }, {
+          name: '현대바이오랜드',
+          memo: 'The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps.',
+        }, {
+          name: '큐옴바이오',
+          memo: 'The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps.',
+        }, {
+          name: '제주도',
+          memo: 'The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps.',
+        }, {
+          name: '이안병원',
+          memo: 'The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps.',
+        }, {
+          name: '한국생명공학연구원',
+          memo: 'The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps.',
+        }, {
+          name: '한국의과학연구원',
+          memo: 'The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps.',
+        }]
+      },
       searchForm: {
         pageIndex: 1,
         pageSize: 15,
