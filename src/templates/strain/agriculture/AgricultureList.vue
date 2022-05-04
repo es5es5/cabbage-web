@@ -49,21 +49,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>20-66</td>
-            <td>Brevibacillus formosus</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>큐옴바이오</td>
-            <td>2</td>
-            <td></td>
-            <td>Botrytis cinerea KACC 40573(잿빛곰팡이병/+++)</td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr v-for="(item, index) in contents" :key="index">
+            <td>{{ item.분류번호 }}</td>
+            <td>{{ item.균종 }}</td>
+            <td>{{ item.균주번호 }}</td>
+            <td>{{ item.Origin }}</td>
+            <td>{{ item.확보일 }}</td>
+            <td>{{ item.기탁여부 }}</td>
+            <td>{{ item.기탁장소 }}</td>
+            <td>{{ item.보관장소 }}</td>
+            <td>{{ item.stock }}</td>
+            <td>{{ item.현재 }}</td>
+            <td>{{ item.활성테스트 }}</td>
+            <td>{{ item.특허 }}</td>
+            <td>{{ item.특허내용 }}</td>
+            <td>{{ item.비고 }}</td>
           </tr>
           <!-- <no-data-message :list="contents.list" :colspan="7"></no-data-message> -->
         </tbody>
@@ -105,7 +105,7 @@ export default {
   data () {
     return {
       selectedContent: {},
-      contents: {},
+      contents: [],
       searchForm: {
         pageIndex: 1,
         pageSize: 15,
@@ -134,21 +134,15 @@ export default {
       this.$modal.show('ModalAgricultureUpdate')
     },
     async getContents () {
-      console.log(firestore)
-      const querySnapshot = await getDocs(collection(firestore, process.env.VUE_APP_FIRESTORE_COLLECTION))
+      const list = []
+      const querySnapshot = await getDocs(collection(firestore, '농업균주'))
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, ' => ', doc.data())
+        list.push({
+          id: doc.id,
+          ...doc.data()
+        })
+        this.contents = list
       })
-      // const list = []
-      // const querySnapshot = await getDocs(collection(firestore, process.env.VUE_APP_FIRESTORE_COLLECTION))
-      // querySnapshot.forEach((doc) => {
-      //   list.push({
-      //     id: doc.id,
-      //     ...doc.data()
-      //   })
-      // })
-      // this.idol = list
     }
   }
 }

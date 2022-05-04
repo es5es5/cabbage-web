@@ -72,25 +72,13 @@ export default {
       }
     },
     async doCreate () {
-      if (
-        this.idolForm.name === '' ||
-        this.idolForm.mbti === '' ||
-        this.idolForm.birthday === ''
-      ) {
-        this.$toast.warning(
-          '필수 입력값을 채워주세요.',
-          this.ToastSettings
-        )
-        return false
-      } else {
-        await setDoc(doc(firestore, process.env.VUE_APP_FIRESTORE_COLLECTION, this.COMMON.UUID()), this.idolForm)
-        this.initData()
-        this.$toast.success(
-          '등록되었습니다.',
-          this.ToastSettings
-        )
-        this.$emit('callback')
-      }
+      await setDoc(doc(firestore, '농업균주', this.COMMON.UUID()), this.modalForm)
+      this.initData()
+      this.$toast.success(
+        '등록되었습니다.',
+        this.ToastSettings
+      )
+      this.$modal.hide('ModalAgricultureCreate')
     },
   }
 }
