@@ -24,12 +24,12 @@
         </colgroup>
         <thead>
           <tr>
-            <td scope="col">균주번호</td>
-            <td scope="col">속</td>
-            <td scope="col">종</td>
-            <td scope="col">strain</td>
-            <td scope="col">유래</td>
-            <td scope="col">기탁</td>
+            <th scope="col">균주번호</th>
+            <th scope="col">속</th>
+            <th scope="col">종</th>
+            <th scope="col">strain</th>
+            <th scope="col">유래</th>
+            <th scope="col">기탁</th>
           </tr>
         </thead>
         <tbody>
