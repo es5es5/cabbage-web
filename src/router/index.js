@@ -102,6 +102,55 @@ const routes = [
         ]
       },
       {
+        path: 'groceries',
+        name: '식품',
+        redirect: 'groceries/official',
+        component: ContentsLayout,
+        meta: {
+          title: '고시형'
+        },
+        children: [
+          {
+            path: 'official',
+            name: '식품_고시형',
+            redirect: 'official/list',
+            meta: {
+              title: '고시형'
+            },
+            component: () => import('@/templates/groceries/GroceriesLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '식품_고시형_리스트',
+                meta: {
+                  title: '고시형'
+                },
+                component: () => import('@/templates/groceries/official/OfficialList')
+              },
+            ]
+          },
+          {
+            path: 'general',
+            name: '식품_일반식품',
+            redirect: 'general/list',
+            meta: {
+              title: '일반식품'
+            },
+            component: () => import('@/templates/groceries/GroceriesLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '식품_일반식품_리스트',
+                meta: {
+                  title: '일반식품'
+                },
+                component: () => import('@/templates/groceries/general/GeneralList')
+              },
+            ]
+          },
+        ]
+      },
+      {
         path: 'manage',
         name: '관리',
         redirect: 'manage/microorganism',
