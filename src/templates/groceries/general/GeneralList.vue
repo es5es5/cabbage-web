@@ -24,12 +24,12 @@
         </colgroup>
         <thead>
           <tr>
-            <th scope="col">균주번호</th>
-            <th scope="col">속</th>
-            <th scope="col">종</th>
-            <th scope="col">strain</th>
-            <th scope="col">유래</th>
-            <th scope="col">기탁</th>
+            <td scope="col">균주번호</td>
+            <td scope="col">속</td>
+            <td scope="col">종</td>
+            <td scope="col">strain</td>
+            <td scope="col">유래</td>
+            <td scope="col">기탁</td>
           </tr>
         </thead>
         <tbody>
@@ -110,7 +110,6 @@ export default {
       this.$modal.show('ModalGeneralUpdate')
     },
     async getContents () {
-
       const querySnapshot = await getDocs(collection(firestore, process.env.VUE_APP_FIRESTORE_COLLECTION))
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
