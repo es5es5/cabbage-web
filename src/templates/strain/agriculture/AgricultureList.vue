@@ -45,7 +45,7 @@
             <th scope="col">활성테스트(병명/활성강도) [+++이상 표기함]</th>
             <th scope="col">특허</th>
             <th scope="col">특허내용</th>
-            <th scope="col">비고</th>
+            <th scope="col">메모</th>
           </tr>
         </thead>
         <tbody>
@@ -58,12 +58,12 @@
             <td>{{ item.기탁여부 }}</td>
             <td>{{ item.기탁장소 }}</td>
             <td>{{ item.보관장소 }}</td>
-            <td>{{ item.stock }}</td>
-            <td>{{ item.현재 }}</td>
+            <td>{{ item.stockr갯수 }}</td>
+            <td>{{ item.현재stock }}</td>
             <td>{{ item.활성테스트 }}</td>
             <td>{{ item.특허 }}</td>
             <td>{{ item.특허내용 }}</td>
-            <td>{{ item.비고 }}</td>
+            <td>{{ item.메모 }}</td>
           </tr>
           <no-data-message :list="contents" :colspan="14"></no-data-message>
         </tbody>
