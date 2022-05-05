@@ -89,6 +89,7 @@ export default {
           '등록되었습니다.',
           this.ToastSettings
         )
+        this.$store.dispatch('manage/set균종_관리')
         this.$emit('callback')
       }
     },

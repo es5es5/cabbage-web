@@ -17,16 +17,16 @@ const getters = {
 }
 
 const actions = {
-  async set장소_관리 (context, COLLECTION_NAME) {
-    const snapshots = await getDocs(collection(firestore, COLLECTION_NAME))
+  async set장소_관리 (context) {
+    const snapshots = await getDocs(collection(firestore, '장소_관리'))
     return context.commit('set장소_관리', snapshots.docs.map(doc => doc.data()))
   },
-  async setOrigin_관리 (context, COLLECTION_NAME) {
-    const snapshots = await getDocs(collection(firestore, COLLECTION_NAME))
+  async setOrigin_관리 (context) {
+    const snapshots = await getDocs(collection(firestore, 'Origin_관리'))
     return context.commit('setOrigin_관리', snapshots.docs.map(doc => doc.data()))
   },
-  async set균종_관리 (context, COLLECTION_NAME) {
-    const snapshots = await getDocs(collection(firestore, COLLECTION_NAME))
+  async set균종_관리 (context) {
+    const snapshots = await getDocs(collection(firestore, '균종_관리'))
     return context.commit('set균종_관리', snapshots.docs.map(doc => doc.data()))
   },
 }
