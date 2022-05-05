@@ -65,7 +65,7 @@
             <td>{{ item.특허내용 }}</td>
             <td>{{ item.비고 }}</td>
           </tr>
-          <!-- <no-data-message :list="contents.list" :colspan="7"></no-data-message> -->
+          <no-data-message :list="contents" :colspan="14"></no-data-message>
         </tbody>
       </table>
       <!-- <Pagination

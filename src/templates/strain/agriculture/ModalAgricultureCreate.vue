@@ -8,7 +8,7 @@
     @opened="openEvent"
     @closed="closeEvent"
     :clickToClose="false"
-    :width="600"
+    :width="900"
     :height="'auto'"
     >
 
@@ -21,7 +21,7 @@
       <div class="modalForm_wrap">
         <form action="" class="form">
           <fieldset>
-            <div class="modalRow row-2">
+            <div class="modalRow row-3">
               <div class="column column-1">
                 <label for="균종" class="required">균종</label>
                 <input type="text" id="균종" v-model="modalForm.균종">
@@ -29,6 +29,83 @@
               <div class="column column-1">
                 <label for="균주번호">균주번호</label>
                 <input type="text" id="균주번호" v-model="modalForm.균주번호">
+              </div>
+              <div class="column column-1">
+                <label for="Origin" class="required">Origin</label>
+                <input type="text" id="Origin" v-model="modalForm.Origin">
+              </div>
+            </div>
+
+            <div class="modalRow row-3">
+              <div class="column column-1">
+                <label for="확보일">확보일</label>
+                <DatePicker
+                  v-model="modalForm.확보일"
+                />
+              </div>
+
+              <div class="column column-1">
+                <label for="기탁여부Y" class="required">기탁여부</label>
+                <div class="checkbox_wrap">
+                  <input type="radio" name="기탁여부Yn" id="기탁여부Y" :value="true" v-model="modalForm.기탁여부">
+                  <label for="기탁여부Y">Y</label>
+                  <input type="radio" name="기탁여부Yn" id="기탁여부N" :value="false" v-model="modalForm.기탁여부">
+                  <label for="기탁여부N">N</label>
+                </div>
+              </div>
+
+              <div class="column column-1">
+                <label for="기탁장소">기탁장소</label>
+                <select name="기탁장소" id="기탁장소" :disabled="!this.modalForm.기탁여부">
+                  <option value="">선택</option>
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+
+            <div class="modalRow row-3">
+              <div class="column column-1">
+                <label for="보관장소">보관장소</label>
+                <select name="보관장소" id="보관장소">
+                  <option value="">선택</option>
+                  <option value=""></option>
+                </select>
+              </div>
+
+              <div class="column column-1">
+                <label for="stock갯수">stock갯수</label>
+                <input type="number" id="stock갯수" v-model="modalForm.stock갯수">
+              </div>
+
+              <div class="column column-1">
+                <label for="현재stock">현재stock</label>
+                <input type="number" id="현재stock" v-model="modalForm.현재stock">
+              </div>
+            </div>
+
+            <div class="modalRow row">
+              <div class="column column">
+                <label for="활성테스트">활성테스트</label>
+                <input type="text" name="활성테스트" id="활성테스트" v-model="modalForm.활성테스트">
+              </div>
+            </div>
+
+            <div class="modalRow row-3">
+              <div class="column column">
+                <label for="특허">특허</label>
+                <input type="text" name="특허" id="특허" v-model="modalForm.특허">
+              </div>
+
+              <div class="column column-2">
+                <label for="특허내용">특허내용</label>
+                <input type="text" name="특허내용" id="특허내용" v-model="modalForm.특허내용">
+              </div>
+            </div>
+
+            <div class="modalRow row">
+              <div class="column column">
+                <label for="메모">메모</label>
+                <textarea name="메모" id="메모" v-model="modalForm.메모"></textarea>
               </div>
             </div>
           </fieldset>
@@ -59,6 +136,7 @@ export default {
       modalForm: {
         균종: '',
         균주번호: '',
+        기탁여부: false,
       }
     }
   },
