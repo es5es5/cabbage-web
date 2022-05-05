@@ -13,11 +13,11 @@
     </div>
     <div class="table_wrap table-hover">
       <table>
-        <caption>Origin 리스트</caption>
+        <caption>Microorganism 리스트</caption>
         <colgroup>
           <col style="width: 1rem;">
           <col style="width: 10rem;">
-          <col style="width: 10rem;">
+          <col style="width: 20rem;">
           <col style="width: 3rem;">
         </colgroup>
         <thead>
@@ -29,13 +29,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in contents.data" :key="index">
-            <td>{{ index + 1 }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.memo }}</td>
-            <td>{{ '2022-05-05' }}</td>
+          <tr v-for="(item, index) in contents" :key="index">
+            <td>{{ contents.length - index }}</td>
+            <td>{{ item.균종명 }}</td>
+            <td>{{ item.메모 }}</td>
+            <td>{{ item.createtime | dateFormat }}</td>
           </tr>
-          <!-- <no-data-message :list="contents.list" :colspan="7"></no-data-message> -->
+          <no-data-message :list="contents" :colspan="4"></no-data-message>
         </tbody>
       </table>
       <!-- <Pagination
@@ -54,20 +54,16 @@
 </template>
 
 <script>
-
-import { collection, getDocs } from 'firebase/firestore'
+import { getDocs, collection } from 'firebase/firestore'
 import { firestore } from '@/plugins/firebase'
 import ModalMicroorganismCreate from './ModalMicroorganismCreate'
 
 export default {
-  name: 'AgricultureList',
+  name: 'MicroorganismList',
   created () {
     this.getContents()
   },
   watch: {
-    mixinSelectedBrand () {
-      // this.getContents()
-    }
   },
   components: {
     ModalMicroorganismCreate,
@@ -75,24 +71,7 @@ export default {
   data () {
     return {
       selectedContent: {},
-      contents: {
-        data: [{
-          name: 'Brevibacillus formosus',
-          memo: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae sint explicabo corporis?'
-        }, {
-          name: 'Bacillus pseudomycoides',
-          memo: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae sint explicabo corporis?'
-        }, {
-          name: 'Bacillus safensis',
-          memo: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae sint explicabo corporis?'
-        }, {
-          name: 'Bacillus amyloliquefaciens',
-          memo: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae sint explicabo corporis?'
-        }, {
-          name: 'Bacillus subtilis',
-          memo: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae sint explicabo corporis?'
-        }]
-      },
+      contents: [],
       searchForm: {
         pageIndex: 1,
         pageSize: 15,
@@ -116,26 +95,16 @@ export default {
     showModalMicroorganismCreate () {
       this.$modal.show('ModalMicroorganismCreate')
     },
-    showModalAgricultureUpdate (idolId) {
-      this.idolId = idolId
-      this.$modal.show('ModalAgricultureUpdate')
-    },
     async getContents () {
-      console.log(firestore)
-      const querySnapshot = await getDocs(collection(firestore, process.env.VUE_APP_FIRESTORE_COLLECTION))
+      const list = []
+      const querySnapshot = await getDocs(collection(firestore, '균종_관리'))
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, ' => ', doc.data())
+        list.push({
+          id: doc.id,
+          ...doc.data()
+        })
+        this.contents = list
       })
-      // const list = []
-      // const querySnapshot = await getDocs(collection(firestore, process.env.VUE_APP_FIRESTORE_COLLECTION))
-      // querySnapshot.forEach((doc) => {
-      //   list.push({
-      //     id: doc.id,
-      //     ...doc.data()
-      //   })
-      // })
-      // this.idol = list
     }
   }
 }
