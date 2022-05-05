@@ -56,9 +56,9 @@
 
               <div class="column column-1">
                 <label for="기탁장소">기탁장소</label>
-                <select name="기탁장소" id="기탁장소" :disabled="!this.modalForm.기탁여부">
+                <select name="기탁장소" id="기탁장소" :disabled="!this.modalForm.기탁여부" v-model="modalForm.기탁장소">
                   <option value="">선택</option>
-                  <option value=""></option>
+                  <option :value="item.id" v-for="(item, index) in _장소" :key="index">{{ item.장소명 }}</option>
                 </select>
               </div>
             </div>
@@ -66,9 +66,9 @@
             <div class="modalRow row-3">
               <div class="column column-1">
                 <label for="보관장소">보관장소</label>
-                <select name="보관장소" id="보관장소">
+                <select name="보관장소" id="보관장소" v-model="modalForm.보관장소">
                   <option value="">선택</option>
-                  <option value=""></option>
+                  <option :value="item.id" v-for="(item, index) in _장소" :key="index">{{ item.장소명 }}</option>
                 </select>
               </div>
 
@@ -112,7 +112,7 @@
         </form>
       </div>
       <div class="action_wrap">
-        <button class="btn primary" @click="doCreate">등록</button>
+        <button class="btn primary" @click.once="doCreate">등록</button>
       </div>
     </div>
   </modal>
@@ -127,6 +127,9 @@ export default {
   created () {
   },
   computed: {
+    _장소 () {
+      return this.$store.getters['manage/get장소_관리List']
+    }
   },
   data () {
     return {
@@ -136,7 +139,17 @@ export default {
       modalForm: {
         균종: '',
         균주번호: '',
+        Origin: '',
+        확보일: '',
         기탁여부: false,
+        기탁장소: '',
+        보관장소: '',
+        stock갯수: '',
+        현재stock: '',
+        활성테스트: '',
+        특허: '',
+        특허내용: '',
+        메모: '',
       }
     }
   },
@@ -147,6 +160,17 @@ export default {
       this.modalForm = {
         균종: '',
         균주번호: '',
+        Origin: '',
+        확보일: '',
+        기탁여부: false,
+        기탁장소: '',
+        보관장소: '',
+        stock갯수: '',
+        현재stock: '',
+        활성테스트: '',
+        특허: '',
+        특허내용: '',
+        메모: '',
       }
     },
     async doCreate () {

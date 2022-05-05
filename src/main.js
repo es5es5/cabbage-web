@@ -21,7 +21,6 @@ Vue.prototype.$eventBus = new Vue()
 
 console.log(process.env.VUE_APP_NAME)
 
-store.dispatch('user/readUserCookie')
 new Vue({
   router,
   store,

@@ -35,7 +35,7 @@
         </form>
       </div>
       <div class="action_wrap">
-        <button class="btn primary" @click="doCreate">등록</button>
+        <button class="btn primary" @click.once="doCreate">등록</button>
       </div>
     </div>
   </modal>

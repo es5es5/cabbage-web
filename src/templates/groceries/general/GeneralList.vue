@@ -45,7 +45,7 @@
         </tbody>
       </table>
       <!-- <Pagination
-        :totalElement="parseInt(contents.count)"
+        :totalElement="parseInt(contents.length)"
         :activePage="searchForm.pageIndex"
         :totalPages="searchForm.pageSize"
         :callback="page => {
@@ -53,7 +53,7 @@
           getContents()
         }">
       </Pagination> -->
-      <span class="total">Total: {{ (contents.count || 0) | numberWithComma }}</span>
+      <span class="total">Total: {{ (contents.length || 0) | numberWithComma }}</span>
     </div>
     <ModalGeneralCreate @callback="getContents" />
   </main>

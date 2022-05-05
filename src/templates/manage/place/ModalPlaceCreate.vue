@@ -21,21 +21,24 @@
       <div class="modalForm_wrap">
         <form action="" class="form">
           <fieldset>
-            <div class="modalRow row-2">
-              <div class="column column-1">
-                <label for="균종" class="required">균종</label>
-                <input type="text" id="균종" v-model="modalForm.균종">
+            <div class="modalRow row">
+              <div class="column column">
+                <label for="장소명" class="required">장소명</label>
+                <input type="text" id="장소명" v-model="modalForm.장소명">
               </div>
-              <div class="column column-1">
-                <label for="균주번호">균주번호</label>
-                <input type="text" id="균주번호" v-model="modalForm.균주번호">
+            </div>
+
+            <div class="modalRow row">
+              <div class="column column">
+                <label for="메모">메모</label>
+                <textarea name="메몹" id="메모" v-model="modalForm.메모"></textarea>
               </div>
             </div>
           </fieldset>
         </form>
       </div>
       <div class="action_wrap">
-        <button class="btn primary" @click="doCreate">등록</button>
+        <button class="btn primary" @click.once="doCreate">등록</button>
       </div>
     </div>
   </modal>
@@ -57,40 +60,32 @@ export default {
       width: '80',
       height: '43',
       modalForm: {
-        균종: '',
-        균주번호: '',
+        장소명: '',
+        메모: '',
+        createtime: '',
       }
     }
   },
   methods: {
-    openEvent () {},
+    openEvent () {
+    },
     closeEvent () { this.$emit('callback') },
     initData () {
       this.modalForm = {
-        균종: '',
-        균주번호: '',
+        장소명: '',
+        메모: '',
+        createtime: '',
       }
     },
     async doCreate () {
-      if (
-        this.idolForm.name === '' ||
-        this.idolForm.mbti === '' ||
-        this.idolForm.birthday === ''
-      ) {
-        this.$toast.warning(
-          '필수 입력값을 채워주세요.',
-          this.ToastSettings
-        )
-        return false
-      } else {
-        await setDoc(doc(firestore, process.env.VUE_APP_FIRESTORE_COLLECTION, this.COMMON.UUID()), this.idolForm)
-        this.initData()
-        this.$toast.success(
-          '등록되었습니다.',
-          this.ToastSettings
-        )
-        this.$emit('callback')
-      }
+      this.modalForm.createtime = moment().valueOf()
+      await setDoc(doc(firestore, '장소_관리', this.COMMON.UUID()), this.modalForm)
+      this.initData()
+      this.$toast.success(
+        '등록되었습니다.',
+        this.ToastSettings
+      )
+      this.$modal.hide('ModalPlaceCreate')
     },
   }
 }
