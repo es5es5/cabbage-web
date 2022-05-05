@@ -15,7 +15,7 @@
       <table>
         <caption>농업 균주 리스트</caption>
         <colgroup>
-          <col style="width: 1rem;">
+          <col style="width: 10rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
@@ -42,7 +42,7 @@
             <th scope="col">보관장소</th>
             <th scope="col">stock 개수</th>
             <th scope="col">현재 stock</th>
-            <th scope="col">활성테스트(병명/활성강도) [+++이상 표기함]</th>
+            <th scope="col">활성테스트</th>
             <th scope="col">특허</th>
             <th scope="col">특허내용</th>
             <th scope="col">메모</th>
@@ -58,7 +58,7 @@
             <td>{{ item.기탁여부 }}</td>
             <td>{{ item.기탁장소 }}</td>
             <td>{{ item.보관장소 }}</td>
-            <td>{{ item.stockr갯수 }}</td>
+            <td>{{ item.stock갯수 }}</td>
             <td>{{ item.현재stock }}</td>
             <td>{{ item.활성테스트 }}</td>
             <td>{{ item.특허 }}</td>

@@ -38,8 +38,9 @@
 
             <div class="modalRow row-3">
               <div class="column column-1">
-                <label for="확보일">확보일</label>
+                <label for="확보일-input">확보일</label>
                 <DatePicker
+                  id="확보일"
                   v-model="modalForm.확보일"
                 />
               </div>
@@ -127,15 +128,9 @@ export default {
   created () {
   },
   computed: {
-    _장소 () {
-      return this.$store.getters['manage/get장소_관리List']
-    },
-    _Origin () {
-      return this.$store.getters['manage/getOrigin_관리List']
-    },
-    _균종 () {
-      return this.$store.getters['manage/get균종_관리List']
-    },
+    _장소 () { return this.$store.getters['manage/get장소_관리List'] },
+    _Origin () { return this.$store.getters['manage/getOrigin_관리List'] },
+    _균종 () { return this.$store.getters['manage/get균종_관리List'] },
   },
   data () {
     return {
