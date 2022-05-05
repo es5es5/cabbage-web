@@ -55,9 +55,9 @@
             <td>{{ item.균주번호 }}</td>
             <td>{{ item.Origin }}</td>
             <td>{{ item.확보일 }}</td>
-            <td>{{ item.기탁여부 }}</td>
-            <td>{{ item.기탁장소 }}</td>
-            <td>{{ item.보관장소 }}</td>
+            <td>{{ item.기탁여부 ? 'Y' : 'N' }}</td>
+            <td>{{ get장소(item.기탁장소) }}</td>
+            <td>{{ get장소(item.보관장소) }}</td>
             <td>{{ item.stock갯수 }}</td>
             <td>{{ item.현재stock }}</td>
             <td>{{ item.활성테스트 }}</td>
@@ -125,6 +125,9 @@ export default {
       }, options)
 
       this.COMMON.searchPagination(option)
+    },
+    get장소 (value) {
+      return this.$store.getters['manage/get장소_관리List'].filter(item => item.id === value)[0].장소명 || ''
     },
     showModalAgricultureCreate () {
       this.$modal.show('ModalAgricultureCreate')

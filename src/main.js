@@ -19,8 +19,6 @@ Vue.config.productionTip = false
 Vue.prototype.COMMON = COMMON
 Vue.prototype.$eventBus = new Vue()
 
-console.log(process.env.VUE_APP_NAME)
-
 new Vue({
   router,
   store,
