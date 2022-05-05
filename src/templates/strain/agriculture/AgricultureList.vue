@@ -49,7 +49,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in contents" :key="index">
+          <tr v-for="(item, index) in contents" :key="index" @click="showModalAgricultureUpdate(item.id)">
             <td>{{ item.분류번호 }}</td>
             <td>{{ item.균종 }}</td>
             <td>{{ item.균주번호 }}</td>
@@ -80,6 +80,7 @@
       <span class="total">Total: {{ (contents.length || 0) | numberWithComma }}</span>
     </div>
     <ModalAgricultureCreate @callback="getContents" />
+    <ModalAgricultureUpdate :id="selectedId" @callback="getContents" />
   </main>
 </template>
 
@@ -88,6 +89,7 @@
 import { collection, getDocs } from 'firebase/firestore'
 import { firestore } from '@/plugins/firebase'
 import ModalAgricultureCreate from './ModalAgricultureCreate'
+import ModalAgricultureUpdate from './ModalAgricultureUpdate'
 
 export default {
   name: 'AgricultureList',
@@ -98,10 +100,11 @@ export default {
   },
   components: {
     ModalAgricultureCreate,
+    ModalAgricultureUpdate,
   },
   data () {
     return {
-      selectedContent: {},
+      selectedId: '',
       contents: [],
       searchForm: {
         pageIndex: 1,
@@ -126,8 +129,8 @@ export default {
     showModalAgricultureCreate () {
       this.$modal.show('ModalAgricultureCreate')
     },
-    showModalAgricultureUpdate (idolId) {
-      this.idolId = idolId
+    showModalAgricultureUpdate (id) {
+      this.selectedId = id
       this.$modal.show('ModalAgricultureUpdate')
     },
     async getContents () {
@@ -138,8 +141,8 @@ export default {
           id: doc.id,
           ...doc.data()
         })
-        this.contents = list
       })
+      this.contents = list
     }
   }
 }

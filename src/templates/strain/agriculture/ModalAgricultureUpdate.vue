@@ -1,6 +1,6 @@
 <template>
   <modal
-    name="ModalAgricultureCreate"
+    name="ModalAgricultureUpdate"
     class="modal"
     adaptive
     reset
@@ -13,8 +13,8 @@
     >
 
     <div class="header_wrap">
-      <h3 class="header">농업균주 등록</h3>
-      <div class="closeButton" @click="$modal.hide('ModalAgricultureCreate')"></div>
+      <h3 class="header">농업균주 수정</h3>
+      <div class="closeButton" @click="$modal.hide('ModalAgricultureUpdate')"></div>
     </div>
 
     <div class="content_wrap">
@@ -112,20 +112,28 @@
           </fieldset>
         </form>
       </div>
+
       <div class="action_wrap">
-        <button class="btn primary" @click.once="doCreate">등록</button>
+        <button class="btn warning" @click="doUpdate">수정</button>
+        <button class="btn error" @click="doDelete">삭제</button>
       </div>
     </div>
   </modal>
 </template>
 
 <script>
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore'
 import { firestore } from '@/plugins/firebase'
 
 export default {
-  name: 'ModalAgricultureCreate',
+  name: 'ModalAgricultureUpdate',
   created () {
+  },
+  props: {
+    id: {
+      type: String,
+      require: true
+    }
   },
   computed: {
     _장소 () { return this.$store.getters['manage/get장소_관리List'] },
@@ -152,7 +160,9 @@ export default {
     }
   },
   methods: {
-    openEvent () {},
+    openEvent () {
+      this.getContent()
+    },
     closeEvent () { this.$emit('callback') },
     initData () {
       this.modalForm = {
@@ -171,14 +181,28 @@ export default {
         메모: '',
       }
     },
-    async doCreate () {
-      await setDoc(doc(firestore, '농업균주', this.COMMON.UUID()), this.modalForm)
+    async getContent () {
+      const content = await getDoc(doc(firestore, '농업균주', this.id))
+      this.modalForm = content.data()
+    },
+    async doDelete () {
+      if (confirm('삭제하시겠습니까?')) {
+        await deleteDoc(doc(firestore, '농업균주', this.id))
+        this.$toast.success(
+          '삭제되었습니다.',
+          this.ToastSettings
+        )
+        this.$modal.hide('ModalAgricultureUpdate')
+      }
+    },
+    async doUpdate () {
+      await setDoc(doc(firestore, '농업균주', this.id), this.modalForm)
       this.initData()
       this.$toast.success(
-        '등록되었습니다.',
+        '수정되었습니다.',
         this.ToastSettings
       )
-      this.$modal.hide('ModalAgricultureCreate')
+      this.$modal.hide('ModalAgricultureUpdate')
     },
   }
 }
