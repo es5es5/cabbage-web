@@ -129,7 +129,13 @@ export default {
   computed: {
     _장소 () {
       return this.$store.getters['manage/get장소_관리List']
-    }
+    },
+    _Origin () {
+      return this.$store.getters['manage/getOrigin_관리List']
+    },
+    _균종 () {
+      return this.$store.getters['manage/get균종_관리List']
+    },
   },
   data () {
     return {

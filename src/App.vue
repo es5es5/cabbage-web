@@ -9,22 +9,20 @@
 </template>
 
 <script>
-import { collection, getDocs } from 'firebase/firestore'
-import { firestore } from '@/plugins/firebase'
-
 export default {
   name: 'App',
   data () {
     return {
       collectionList: [
-        '장소_관리'
+        '장소_관리',
+        'Origin_관리',
+        '균종_관리',
       ]
     }
   },
   async created () {
     this.collectionList.forEach(async (item) => {
-      const snapshots = await getDocs(collection(firestore, item))
-      this.$store.commit(`manage/set${item}`, snapshots.docs.map(doc => doc.data()))
+      this.$store.dispatch(`manage/set${item}`, item)
     })
   },
 }
