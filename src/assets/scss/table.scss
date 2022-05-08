@@ -67,7 +67,7 @@
 		&.center { text-align: center; }
 		&.left { text-align: left; }
 		&.right { text-align: right; }
-		
+
 		// park 추가
 		select {
 			font-size: 12px;
@@ -97,6 +97,7 @@
 }
 
 .table_wrap-scoll-y {
+	table { table-layout: fixed; }
 	thead {
 		-webkit-box-shadow: 0px 10px 10px -10px rgba($gray, .8);
 		-moz-box-shadow: 0px 10px 10px -10px rgba($gray, .8);
@@ -105,7 +106,7 @@
 
 	.table_scroll {
 		table { table-layout: fixed; }
-		max-height: 60rem;
+		max-height: calc(100vh - 300px);
 		overflow-y: scroll;
 		border-bottom: 2px solid rgba($gray, .3);
 
