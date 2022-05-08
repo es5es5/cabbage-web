@@ -16,6 +16,20 @@
       </select>
       <span class="separator">|</span>
 
+      <label for="보관장소">보관장소</label>
+      <select name="보관장소" id="보관장소" v-model="searchForm.보관장소">
+        <option value="">전체</option>
+        <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_보관장소`">{{ item.장소명 }}</option>
+      </select>
+      <span class="separator">|</span>
+
+      <!-- <label for="Origin">Origin</label>
+      <select name="Origin" id="Origin" v-model="searchForm.Origin">
+        <option value="">전체</option>
+        <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_Origin`">{{ item.장소명 }}</option>
+      </select>
+      <span class="separator">|</span> -->
+
       <button type="button" class="btn-search" @click="getContents">검색</button>
     </div>
     <div class="action_wrap">
@@ -125,6 +139,8 @@ export default {
         균종: '',
         균주번호: '',
         기탁장소: '',
+        보관장소: '',
+        Origin: '',
         pageIndex: 1,
         pageSize: 15,
       },
@@ -141,6 +157,8 @@ export default {
         .filter(item => item.균종.indexOf(this.searchForm.균종) > -1)
         .filter(item => item.균주번호.indexOf(this.searchForm.균주번호) > -1)
         .filter(item => this.searchForm.기탁장소 !== '' ? this.searchForm.기탁장소 === item.기탁장소 : true)
+        .filter(item => this.searchForm.보관장소 !== '' ? this.searchForm.보관장소 === item.보관장소 : true)
+        .filter(item => this.searchForm.Origin !== '' ? this.searchForm.Origin === item.Origin : true)
         // .filter(item => item.customerName.indexOf(this.searchForm.customerName) > -1)
         // .filter(item => this.getToDate(item.salesDate).indexOf(this.getToDate(this.searchForm.salesDate)) > -1)
     }
