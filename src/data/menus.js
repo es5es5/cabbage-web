@@ -8,7 +8,7 @@ const MENUS = [
     roles: [],
     subMenus: [
       {
-        name: '농업균주 관리',
+        name: '농업균주',
         route: '균주_농업균주관리',
         params: null,
         order: 0,
@@ -17,7 +17,7 @@ const MENUS = [
         subMenus: null
       },
       {
-        name: '수산업균주 관리',
+        name: '수산업균주',
         route: '균주_수산업균주관리',
         params: null,
         order: 0,
@@ -26,7 +26,7 @@ const MENUS = [
         subMenus: null
       },
       {
-        name: '기타균주 관리',
+        name: '기타균주',
         route: '균주_기타균주관리',
         params: null,
         order: 0,

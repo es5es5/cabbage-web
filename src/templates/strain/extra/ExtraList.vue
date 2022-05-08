@@ -86,7 +86,7 @@
 
 <script>
 
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, orderBy, query } from 'firebase/firestore'
 import { firestore } from '@/plugins/firebase'
 import ModalExtraCreate from './ModalExtraCreate'
 import ModalExtraUpdate from './ModalExtraUpdate'
@@ -138,7 +138,7 @@ export default {
     },
     async getContents () {
       const list = []
-      const querySnapshot = await getDocs(collection(firestore, '기타균주'))
+      const querySnapshot = await getDocs(query(collection(firestore, '기타균주'), orderBy('createtime', 'desc')))
       querySnapshot.forEach((doc) => {
         list.push({
           id: doc.id,

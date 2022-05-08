@@ -86,14 +86,14 @@
 
 <script>
 
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, query, orderBy } from 'firebase/firestore'
 import { firestore } from '@/plugins/firebase'
 import ModalAgricultureCreate from './ModalAgricultureCreate'
 import ModalAgricultureUpdate from './ModalAgricultureUpdate'
 
 export default {
   name: 'AgricultureList',
-  created () {
+  async created () {
     this.getContents()
   },
   watch: {
@@ -138,7 +138,7 @@ export default {
     },
     async getContents () {
       const list = []
-      const querySnapshot = await getDocs(collection(firestore, '농업균주'))
+      const querySnapshot = await getDocs(query(collection(firestore, '농업균주'), orderBy('createtime', 'desc')))
       querySnapshot.forEach((doc) => {
         list.push({
           id: doc.id,
