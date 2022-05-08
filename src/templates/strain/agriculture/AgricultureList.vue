@@ -1,8 +1,19 @@
 <template>
   <main>
     <div class="search_wrap">
-      <label for="">검색조건</label>
-      <input type="text" placeholder="">
+      <label for="균종">균종</label>
+      <input id="균종" type="text" placeholder="" v-model="searchForm.균종">
+      <span class="separator">|</span>
+
+      <label for="균종">균주번호</label>
+      <input id="균주번호" type="text" placeholder="" v-model="searchForm.균주번호">
+      <span class="separator">|</span>
+
+      <label for="기탁장소">기탁장소</label>
+      <select name="기탁장소" id="기탁장소" v-model="searchForm.기탁장소">
+        <option value="">전체</option>
+        <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_기탁장소`">{{ item.장소명 }}</option>
+      </select>
       <span class="separator">|</span>
 
       <button type="button" class="btn-search" @click="getContents">검색</button>
@@ -49,7 +60,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in contents" :key="index" @click="showModalAgricultureUpdate(item.id)">
+          <tr v-for="(item, index) in _contents" :key="index" @click="showModalAgricultureUpdate(item.id)">
             <td>{{ item.분류번호 }}</td>
             <td>{{ item.균종 }}</td>
             <td>{{ item.균주번호 }}</td>
@@ -65,7 +76,7 @@
             <td>{{ item.특허내용 }}</td>
             <td>{{ item.메모 }}</td>
           </tr>
-          <no-data-message :list="contents" :colspan="14"></no-data-message>
+          <no-data-message :list="_contents" :colspan="14"></no-data-message>
         </tbody>
       </table>
       <!-- <Pagination
@@ -77,7 +88,7 @@
           getContents()
         }">
       </Pagination> -->
-      <span class="total">Total: {{ (contents.length || 0) | numberWithComma }}</span>
+      <span class="total">Total: {{ (_contents.length || 0) | numberWithComma }}</span>
     </div>
     <ModalAgricultureCreate @callback="getContents" />
     <ModalAgricultureUpdate :id="selectedId" @callback="getContents" />
@@ -107,6 +118,9 @@ export default {
       selectedId: '',
       contents: [],
       searchForm: {
+        균종: '',
+        균주번호: '',
+        기탁장소: '',
         pageIndex: 1,
         pageSize: 15,
       },
@@ -114,6 +128,18 @@ export default {
     }
   },
   computed: {
+    _장소 () { return this.$store.getters['manage/get장소_관리List'] },
+    _Origin () { return this.$store.getters['manage/getOrigin_관리List'] },
+    _균종 () { return this.$store.getters['manage/get균종_관리List'] },
+    _contents () {
+      return this.contents
+        // .filter(item => item.균종.indexOf(this.searchForm.균종) > -1)
+        .filter(item => item.균종.indexOf(this.searchForm.균종) > -1)
+        .filter(item => item.균주번호.indexOf(this.searchForm.균주번호) > -1)
+        .filter(item => this.searchForm.기탁장소 !== '' ? this.searchForm.기탁장소 === item.기탁장소 : true)
+        // .filter(item => item.customerName.indexOf(this.searchForm.customerName) > -1)
+        // .filter(item => this.getToDate(item.salesDate).indexOf(this.getToDate(this.searchForm.salesDate)) > -1)
+    }
   },
   methods: {
     searchDocList (options) {
