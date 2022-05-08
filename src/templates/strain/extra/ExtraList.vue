@@ -13,9 +13,9 @@
     </div>
     <div class="table_wrap table-hover">
       <table>
-        <caption>농업 균주 리스트</caption>
+        <caption>기타균주 리스트</caption>
         <colgroup>
-          <col style="width: 1rem;">
+          <col style="width: 10rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
@@ -42,28 +42,28 @@
             <th scope="col">보관장소</th>
             <th scope="col">stock 개수</th>
             <th scope="col">현재 stock</th>
-            <th scope="col">활성테스트(병명/활성강도) [+++이상 표기함]</th>
+            <th scope="col">활성테스트</th>
             <th scope="col">특허</th>
             <th scope="col">특허내용</th>
-            <th scope="col">비고</th>
+            <th scope="col">메모</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>20-66</td>
-            <td>Brevibacillus formosus</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>큐옴바이오</td>
-            <td>2</td>
-            <td></td>
-            <td>Botrytis cinerea KACC 40573(잿빛곰팡이병/+++)</td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr v-for="(item, index) in contents" :key="index" @click="showModalExtraUpdate(item.id)">
+            <td>{{ item.분류번호 }}</td>
+            <td>{{ item.균종 }}</td>
+            <td>{{ item.균주번호 }}</td>
+            <td>{{ item.Origin }}</td>
+            <td>{{ item.확보일 }}</td>
+            <td>{{ item.기탁여부 ? 'Y' : 'N' }}</td>
+            <td>{{ get장소(item.기탁장소) }}</td>
+            <td>{{ get장소(item.보관장소) }}</td>
+            <td>{{ item.stock갯수 }}</td>
+            <td>{{ item.현재stock }}</td>
+            <td>{{ item.활성테스트 }}</td>
+            <td>{{ item.특허 }}</td>
+            <td>{{ item.특허내용 }}</td>
+            <td>{{ item.메모 }}</td>
           </tr>
           <no-data-message :list="contents" :colspan="14"></no-data-message>
         </tbody>
@@ -80,6 +80,7 @@
       <span class="total">Total: {{ (contents.length || 0) | numberWithComma }}</span>
     </div>
     <ModalExtraCreate @callback="getContents" />
+    <ModalExtraUpdate :id="selectedId" @callback="getContents" />
   </main>
 </template>
 
@@ -88,6 +89,7 @@
 import { collection, getDocs } from 'firebase/firestore'
 import { firestore } from '@/plugins/firebase'
 import ModalExtraCreate from './ModalExtraCreate'
+import ModalExtraUpdate from './ModalExtraUpdate'
 
 export default {
   name: 'ExtraList',
@@ -95,17 +97,15 @@ export default {
     this.getContents()
   },
   watch: {
-    mixinSelectedBrand () {
-      // this.getContents()
-    }
   },
   components: {
     ModalExtraCreate,
+    ModalExtraUpdate,
   },
   data () {
     return {
-      selectedContent: {},
-      contents: {},
+      selectedId: '',
+      contents: [],
       searchForm: {
         pageIndex: 1,
         pageSize: 15,
@@ -126,29 +126,26 @@ export default {
 
       this.COMMON.searchPagination(option)
     },
+    get장소 (value) {
+      return this.$store.getters['manage/get장소_관리List'].filter(item => item.id === value)[0] ? this.$store.getters['manage/get장소_관리List'].filter(item => item.id === value)[0].장소명 : '' || ''
+    },
     showModalExtraCreate () {
       this.$modal.show('ModalExtraCreate')
     },
-    showModalExtraUpdate (idolId) {
-      this.idolId = idolId
+    showModalExtraUpdate (id) {
+      this.selectedId = id
       this.$modal.show('ModalExtraUpdate')
     },
     async getContents () {
-      console.log(firestore)
-      const querySnapshot = await getDocs(collection(firestore, process.env.VUE_APP_FIRESTORE_COLLECTION))
+      const list = []
+      const querySnapshot = await getDocs(collection(firestore, '기타균주'))
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, ' => ', doc.data())
+        list.push({
+          id: doc.id,
+          ...doc.data()
+        })
       })
-      // const list = []
-      // const querySnapshot = await getDocs(collection(firestore, process.env.VUE_APP_FIRESTORE_COLLECTION))
-      // querySnapshot.forEach((doc) => {
-      //   list.push({
-      //     id: doc.id,
-      //     ...doc.data()
-      //   })
-      // })
-      // this.idol = list
+      this.contents = list
     }
   }
 }

@@ -21,6 +21,7 @@
       <div class="modalForm_wrap">
         <form action="" class="form">
           <fieldset>
+            <legend>균주 정보</legend>
             <div class="modalRow row-3">
               <div class="column column-1">
                 <label for="균종" class="required">균종</label>
@@ -35,41 +36,16 @@
                 <input type="text" id="Origin" v-model="modalForm.Origin">
               </div>
             </div>
+          </fieldset>
 
-            <div class="modalRow row-3">
-              <div class="column column-1">
-                <label for="확보일-input">확보일</label>
-                <DatePicker
-                  id="확보일"
-                  v-model="modalForm.확보일"
-                />
-              </div>
-
-              <div class="column column-1">
-                <label for="기탁여부Y" class="required">기탁여부</label>
-                <div class="checkbox_wrap">
-                  <input type="radio" name="기탁여부Yn" id="기탁여부Y" :value="true" v-model="modalForm.기탁여부">
-                  <label for="기탁여부Y">Y</label>
-                  <input type="radio" name="기탁여부Yn" id="기탁여부N" :value="false" v-model="modalForm.기탁여부">
-                  <label for="기탁여부N">N</label>
-                </div>
-              </div>
-
-              <div class="column column-1">
-                <label for="기탁장소">기탁장소</label>
-                <select name="기탁장소" id="기탁장소" :disabled="!this.modalForm.기탁여부" v-model="modalForm.기탁장소">
-                  <option value="">선택</option>
-                  <option :value="item.id" v-for="(item, index) in _장소" :key="index">{{ item.장소명 }}</option>
-                </select>
-              </div>
-            </div>
-
+          <fieldset>
+            <legend>보관 정보</legend>
             <div class="modalRow row-3">
               <div class="column column-1">
                 <label for="보관장소">보관장소</label>
                 <select name="보관장소" id="보관장소" v-model="modalForm.보관장소">
                   <option value="">선택</option>
-                  <option :value="item.id" v-for="(item, index) in _장소" :key="index">{{ item.장소명 }}</option>
+                  <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_보관장소`">{{ item.장소명 }}</option>
                 </select>
               </div>
 
@@ -84,13 +60,37 @@
               </div>
             </div>
 
-            <div class="modalRow row">
-              <div class="column column">
-                <label for="활성테스트">활성테스트</label>
-                <input type="text" name="활성테스트" id="활성테스트" v-model="modalForm.활성테스트">
+            <div class="modalRow row-3">
+              <div class="column column-1">
+                <label for="기탁여부Y" class="required">기탁여부</label>
+                <div class="checkbox_wrap">
+                  <input type="radio" name="기탁여부Yn" id="기탁여부Y" :value="true" v-model="modalForm.기탁여부">
+                  <label for="기탁여부Y">Y</label>
+                  <input type="radio" name="기탁여부Yn" id="기탁여부N" :value="false" v-model="modalForm.기탁여부">
+                  <label for="기탁여부N">N</label>
+                </div>
+              </div>
+
+              <div class="column column-1">
+                <label for="기탁장소">기탁장소</label>
+                <select name="기탁장소" id="기탁장소" :disabled="!this.modalForm.기탁여부" v-model="modalForm.기탁장소">
+                  <option value="">선택</option>
+                  <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_기탁장소`">{{ item.장소명 }}</option>
+                </select>
+              </div>
+
+              <div class="column column-1">
+                <label for="확보일-input">확보일</label>
+                <DatePicker
+                  id="확보일"
+                  v-model="modalForm.확보일"
+                />
               </div>
             </div>
+          </fieldset>
 
+          <fieldset>
+            <legend>특허 정보</legend>
             <div class="modalRow row-3">
               <div class="column column">
                 <label for="특허">특허</label>
@@ -100,6 +100,13 @@
               <div class="column column-2">
                 <label for="특허내용">특허내용</label>
                 <input type="text" name="특허내용" id="특허내용" v-model="modalForm.특허내용">
+              </div>
+            </div>
+
+            <div class="modalRow row">
+              <div class="column column">
+                <label for="활성테스트">활성테스트</label>
+                <input type="text" name="활성테스트" id="활성테스트" v-model="modalForm.활성테스트">
               </div>
             </div>
 
