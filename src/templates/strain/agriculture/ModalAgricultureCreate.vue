@@ -188,6 +188,23 @@ export default {
       )
       this.$modal.hide('ModalAgricultureCreate')
     },
+    // async doCreate () {
+    //   for (let index = 0; index < 40; index++) {
+    //     this.modalForm.createtime = moment().valueOf()
+    //     this.modalForm.기탁장소 = true
+    //     this.modalForm.기탁장소 = this._장소[parseInt((Math.random() * 6))].id
+    //     this.modalForm.보관장소 = this._장소[parseInt((Math.random() * 6))].id
+    //     this.modalForm.균종 = `윤지우_${index + 1}`
+    //     this.modalForm.균주번호 = parseInt((Math.random() * 400000)).toString()
+    //     await setDoc(doc(firestore, '농업균주', this.COMMON.UUID()), this.modalForm)
+    //     this.initData()
+    //     this.$toast.success(
+    //       '등록되었습니다.',
+    //       this.ToastSettings
+    //     )
+    //   }
+    //   this.$modal.hide('ModalAgricultureCreate')
+    // },
   }
 }
 </script>
