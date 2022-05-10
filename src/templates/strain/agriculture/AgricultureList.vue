@@ -175,7 +175,7 @@ export default {
       this.COMMON.searchPagination(option)
     },
     get장소 (value) {
-      return this.$store.getters['manage/get장소_관리List'].filter(item => item.id === value)[0] ? this.$store.getters['manage/get장소_관리List'].filter(item => item.id === value)[0].장소명 : '' || ''
+      return this.$store.getters['manage/get장소_관리List'].filter(item => item.id === value)[0] ? this.$store.getters['manage/get장소_관리List'].filter(item => item.id === value)[0].name : '' || ''
     },
     showModalAgricultureCreate () {
       this.$modal.show('ModalAgricultureCreate')

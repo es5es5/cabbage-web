@@ -29,10 +29,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in contents" :key="index">
+          <tr v-for="(item, index) in contents" :key="index" @click="showModalPlaceUpdate(item.id)">
             <td>{{ contents.length - index }}</td>
-            <td>{{ item.장소명 }}</td>
-            <td>{{ item.메모 }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.memo }}</td>
             <td>{{ item.createtime | dateFormat }}</td>
           </tr>
           <no-data-message :list="contents" :colspan="4"></no-data-message>
@@ -50,13 +50,15 @@
       <span class="total">Total: {{ (contents.length || 0) | numberWithComma }}</span>
     </div>
     <ModalPlaceCreate @callback="getContents" />
+    <ModalPlaceUpdate :id="selectedId" @callback="getContents" />
   </main>
 </template>
 
 <script>
-import { getDocs, collection } from 'firebase/firestore'
+import { collection, getDocs, query, orderBy } from 'firebase/firestore'
 import { firestore } from '@/plugins/firebase'
 import ModalPlaceCreate from './ModalPlaceCreate'
+import ModalPlaceUpdate from './ModalPlaceUpdate'
 
 export default {
   name: 'PlaceList',
@@ -70,10 +72,11 @@ export default {
   },
   components: {
     ModalPlaceCreate,
+    ModalPlaceUpdate,
   },
   data () {
     return {
-      selectedContent: {},
+      selectedId: '',
       contents: [],
       searchForm: {
         pageIndex: 1,
@@ -98,13 +101,13 @@ export default {
     showModalPlaceCreate () {
       this.$modal.show('ModalPlaceCreate')
     },
-    showModalAgricultureUpdate (idolId) {
-      this.idolId = idolId
-      this.$modal.show('ModalAgricultureUpdate')
+    showModalPlaceUpdate (id) {
+      this.selectedId = id
+      this.$modal.show('ModalPlaceUpdate')
     },
     async getContents () {
       const list = []
-      const querySnapshot = await getDocs(collection(firestore, '장소_관리'))
+      const querySnapshot = await getDocs(query(collection(firestore, '장소_관리'), orderBy('createtime', 'desc')))
       querySnapshot.forEach((doc) => {
         list.push({
           id: doc.id,

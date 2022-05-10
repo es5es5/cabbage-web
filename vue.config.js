@@ -6,7 +6,7 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     host: '0.0.0.0',
-    port: 2000,
+    port: 5000,
     https: false,
     disableHostCheck: true,
     overlay: {
