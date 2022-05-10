@@ -12,14 +12,14 @@
       <label for="기탁장소">기탁장소</label>
       <select name="기탁장소" id="기탁장소" v-model="searchForm.기탁장소">
         <option value="">전체</option>
-        <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_기탁장소`">{{ item.장소명 }}</option>
+        <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_기탁장소`">{{ item.name }}</option>
       </select>
       <span class="separator">|</span>
 
       <label for="보관장소">보관장소</label>
       <select name="보관장소" id="보관장소" v-model="searchForm.보관장소">
         <option value="">전체</option>
-        <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_보관장소`">{{ item.장소명 }}</option>
+        <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_보관장소`">{{ item.name }}</option>
       </select>
       <span class="separator">|</span>
 

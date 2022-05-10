@@ -45,7 +45,7 @@
                 <label for="보관장소">보관장소</label>
                 <select name="보관장소" id="보관장소" v-model="modalForm.보관장소">
                   <option value="">선택</option>
-                  <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_보관장소`">{{ item.장소명 }}</option>
+                  <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_보관장소`">{{ item.name }}</option>
                 </select>
               </div>
 
@@ -75,7 +75,7 @@
                 <label for="기탁장소">기탁장소</label>
                 <select name="기탁장소" id="기탁장소" :disabled="!this.modalForm.기탁여부" v-model="modalForm.기탁장소">
                   <option value="">선택</option>
-                  <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_기탁장소`">{{ item.장소명 }}</option>
+                  <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_기탁장소`">{{ item.name }}</option>
                 </select>
               </div>
 
