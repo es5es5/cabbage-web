@@ -73,7 +73,7 @@
 
               <div class="column column-1">
                 <label for="기탁장소">기탁장소</label>
-                <select name="기탁장소" id="기탁장소" :disabled="!this.modalForm.기탁여부" v-model="modalForm.기탁장소">
+                <select name="기탁장소" id="기탁장소" v-model="modalForm.기탁장소">
                   <option value="">선택</option>
                   <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_기탁장소`">{{ item.name }}</option>
                 </select>
