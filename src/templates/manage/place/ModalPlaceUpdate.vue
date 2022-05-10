@@ -76,6 +76,7 @@ export default {
   },
   methods: {
     openEvent () {
+      this.getContent()
     },
     closeEvent () { this.$emit('callback') },
     initData () {

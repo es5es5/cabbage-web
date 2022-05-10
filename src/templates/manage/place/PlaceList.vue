@@ -11,7 +11,7 @@
       <button type="button" class="btn primary" @click="showModalPlaceCreate">등록</button>
       <!-- <button type="button" class="btn">엑셀다운로드</button> -->
     </div>
-    <div class="table_wrap table-hover">
+    <div class="table_wrap table-hover table_wrap-scoll-y">
       <table>
         <caption>장소 리스트</caption>
         <colgroup>
@@ -28,16 +28,26 @@
             <th scope="col">등록일</th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="(item, index) in contents" :key="index" @click="showModalPlaceUpdate(item.id)">
-            <td>{{ contents.length - index }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.memo }}</td>
-            <td>{{ item.createtime | dateFormat }}</td>
-          </tr>
-          <no-data-message :list="contents" :colspan="4"></no-data-message>
-        </tbody>
       </table>
+      <div class="table_scroll">
+        <table>
+          <colgroup>
+            <col style="width: 1rem;">
+            <col style="width: 10rem;">
+            <col style="width: 20rem;">
+            <col style="width: 3rem;">
+          </colgroup>
+          <tbody>
+            <tr v-for="(item, index) in contents" :key="index" @click="showModalPlaceUpdate(item.id)">
+              <td>{{ contents.length - index }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.memo }}</td>
+              <td>{{ item.createtime | dateFormat }}</td>
+            </tr>
+            <no-data-message :list="contents" :colspan="4"></no-data-message>
+          </tbody>
+        </table>
+      </div>
       <!-- <Pagination
         :totalElement="parseInt(contents.length)"
         :activePage="searchForm.pageIndex"
