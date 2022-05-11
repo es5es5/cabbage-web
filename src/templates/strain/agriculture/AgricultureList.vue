@@ -2,7 +2,10 @@
   <main>
     <div class="search_wrap">
       <label for="균종">균종</label>
-      <input id="균종" type="text" placeholder="" v-model="searchForm.균종">
+      <select name="균종" id="균종" v-model="searchForm.균종">
+        <option value="">선택</option>
+        <option :value="item.id" v-for="(item, index) in _균종" :key="`${index}_균종`">{{ item.name }}</option>
+      </select>
       <span class="separator">|</span>
 
       <label for="균종">균주번호</label>
@@ -82,7 +85,7 @@
           </colgroup>
           <tbody>
             <tr v-for="(item, index) in _contents" :key="index" @click="showModalAgricultureUpdate(item.id)">
-              <td>{{ item.균종 }}</td>
+              <td>{{ get균종(item.균종) }}</td>
               <td>{{ item.균주번호 }}</td>
               <td>{{ item.Origin }}</td>
               <td>{{ item.확보일 }}</td>
@@ -176,6 +179,9 @@ export default {
     },
     get장소 (value) {
       return this.$store.getters['manage/get장소_관리List'].filter(item => item.id === value)[0] ? this.$store.getters['manage/get장소_관리List'].filter(item => item.id === value)[0].name : '' || ''
+    },
+    get균종 (value) {
+      return this.$store.getters['manage/get균종_관리List'].filter(item => item.id === value)[0] ? this.$store.getters['manage/get균종_관리List'].filter(item => item.id === value)[0].name : '' || ''
     },
     showModalAgricultureCreate () {
       this.$modal.show('ModalAgricultureCreate')
