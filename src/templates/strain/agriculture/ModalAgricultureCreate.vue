@@ -25,7 +25,10 @@
             <div class="modalRow row-3">
               <div class="column column-1">
                 <label for="균종" class="required">균종</label>
-                <input type="text" id="균종" v-model="modalForm.균종">
+                <select name="균종" id="균종" v-model="modalForm.균종">
+                  <option value="">선택</option>
+                  <option :value="item.id" v-for="(item, index) in _균종" :key="`${index}_균종`">{{ item.name }}</option>
+                </select>
               </div>
               <div class="column column-1">
                 <label for="균주번호">균주번호</label>
