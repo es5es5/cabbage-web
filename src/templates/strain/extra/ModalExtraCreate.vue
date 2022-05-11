@@ -13,7 +13,7 @@
     >
 
     <div class="header_wrap">
-      <h3 class="header">기타균주 등록</h3>
+      <h3 class="header">기타 등록</h3>
       <div class="closeButton" @click="$modal.hide('ModalExtraCreate')"></div>
     </div>
 
@@ -25,7 +25,10 @@
             <div class="modalRow row-3">
               <div class="column column-1">
                 <label for="균종" class="required">균종</label>
-                <input type="text" id="균종" v-model="modalForm.균종">
+                <select name="균종" id="균종" v-model="modalForm.균종">
+                  <option value="">선택</option>
+                  <option :value="item.id" v-for="(item, index) in _균종" :key="`${index}_균종`">{{ item.name }}</option>
+                </select>
               </div>
               <div class="column column-1">
                 <label for="균주번호">균주번호</label>
@@ -33,7 +36,10 @@
               </div>
               <div class="column column-1">
                 <label for="Origin" class="required">Origin</label>
-                <input type="text" id="Origin" v-model="modalForm.Origin">
+                <select name="Origin" id="Origin" v-model="modalForm.Origin">
+                  <option value="">선택</option>
+                  <option :value="item.id" v-for="(item, index) in _Origin" :key="`${index}_Origin`">{{ item.name }}</option>
+                </select>
               </div>
             </div>
           </fieldset>
@@ -45,7 +51,7 @@
                 <label for="보관장소">보관장소</label>
                 <select name="보관장소" id="보관장소" v-model="modalForm.보관장소">
                   <option value="">선택</option>
-                  <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_보관장소`">{{ item.장소명 }}</option>
+                  <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_보관장소`">{{ item.name }}</option>
                 </select>
               </div>
 
@@ -73,9 +79,9 @@
 
               <div class="column column-1">
                 <label for="기탁장소">기탁장소</label>
-                <select name="기탁장소" id="기탁장소" :disabled="!this.modalForm.기탁여부" v-model="modalForm.기탁장소">
+                <select name="기탁장소" id="기탁장소" v-model="modalForm.기탁장소">
                   <option value="">선택</option>
-                  <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_기탁장소`">{{ item.장소명 }}</option>
+                  <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_기탁장소`">{{ item.name }}</option>
                 </select>
               </div>
 
