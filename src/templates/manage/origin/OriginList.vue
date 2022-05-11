@@ -11,7 +11,7 @@
       <button type="button" class="btn primary" @click="showModalOriginCreate">등록</button>
       <!-- <button type="button" class="btn">엑셀다운로드</button> -->
     </div>
-    <div class="table_wrap table-hover">
+    <div class="table_wrap table-hover table_wrap-scoll-y">
       <table>
         <caption>Origin 리스트</caption>
         <colgroup>
@@ -28,16 +28,26 @@
             <th scope="col">등록일</th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="(item, index) in contents" :key="index">
-            <td>{{ contents.length - index }}</td>
-            <td>{{ item.Origin명 }}</td>
-            <td>{{ item.메모 }}</td>
-            <td>{{ item.createtime | dateFormat }}</td>
-          </tr>
-          <no-data-message :list="contents" :colspan="4"></no-data-message>
-        </tbody>
       </table>
+      <div class="table_scroll">
+        <table>
+          <colgroup>
+            <col style="width: 1rem;">
+            <col style="width: 10rem;">
+            <col style="width: 20rem;">
+            <col style="width: 3rem;">
+          </colgroup>
+          <tbody>
+            <tr v-for="(item, index) in contents" :key="index" @click="showModalOriginUpdate(item.id)">
+              <td>{{ contents.length - index }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.memo }}</td>
+              <td>{{ item.createtime | dateFormat }}</td>
+            </tr>
+            <no-data-message :list="contents" :colspan="4"></no-data-message>
+          </tbody>
+        </table>
+      </div>
       <!-- <Pagination
         :totalElement="parseInt(contents.length)"
         :activePage="searchForm.pageIndex"
@@ -50,13 +60,15 @@
       <span class="total">Total: {{ (contents.length || 0) | numberWithComma }}</span>
     </div>
     <ModalOriginCreate @callback="getContents" />
+    <ModalOriginUpdate :id="selectedId" @callback="getContents" />
   </main>
 </template>
 
 <script>
-import { getDocs, collection } from 'firebase/firestore'
+import { collection, getDocs, query, orderBy } from 'firebase/firestore'
 import { firestore } from '@/plugins/firebase'
 import ModalOriginCreate from './ModalOriginCreate'
+import ModalOriginUpdate from './ModalOriginUpdate'
 
 export default {
   name: 'OriginList',
@@ -64,13 +76,17 @@ export default {
     this.getContents()
   },
   watch: {
+    mixinSelectedBrand () {
+      // this.getContents()
+    }
   },
   components: {
     ModalOriginCreate,
+    ModalOriginUpdate,
   },
   data () {
     return {
-      selectedContent: {},
+      selectedId: '',
       contents: [],
       searchForm: {
         pageIndex: 1,
@@ -95,9 +111,13 @@ export default {
     showModalOriginCreate () {
       this.$modal.show('ModalOriginCreate')
     },
+    showModalOriginUpdate (id) {
+      this.selectedId = id
+      this.$modal.show('ModalOriginUpdate')
+    },
     async getContents () {
       const list = []
-      const querySnapshot = await getDocs(collection(firestore, 'Origin_관리'))
+      const querySnapshot = await getDocs(query(collection(firestore, 'Origin_관리'), orderBy('createtime', 'desc')))
       querySnapshot.forEach((doc) => {
         list.push({
           id: doc.id,

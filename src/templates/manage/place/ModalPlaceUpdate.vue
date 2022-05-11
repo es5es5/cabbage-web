@@ -13,7 +13,7 @@
     >
 
     <div class="header_wrap">
-      <h3 class="header">장소 등록</h3>
+      <h3 class="header">장소 수정</h3>
       <div class="closeButton" @click="$modal.hide('ModalPlaceUpdate')"></div>
     </div>
 

@@ -1,6 +1,6 @@
 <template>
   <modal
-    name="ModalMicroorganismCreate"
+    name="ModalMicroorganismUpdate"
     class="modal"
     adaptive
     reset
@@ -13,8 +13,8 @@
     >
 
     <div class="header_wrap">
-      <h3 class="header">균종 등록</h3>
-      <div class="closeButton" @click="$modal.hide('ModalMicroorganismCreate')"></div>
+      <h3 class="header">균종 수정</h3>
+      <div class="closeButton" @click="$modal.hide('ModalMicroorganismUpdate')"></div>
     </div>
 
     <div class="content_wrap">
@@ -37,22 +37,30 @@
           </fieldset>
         </form>
       </div>
+
       <div class="action_wrap">
-        <button class="btn primary" @click.once="doCreate">등록</button>
+        <button class="btn warning" @click="doUpdate">수정</button>
+        <button class="btn error" @click="doDelete">삭제</button>
       </div>
     </div>
   </modal>
 </template>
 
 <script>
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore'
 import { firestore } from '@/plugins/firebase'
 
 export default {
-  name: 'ModalMicroorganismCreate',
+  name: 'ModalMicroorganismUpdate',
   created () {
   },
   computed: {
+  },
+  props: {
+    id: {
+      type: String,
+      require: true
+    }
   },
   data () {
     return {
@@ -68,6 +76,7 @@ export default {
   },
   methods: {
     openEvent () {
+      this.getContent()
     },
     closeEvent () {
       this.$store.dispatch('manage/set균종_관리')
@@ -80,15 +89,28 @@ export default {
         createtime: '',
       }
     },
-    async doCreate () {
-      this.modalForm.createtime = moment().valueOf()
-      await setDoc(doc(firestore, '균종_관리', this.COMMON.UUID()), this.modalForm)
+    async getContent () {
+      const content = await getDoc(doc(firestore, '균종_관리', this.id))
+      this.modalForm = content.data()
+    },
+    async doDelete () {
+      if (confirm('삭제하시겠습니까?')) {
+        await deleteDoc(doc(firestore, '균종_관리', this.id))
+        this.$toast.success(
+          '삭제되었습니다.',
+          this.ToastSettings
+        )
+        this.$modal.hide('ModalMicroorganismUpdate')
+      }
+    },
+    async doUpdate () {
+      await setDoc(doc(firestore, '균종_관리', this.id), this.modalForm)
       this.initData()
       this.$toast.success(
-        '등록되었습니다.',
+        '수정되었습니다.',
         this.ToastSettings
       )
-      this.$modal.hide('ModalMicroorganismCreate')
+      this.$modal.hide('ModalMicroorganismUpdate')
     },
   }
 }
