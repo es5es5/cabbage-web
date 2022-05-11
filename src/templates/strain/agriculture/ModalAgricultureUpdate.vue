@@ -36,7 +36,10 @@
               </div>
               <div class="column column-1">
                 <label for="Origin" class="required">Origin</label>
-                <input type="text" id="Origin" v-model="modalForm.Origin">
+                <select name="Origin" id="Origin" v-model="modalForm.Origin">
+                  <option value="">선택</option>
+                  <option :value="item.id" v-for="(item, index) in _Origin" :key="`${index}_Origin`">{{ item.name }}</option>
+                </select>
               </div>
             </div>
           </fieldset>

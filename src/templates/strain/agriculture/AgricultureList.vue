@@ -12,6 +12,13 @@
       <input id="균주번호" type="text" placeholder="" v-model="searchForm.균주번호">
       <span class="separator">|</span>
 
+      <label for="Origin">Origin</label>
+      <select name="Origin" id="Origin" v-model="searchForm.Origin">
+        <option value="">전체</option>
+        <option :value="item.id" v-for="(item, index) in _Origin" :key="`${index}_Origin`">{{ item.name }}</option>
+      </select>
+      <span class="separator">|</span>
+
       <label for="기탁장소">기탁장소</label>
       <select name="기탁장소" id="기탁장소" v-model="searchForm.기탁장소">
         <option value="">전체</option>
@@ -85,12 +92,12 @@
           </colgroup>
           <tbody>
             <tr v-for="(item, index) in _contents" :key="index" @click="showModalAgricultureUpdate(item.id)">
-              <td>{{ get균종(item.균종) }}</td>
+              <td>{{ getManage('균종', item.균종) }}</td>
               <td>{{ item.균주번호 }}</td>
-              <td>{{ item.Origin }}</td>
+              <td>{{ getManage('Origin', item.Origin) }}</td>
               <td>{{ item.확보일 }}</td>
-              <td>{{ get장소(item.기탁장소) }}</td>
-              <td>{{ get장소(item.보관장소) }}</td>
+              <td>{{ getManage('장소', item.기탁장소) }}</td>
+              <td>{{ getManage('장소', item.보관장소) }}</td>
               <td>{{ item.stock갯수 }}</td>
               <td>{{ item.현재stock }}</td>
               <td>{{ item.활성테스트 }}</td>
@@ -177,11 +184,8 @@ export default {
 
       this.COMMON.searchPagination(option)
     },
-    get장소 (value) {
-      return this.$store.getters['manage/get장소_관리List'].filter(item => item.id === value)[0] ? this.$store.getters['manage/get장소_관리List'].filter(item => item.id === value)[0].name : '' || ''
-    },
-    get균종 (value) {
-      return this.$store.getters['manage/get균종_관리List'].filter(item => item.id === value)[0] ? this.$store.getters['manage/get균종_관리List'].filter(item => item.id === value)[0].name : '' || ''
+    getManage (manage, value) {
+      return this.$store.getters[`manage/get${manage}_관리List`].filter(item => item.id === value)[0] ? this.$store.getters[`manage/get${manage}_관리List`].filter(item => item.id === value)[0].name : '' || ''
     },
     showModalAgricultureCreate () {
       this.$modal.show('ModalAgricultureCreate')
