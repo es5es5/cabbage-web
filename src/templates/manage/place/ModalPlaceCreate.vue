@@ -24,7 +24,7 @@
             <div class="modalRow row">
               <div class="column column">
                 <label for="name" class="required">name</label>
-                <input type="text" id="name" v-model="modalForm.name">
+                <input type="text" id="name" name="name" v-validate="'required'" v-model="modalForm.name">
               </div>
             </div>
 
@@ -38,7 +38,7 @@
         </form>
       </div>
       <div class="action_wrap">
-        <button class="btn primary" @click.once="doCreate">등록</button>
+        <button class="btn primary" @click="doCreate">등록</button>
       </div>
     </div>
   </modal>
@@ -69,7 +69,10 @@ export default {
   methods: {
     openEvent () {
     },
-    closeEvent () { this.$emit('callback') },
+    closeEvent () {
+      this.$emit('callback')
+      this.$store.dispatch('manage/set장소_관리')
+    },
     initData () {
       this.modalForm = {
         name: '',
@@ -77,16 +80,21 @@ export default {
         createtime: '',
       }
     },
-    async doCreate () {
-      this.modalForm.createtime = moment().valueOf()
-      await setDoc(doc(firestore, '장소_관리', this.COMMON.UUID()), this.modalForm)
-      this.initData()
-      this.$toast.success(
-        '등록되었습니다.',
-        this.ToastSettings
-      )
-      this.$store.dispatch('manage/set장소_관리')
-      this.$modal.hide('ModalPlaceCreate')
+    async doCreate ($event) {
+      $event.target.disabled = true
+      if (await this.$validator.validate()) {
+        this.modalForm.createtime = moment().valueOf()
+        await setDoc(doc(firestore, '장소_관리', this.COMMON.UUID()), this.modalForm)
+        this.initData()
+        this.$toast.success(
+          '등록되었습니다.',
+          this.ToastSettings
+        )
+        this.$modal.hide('ModalPlaceCreate')
+      } else {
+        this.setValidateError()
+        $event.target.disabled = false
+      }
     },
   }
 }

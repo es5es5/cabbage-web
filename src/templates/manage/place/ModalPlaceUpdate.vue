@@ -24,7 +24,7 @@
             <div class="modalRow row">
               <div class="column column">
                 <label for="name" class="required">name</label>
-                <input type="text" id="name" v-model="modalForm.name">
+                <input type="text" id="name" name="name" v-validate="'required'" v-model="modalForm.name">
               </div>
             </div>
 
@@ -78,7 +78,10 @@ export default {
     openEvent () {
       this.getContent()
     },
-    closeEvent () { this.$emit('callback') },
+    closeEvent () {
+      this.$emit('callback')
+      this.$store.dispatch('manage/set장소_관리')
+    },
     initData () {
       this.modalForm = {
         name: '',
@@ -100,14 +103,20 @@ export default {
         this.$modal.hide('ModalPlaceUpdate')
       }
     },
-    async doUpdate () {
-      await setDoc(doc(firestore, '장소_관리', this.id), this.modalForm)
-      this.initData()
-      this.$toast.success(
-        '수정되었습니다.',
-        this.ToastSettings
-      )
-      this.$modal.hide('ModalPlaceUpdate')
+    async doUpdate ($event) {
+      $event.target.disabled = true
+      if (await this.$validator.validate()) {
+        await setDoc(doc(firestore, '장소_관리', this.id), this.modalForm)
+        this.initData()
+        this.$toast.success(
+          '수정되었습니다.',
+          this.ToastSettings
+        )
+        this.$modal.hide('ModalPlaceUpdate')
+      } else {
+        this.setValidateError()
+        $event.target.disabled = false
+      }
     },
   }
 }
