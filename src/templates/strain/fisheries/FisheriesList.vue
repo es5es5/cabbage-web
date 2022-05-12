@@ -3,7 +3,7 @@
     <div class="search_wrap">
       <label for="search균종">균종</label>
       <select name="search균종" id="search균종" v-model="searchForm.균종">
-        <option value="">선택</option>
+        <option value="">전체</option>
         <option :value="item.id" v-for="(item, index) in _균종" :key="`${index}_균종`">{{ item.name }}</option>
       </select>
       <span class="separator">|</span>
