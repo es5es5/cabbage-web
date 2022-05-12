@@ -8,7 +8,7 @@
       </select>
       <span class="separator">|</span>
 
-      <label for="search균종">균주번호</label>
+      <label for="search균주번호">균주번호</label>
       <input id="search균주번호" type="text" placeholder="" v-model="searchForm.균주번호">
       <span class="separator">|</span>
 
