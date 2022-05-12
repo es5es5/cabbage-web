@@ -24,7 +24,7 @@
             <div class="modalRow row">
               <div class="column column">
                 <label for="name" class="required">name</label>
-                <input type="text" id="name" v-model="modalForm.name">
+                <input type="text" id="name" name="name" v-validate="'required'" v-model="modalForm.name">
               </div>
             </div>
 
@@ -103,14 +103,20 @@ export default {
         this.$modal.hide('ModalMicroorganismUpdate')
       }
     },
-    async doUpdate () {
-      await setDoc(doc(firestore, '균종_관리', this.id), this.modalForm)
-      this.initData()
-      this.$toast.success(
-        '수정되었습니다.',
-        this.ToastSettings
-      )
-      this.$modal.hide('ModalMicroorganismUpdate')
+    async doUpdate ($event) {
+      $event.target.disabled = true
+      if (await this.$validator.validate()) {
+        await setDoc(doc(firestore, '균종_관리', this.id), this.modalForm)
+        this.initData()
+        this.$toast.success(
+          '수정되었습니다.',
+          this.ToastSettings
+        )
+        this.$modal.hide('ModalMicroorganismUpdate')
+      } else {
+        this.setValidateError()
+        $event.target.disabled = false
+      }
     },
   }
 }
