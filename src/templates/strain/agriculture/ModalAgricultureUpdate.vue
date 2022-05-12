@@ -25,17 +25,17 @@
             <div class="modalRow row-3">
               <div class="column column-1">
                 <label for="균종" class="required">균종</label>
-                <select name="균종" id="균종" v-model="modalForm.균종">
+                <select name="균종" id="균종" v-model="modalForm.균종" v-validate="'required'">
                   <option value="">선택</option>
                   <option :value="item.id" v-for="(item, index) in _균종" :key="`${index}_균종`">{{ item.name }}</option>
                 </select>
               </div>
               <div class="column column-1">
-                <label for="균주번호">균주번호</label>
-                <input type="text" id="균주번호" v-model="modalForm.균주번호">
+                <label for="균주번호" class="required">균주번호</label>
+                <input type="text" id="균주번호" name="균주번호" v-model="modalForm.균주번호" v-validate="'required'">
               </div>
               <div class="column column-1">
-                <label for="Origin" class="required">Origin</label>
+                <label for="Origin">Origin</label>
                 <select name="Origin" id="Origin" v-model="modalForm.Origin">
                   <option value="">선택</option>
                   <option :value="item.id" v-for="(item, index) in _Origin" :key="`${index}_Origin`">{{ item.name }}</option>
@@ -208,14 +208,20 @@ export default {
         this.$modal.hide('ModalAgricultureUpdate')
       }
     },
-    async doUpdate () {
-      await setDoc(doc(firestore, '농업균주', this.id), this.modalForm)
-      this.initData()
-      this.$toast.success(
-        '수정되었습니다.',
-        this.ToastSettings
-      )
-      this.$modal.hide('ModalAgricultureUpdate')
+    async doUpdate ($event) {
+      $event.target.disabled = true
+      if (await this.$validator.validate()) {
+        await setDoc(doc(firestore, '농업균주', this.id), this.modalForm)
+        this.initData()
+        this.$toast.success(
+          '수정되었습니다.',
+          this.ToastSettings
+        )
+        this.$modal.hide('ModalAgricultureUpdate')
+      } else {
+        this.setValidateError()
+        $event.target.disabled = false
+      }
     },
   }
 }

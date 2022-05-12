@@ -25,17 +25,17 @@
             <div class="modalRow row-3">
               <div class="column column-1">
                 <label for="균종" class="required">균종</label>
-                <select name="균종" id="균종" v-model="modalForm.균종">
+                <select name="균종" id="균종" v-model="modalForm.균종" v-validate="'required'">
                   <option value="">선택</option>
                   <option :value="item.id" v-for="(item, index) in _균종" :key="`${index}_균종`">{{ item.name }}</option>
                 </select>
               </div>
               <div class="column column-1">
-                <label for="균주번호">균주번호</label>
-                <input type="text" id="균주번호" v-model="modalForm.균주번호">
+                <label for="균주번호" class="required">균주번호</label>
+                <input type="text" id="균주번호" name="균주번호" v-model="modalForm.균주번호" v-validate="'required'">
               </div>
               <div class="column column-1">
-                <label for="Origin" class="required">Origin</label>
+                <label for="Origin">Origin</label>
                 <select name="Origin" id="Origin" v-model="modalForm.Origin">
                   <option value="">선택</option>
                   <option :value="item.id" v-for="(item, index) in _Origin" :key="`${index}_Origin`">{{ item.name }}</option>
@@ -126,7 +126,7 @@
         </form>
       </div>
       <div class="action_wrap">
-        <button class="btn primary" @click.once="doCreate">등록</button>
+        <button class="btn primary" @click="doCreate">등록</button>
       </div>
     </div>
   </modal>
@@ -184,15 +184,21 @@ export default {
         메모: '',
       }
     },
-    async doCreate () {
-      this.modalForm.createtime = moment().valueOf()
-      await setDoc(doc(firestore, '수산업균주', this.COMMON.UUID()), this.modalForm)
-      this.initData()
-      this.$toast.success(
-        '등록되었습니다.',
-        this.ToastSettings
-      )
-      this.$modal.hide('ModalFisheriesCreate')
+    async doCreate ($event) {
+      $event.target.disabled = true
+      if (await this.$validator.validate()) {
+        this.modalForm.createtime = moment().valueOf()
+        await setDoc(doc(firestore, '수산업균주', this.COMMON.UUID()), this.modalForm)
+        this.initData()
+        this.$toast.success(
+          '등록되었습니다.',
+          this.ToastSettings
+        )
+        this.$modal.hide('ModalFisheriesCreate')
+      } else {
+        this.setValidateError()
+        $event.target.disabled = false
+      }
     },
   }
 }

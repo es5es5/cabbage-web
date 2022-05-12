@@ -1,40 +1,40 @@
 <template>
   <main>
     <div class="search_wrap">
-      <label for="균종">균종</label>
-      <select name="균종" id="균종" v-model="searchForm.균종">
+      <label for="search균종">균종</label>
+      <select name="search균종" id="search균종" v-model="searchForm.균종">
         <option value="">선택</option>
         <option :value="item.id" v-for="(item, index) in _균종" :key="`${index}_균종`">{{ item.name }}</option>
       </select>
       <span class="separator">|</span>
 
-      <label for="균종">균주번호</label>
-      <input id="균주번호" type="text" placeholder="" v-model="searchForm.균주번호">
+      <label for="search균종">균주번호</label>
+      <input id="search균주번호" type="text" placeholder="" v-model="searchForm.균주번호">
       <span class="separator">|</span>
 
-      <label for="Origin">Origin</label>
-      <select name="Origin" id="Origin" v-model="searchForm.Origin">
+      <label for="searchOrigin">Origin</label>
+      <select name="searchOrigin" id="searchOrigin" v-model="searchForm.Origin">
         <option value="">전체</option>
         <option :value="item.id" v-for="(item, index) in _Origin" :key="`${index}_Origin`">{{ item.name }}</option>
       </select>
       <span class="separator">|</span>
 
-      <label for="기탁장소">기탁장소</label>
-      <select name="기탁장소" id="기탁장소" v-model="searchForm.기탁장소">
+      <label for="search기탁장소">기탁장소</label>
+      <select name="search기탁장소" id="search기탁장소" v-model="searchForm.기탁장소">
         <option value="">전체</option>
         <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_기탁장소`">{{ item.name }}</option>
       </select>
       <span class="separator">|</span>
 
-      <label for="보관장소">보관장소</label>
-      <select name="보관장소" id="보관장소" v-model="searchForm.보관장소">
+      <label for="search보관장소">보관장소</label>
+      <select name="search보관장소" id="search보관장소" v-model="searchForm.보관장소">
         <option value="">전체</option>
         <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_보관장소`">{{ item.name }}</option>
       </select>
       <span class="separator">|</span>
 
       <!-- <label for="Origin">Origin</label>
-      <select name="Origin" id="Origin" v-model="searchForm.Origin">
+      <select name="searchOrigin" id="searchOrigin" v-model="searchForm.Origin">
         <option value="">전체</option>
         <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_Origin`">{{ item.장소명 }}</option>
       </select>
