@@ -2,27 +2,28 @@
   <div id="login">
     <div class="login_wrap">
       <div class="logo_wrap">
-        <img src="@/assets/images/login/people_logo_text.png" alt="people_logo_text" class="logoImg">
+        <img src="@/assets/images/logo_on.png" alt="people_logo_text" class="logoImg">
       </div>
       <div class="login_inner">
         <div class="left_wrap">
           <div class="left_inner">
             <img src="@/assets/images/login/team.png" alt="team" class="teamImg">
-            <p class="appName">피플라이프 <strong>OTC</strong></p>
-            <p class="info">피플라이프(주) 직원 전용 시스템입니다.</p>
+            <p class="appName">큐옴바이오 <strong>R&D Center</strong></p>
+            <p class="info">관리 프로그램</p>
           </div>
         </div>
         <div class="right_wrap">
           <div class="right_inner">
             <label for="employeeNumber" class="title">LOGIN</label>
-            <input type="text" id="employeeNumber" placeholder="사원번호" class="loginInput" maxlength="7" v-model="login.employeeNumber">
+            <input type="text" id="employeeNumber" placeholder="아이디" class="loginInput" maxlength="7" v-model="login.employeeNumber">
             <input type="password" id="password" placeholder="비밀번호" class="loginInput" v-model="login.passwordPlain" @keyup.enter="postLogin">
-            <button type="button" class="loginButton" :class="_isVaild" @click="postLogin">로그인</button>
-            <p class="find">비밀번호 찾기</p>
+            <!-- <button type="button" class="loginButton" :class="_isVaild" @click="postLogin">로그인</button> -->
+            <button type="button" class="loginButton" :class="'active'" @click="postLogin">로그인</button>
+            <!-- <p class="find">비밀번호 찾기</p> -->
           </div>
         </div>
       </div>
-      <p class="copyright">&copy; Peoplelife. All rights reserved</p>
+      <p class="copyright">&copy; Cuomebio All rights reserved.</p>
     </div>
   </div>
 </template>
@@ -50,6 +51,10 @@ export default {
   },
   methods: {
     postLogin () {
+      this.$router.push({
+        name: 'Main'
+      })
+
       if (this._isVaild !== 'active') return false
 
       const apiURL = `${this.ENV_AUTH}/auth/sign-in`

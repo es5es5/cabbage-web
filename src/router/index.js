@@ -12,20 +12,21 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    redirect: '/main',
+    // redirect: '/main',
+    redirect: '/login',
     component: Home
   },
   {
     path: '/login',
     name: 'Login',
     component: Login,
-    beforeEnter: (to, from, next) => {
-      if (Vue.cookie.get('auth-token') || Vue.cookie.get('Authorization-v2')) {
-        next({ name: 'Main' })
-      } else {
-        next()
-      }
-    }
+    // beforeEnter: (to, from, next) => {
+    //   if (Vue.cookie.get('auth-token') || Vue.cookie.get('Authorization-v2')) {
+    //     next({ name: 'Main' })
+    //   } else {
+    //     next()
+    //   }
+    // }
   },
   {
     path: '/main',
