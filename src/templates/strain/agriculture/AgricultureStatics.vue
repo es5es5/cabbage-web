@@ -89,6 +89,7 @@ export default {
     _장소 () { return this.$store.getters['manage/get장소_관리List'] },
     _Origin () { return this.$store.getters['manage/getOrigin_관리List'] },
     _균종 () { return this.$store.getters['manage/get균종_관리List'] },
+    _균종NameList () { return this.$store.getters['manage/get균종_관리List'].map(item => item.name) },
     _contents () {
       return this.contents
         .filter(item => item.균종.indexOf(this.searchForm.균종) > -1)
@@ -111,7 +112,6 @@ export default {
           ...doc.data()
         })
       })
-      this.contents = list
       list = list.map(item => {
         return {
           name: this.getManage('균종', item.균종),
@@ -120,14 +120,13 @@ export default {
           ...item
         }
       })
-      this.chartData.rows = [
-        { 균종: 'Louis Lee', 갯수: list.filter(item => item.name === 'Louis Lee').length },
-        { 균종: 'Louis Vitton', 갯수: list.filter(item => item.name === 'Louis Vitton').length },
-        { 균종: 'Pearl', 갯수: list.filter(item => item.name === 'Pearl').length },
-        { 균종: 'Jiwoo Yoon', 갯수: list.filter(item => item.name === 'Jiwoo Yoon').length },
-        { 균종: 'That That', 갯수: list.filter(item => item.name === 'That That').length },
-        { 균종: 'Star', 갯수: list.filter(item => item.name === 'Star').length },
-      ]
+      this._균종NameList.forEach(name => {
+        this.chartData.rows.push({
+          균종: name,
+          갯수: list.filter(item => item.name === name).length
+        })
+      })
+      console.log(this.chartData.row)
     }
   }
 }
