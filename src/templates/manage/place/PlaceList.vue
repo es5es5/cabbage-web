@@ -1,8 +1,8 @@
 <template>
   <main>
     <div class="search_wrap">
-      <label for="">검색조건</label>
-      <input type="text" placeholder="">
+      <label for="name">이름</label>
+      <input type="text" placeholder="" v-model="searchForm.name">
       <span class="separator">|</span>
 
       <button type="button" class="btn-search" @click="getContents">검색</button>
@@ -38,13 +38,13 @@
             <col style="width: 3rem;">
           </colgroup>
           <tbody>
-            <tr v-for="(item, index) in contents" :key="index" @click="showModalPlaceUpdate(item.id)">
+            <tr v-for="(item, index) in _contents" :key="index" @click="showModalPlaceUpdate(item.id)">
               <Td>{{ contents.length - index }}</Td>
               <Td>{{ item.name }}</Td>
               <Td>{{ item.memo }}</Td>
               <Td>{{ item.createtime | dateFormat }}</Td>
             </tr>
-            <no-data-message :list="contents" :colspan="4"></no-data-message>
+            <no-data-message :list="_contents" :colspan="4"></no-data-message>
           </tbody>
         </table>
       </div>
@@ -89,12 +89,17 @@ export default {
       selectedId: '',
       contents: [],
       searchForm: {
+        name: '',
         pageIndex: 1,
         pageSize: 15,
       },
     }
   },
   computed: {
+    _contents () {
+      return this.contents
+        .filter(item => item.name.indexOf(this.searchForm.name) > -1)
+    }
   },
   methods: {
     searchDocList (options) {
