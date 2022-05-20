@@ -20,6 +20,9 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+    meta: {
+      title: '로그인'
+    }
     // beforeEnter: (to, from, next) => {
     //   if (Vue.cookie.get('auth-token') || Vue.cookie.get('Authorization-v2')) {
     //     next({ name: 'Main' })
@@ -239,7 +242,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = `${to.meta.title} | 큐옴바이오` || '큐옴바이오'
+  document.title = `${to.meta.title} | 캐비지` || '캐비지'
   next()
 })
 

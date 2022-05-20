@@ -8,13 +8,13 @@
         <div class="left_wrap">
           <div class="left_inner">
             <img src="@/assets/images/login/team.png" alt="team" class="teamImg">
-            <p class="appName">큐옴바이오 <strong>R&D Center</strong></p>
-            <p class="info">관리 프로그램</p>
+            <p class="appName"><span>안녕, </span><strong>캐비지</strong><span>!</span></p>
+            <p class="info">for 큐옴바이오 <strong>R&D Center</strong></p>
           </div>
         </div>
         <div class="right_wrap">
           <div class="right_inner">
-            <label for="employeeNumber" class="title">LOGIN</label>
+            <!-- <label for="employeeNumber" class="greeting"></label> -->
             <input type="text" id="employeeNumber" placeholder="아이디" class="loginInput" maxlength="7" v-model="login.employeeNumber">
             <input type="password" id="password" placeholder="비밀번호" class="loginInput" v-model="login.passwordPlain" @keyup.enter="postLogin">
             <!-- <button type="button" class="loginButton" :class="_isVaild" @click="postLogin">로그인</button> -->
@@ -141,13 +141,19 @@ export default {
 
     .appName {
       margin-top: 23px;
-      margin-bottom: 3px;
+      margin-bottom: 8px;
       text-align: center;
-      font-size: 18px;
+      font-size: 22px;
       color: #333;
 
       strong {
+        color: $primary;
+        font-size: 36px;
         font-weight: bold;
+      }
+
+      span {
+        color: $success;
       }
     }
 
@@ -173,11 +179,11 @@ export default {
       left: 50%;
       transform: translate(-50%, -50%);
 
-      .title {
+      .greeting {
         display: block;
         width: 250px;
         font-weight: 500;
-        font-size: 36px;
+        font-size: 22px;
         margin-bottom: 20px;
       }
 
