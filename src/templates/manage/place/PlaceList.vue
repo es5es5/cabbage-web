@@ -39,10 +39,10 @@
           </colgroup>
           <tbody>
             <tr v-for="(item, index) in contents" :key="index" @click="showModalPlaceUpdate(item.id)">
-              <td>{{ contents.length - index }}</td>
-              <td>{{ item.name }}</td>
-              <td>{{ item.memo }}</td>
-              <td>{{ item.createtime | dateFormat }}</td>
+              <Td>{{ contents.length - index }}</Td>
+              <Td>{{ item.name }}</Td>
+              <Td>{{ item.memo }}</Td>
+              <Td>{{ item.createtime | dateFormat }}</Td>
             </tr>
             <no-data-message :list="contents" :colspan="4"></no-data-message>
           </tbody>

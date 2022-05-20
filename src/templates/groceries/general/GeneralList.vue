@@ -34,12 +34,12 @@
         </thead>
         <tbody>
           <tr>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
+            <Td>-</Td>
+            <Td>-</Td>
+            <Td>-</Td>
+            <Td>-</Td>
+            <Td>-</Td>
+            <Td>-</Td>
           </tr>
           <!-- <no-data-message :list="contents.list" :colspan="7"></no-data-message> -->
         </tbody>

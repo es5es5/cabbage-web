@@ -9,5 +9,6 @@ export default {
     Vue.component('SubTab', () => import('./_element/SubTab'))
     Vue.component('Confirm', () => import('./_element/Confirm'))
     Vue.component('Legend', () => import('./_element/Legend'))
+    Vue.component('Td', () => import('./_element/TableData'))
   }
 }

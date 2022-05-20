@@ -20,7 +20,7 @@
       <p class="chartTitle">균종별 갯수</p>
     </div>
     <div class="chart_wrap line">
-      <VeLine
+      <VeBar
         :data="chartData"
         height="330px"
         width="100%"
@@ -35,7 +35,7 @@
 import { collection, getDocs, query, orderBy } from 'firebase/firestore'
 import { firestore } from '@/plugins/firebase'
 import VeRing from 'v-charts/lib/ring.common'
-import VeLine from 'v-charts/lib/bar.common'
+import VeBar from 'v-charts/lib/bar.common'
 
 export default {
   name: 'AgricultureStatics',
@@ -46,7 +46,7 @@ export default {
   },
   components: {
     VeRing,
-    VeLine,
+    VeBar,
   },
   data () {
     return {
