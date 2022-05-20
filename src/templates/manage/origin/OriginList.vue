@@ -122,8 +122,8 @@ export default {
           id: doc.id,
           ...doc.data()
         })
-        this.contents = list
       })
+      this.contents = list
     }
   }
 }
