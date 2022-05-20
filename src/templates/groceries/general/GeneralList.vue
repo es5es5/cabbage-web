@@ -86,7 +86,6 @@ export default {
         pageIndex: 1,
         pageSize: 15,
       },
-      isModalOpen: false
     }
   },
   computed: {

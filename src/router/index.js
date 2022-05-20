@@ -60,6 +60,14 @@ const routes = [
                 },
                 component: () => import('@/templates/strain/agriculture/AgricultureList')
               },
+              {
+                path: 'statics',
+                name: '균주_농업균주관리_통계',
+                meta: {
+                  title: '농업균주'
+                },
+                component: () => import('@/templates/strain/agriculture/AgricultureStatics')
+              },
             ]
           },
           {
