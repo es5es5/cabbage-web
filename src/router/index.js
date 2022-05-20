@@ -50,7 +50,7 @@ const routes = [
             meta: {
               title: '농업균주'
             },
-            component: () => import('@/templates/strain/StrainLayout'),
+            component: () => import('@/templates/strain/agriculture/StrainAgricultureLayout'),
             children: [
               {
                 path: 'list',
