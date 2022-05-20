@@ -9,7 +9,7 @@
           <div class="left_inner">
             <img src="@/assets/images/login/team.png" alt="team" class="teamImg">
             <p class="appName"><span>안녕, </span><strong>캐비지</strong><span>!</span></p>
-            <p class="info">for 큐옴바이오 <strong>R&D Center</strong></p>
+            <p class="info"><strong>종합관리시스템</strong><br>for 큐옴바이오 <strong>R&D Center</strong></p>
           </div>
         </div>
         <div class="right_wrap">
