@@ -11,6 +11,8 @@ import COMMON from './js/common'
 import FILTER from './js/filter'
 import GlobalComponents from './components'
 
+console.log(process.env)
+
 Vue.use(MIXSINS)
 Vue.use(FILTER)
 Vue.use(GlobalComponents)
