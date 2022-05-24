@@ -11,24 +11,6 @@ import COMMON from './js/common'
 import FILTER from './js/filter'
 import GlobalComponents from './components'
 
-import * as Sentry from '@sentry/vue'
-import { BrowserTracing } from '@sentry/tracing'
-
-Sentry.init({
-  Vue,
-  dsn: process.env.VUE_APP_SENTRY_DSN,
-  integrations: [
-    new BrowserTracing({
-      routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-      tracingOrigins: ['localhost', 'cuome.netlify.app', /^\//],
-    }),
-  ],
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
-  tracesSampleRate: 1.0,
-})
-
 Vue.use(MIXSINS)
 Vue.use(FILTER)
 Vue.use(GlobalComponents)

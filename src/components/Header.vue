@@ -1,5 +1,5 @@
 <template>
-  <header id="header">
+  <header id="header" @click="throwError">
     <div class="header_wrap">
       <div class="left">
         <!-- <select name="brandList" id="brandList" v-model="brand" @change="changeBrand">
@@ -55,6 +55,10 @@ export default {
   components: {
   },
   methods: {
+    throwError () {
+      console.error(`Sentry Error ${this.COMMON.UUID()}`)
+      throw new Error(`Sentry Error ${this.COMMON.UUID()}`)
+    },
     handler () {
       if (this.isSettingOpen) this.isSettingOpen = false
     },
