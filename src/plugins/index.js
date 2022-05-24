@@ -2,6 +2,7 @@ import Vue from 'vue'
 
 import './toast'
 import './loader'
+import './sentry'
 // import './veeValidate'
 
 // https://github.com/euvl/vue-js-modal
