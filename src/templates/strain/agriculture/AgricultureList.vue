@@ -50,14 +50,14 @@
       <table>
         <caption>농업 균주 리스트</caption>
         <colgroup>
+          <col style="width: 15rem;">
+          <col style="width: 8rem;">
+          <col style="width: 8rem;">
+          <col style="width: 6rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
+          <col style="width: 6rem;">
+          <col style="width: 6rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
         </colgroup>
@@ -79,14 +79,14 @@
       <div class="table_scroll">
         <table>
           <colgroup>
+            <col style="width: 15rem;">
+            <col style="width: 8rem;">
+            <col style="width: 8rem;">
+            <col style="width: 6rem;">
             <col style="width: 10rem;">
             <col style="width: 10rem;">
-            <col style="width: 10rem;">
-            <col style="width: 10rem;">
-            <col style="width: 10rem;">
-            <col style="width: 10rem;">
-            <col style="width: 10rem;">
-            <col style="width: 10rem;">
+            <col style="width: 6rem;">
+            <col style="width: 6rem;">
             <col style="width: 10rem;">
             <col style="width: 10rem;">
           </colgroup>
