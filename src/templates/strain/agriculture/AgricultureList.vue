@@ -91,17 +91,17 @@
             <col style="width: 10rem;">
           </colgroup>
           <tbody>
-            <tr v-for="(item, index) in _contents" :key="index" @click="showModalAgricultureUpdate(item.id)">
+            <tr v-for="(item, index) in _contents" :key="index" @click="showModalAgricultureUpdate(item.id)" :title="item.메모">
               <Td>{{ getManage('균종', item.균종) }}</Td>
-              <Td>{{ item.균주번호 }}</Td>
-              <Td>{{ getManage('Origin', item.Origin) }}</Td>
-              <Td>{{ item.확보일 }}</Td>
-              <Td>{{ getManage('장소', item.기탁장소) }}</Td>
-              <Td>{{ getManage('장소', item.보관장소) }}</Td>
-              <Td>{{ item.stock갯수 }}</Td>
-              <Td>{{ item.현재stock }}</Td>
-              <Td>{{ item.활성테스트 }}</Td>
-              <Td>{{ item.특허 }}</Td>
+              <td>{{ item.균주번호 }}</td>
+              <td>{{ getManage('Origin', item.Origin) }}</td>
+              <td>{{ item.확보일 }}</td>
+              <td>{{ getManage('장소', item.기탁장소) }}</td>
+              <td>{{ getManage('장소', item.보관장소) }}</td>
+              <td>{{ item.stock갯수 }}</td>
+              <td>{{ item.현재stock }}</td>
+              <td>{{ item.활성테스트 }}</td>
+              <td>{{ item.특허 }}</td>
             </tr>
             <no-data-message :list="_contents" :colspan="10"></no-data-message>
           </tbody>
