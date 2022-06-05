@@ -31,6 +31,11 @@
 <script>
 export default {
   name: 'Login',
+  created () {
+    this.$axios.get(`${this.ENV_CUOME}/microorganism`).then(result => {
+      console.log(result)
+    })
+  },
   computed: {
     _isVaild () {
       return this.login.employeeNumber && this.login.passwordPlain ? 'active' : 'disabled'
