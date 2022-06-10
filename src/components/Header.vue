@@ -45,7 +45,6 @@ export default {
       if (this.isSettingOpen) {
         bodyElement.addEventListener('click', this.handler)
       } else {
-        console.log('remove')
         bodyElement.removeEventListener('click', this.handler)
       }
     }
@@ -56,8 +55,8 @@ export default {
   },
   methods: {
     throwError () {
-      console.error(`Sentry Error ${this.COMMON.UUID()}`)
-      throw new Error(`Sentry Error ${this.COMMON.UUID()}`)
+      // console.error(`Sentry Error ${this.COMMON.UUID()}`)
+      // throw new Error(`Sentry Error ${this.COMMON.UUID()}`)
     },
     handler () {
       if (this.isSettingOpen) this.isSettingOpen = false

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import App from './App.vue'
-import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import axios from 'axios'
@@ -13,8 +12,6 @@ import FILTER from './js/filter'
 import GlobalComponents from './components'
 
 import { NODE_ENV, ENV_CUOME } from './js/api'
-
-console.log(process.env)
 
 Vue.use(MIXSINS)
 Vue.use(FILTER)

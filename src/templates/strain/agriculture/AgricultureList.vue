@@ -125,8 +125,6 @@
 
 <script>
 
-import { collection, getDocs, query, orderBy } from 'firebase/firestore'
-import { firestore } from '@/plugins/firebase'
 import ModalAgricultureCreate from './ModalAgricultureCreate'
 import ModalAgricultureUpdate from './ModalAgricultureUpdate'
 
@@ -194,15 +192,8 @@ export default {
       this.$modal.show('ModalAgricultureUpdate')
     },
     async getContents () {
-      const list = []
-      const querySnapshot = await getDocs(query(collection(firestore, '농업균주'), orderBy('createtime', 'desc')))
-      querySnapshot.forEach((doc) => {
-        list.push({
-          id: doc.id,
-          ...doc.data()
-        })
-      })
-      this.contents = list
+      const { data } = await this.$axios.get(`${this.ENV_CUOME}/rest/microorganism`)
+      this.contents = data
     }
   }
 }
