@@ -1,4 +1,91 @@
-const MENUS = [
+export const MENUS = [
+  {
+    name: '연구',
+    route: '균주',
+    params: null,
+    order: 0,
+    icon: 'list-alt',
+    roles: [],
+    subMenus: [
+      {
+        name: '연구 주제·목표',
+        route: '균주_농업균주관리',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
+      {
+        name: '자료',
+        route: '균주_농업균주관리',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
+      {
+        name: '장비·시약',
+        route: '균주_농업균주관리',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
+      {
+        name: '국책사업',
+        route: '균주_농업균주관리',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
+    ]
+  },
+  {
+    name: '생물 자원',
+    route: '균주',
+    params: null,
+    order: 0,
+    icon: 'list-alt',
+    roles: [],
+    subMenus: [
+      {
+        name: '데이터베이스',
+        route: '균주_농업균주관리',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
+      {
+        name: '입출입',
+        route: '균주_농업균주관리',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
+    ]
+  },
+  {
+    name: '일정',
+    route: '균주',
+    params: null,
+    order: 0,
+    icon: 'list-alt',
+    roles: [],
+    subMenus: [
+    ]
+  },
+]
+
+export const OLD_MENUS = [
   {
     name: '균주',
     route: '균주',
