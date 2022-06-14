@@ -40,8 +40,8 @@ export default {
   data () {
     return {
       login: {
-        username: '',
-        password: ''
+        username: 'string',
+        password: 'string'
       }
     }
   },
@@ -63,8 +63,9 @@ export default {
         url: apiURL,
         data
       }).then(() => {
+        this.getUserInfo()
         this.$Progress.finish()
-        location.href = '/'
+        this.$router.push({ name: 'Main' })
       }).catch(() => {
         this.$Progress.fail()
         this.$toast.error(
@@ -72,7 +73,20 @@ export default {
           this.ToastSettings
         )
       })
-    }
+    },
+    getUserInfo () {
+      const apiURL = `${this.ENV_CUOME}/users/info`
+      const data = {}
+      this.$Progress.start()
+
+      this.$axios({
+        method: 'get',
+        url: apiURL,
+        data
+      }).then(result => {
+        this.$store.commit('user/setUser', result.data)
+      })
+    },
   }
 }
 </script>

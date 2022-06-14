@@ -8,7 +8,7 @@
       </div>
       <div class="right">
         <img src="@/assets/images/header/user.svg" alt="user" class="headerImg user" @click="toggleSetting" />
-        <span class="employeeName" @click="toggleSetting">{{ '김루이' }} 님</span>
+        <span class="employeeName" @click="toggleSetting">{{ _user.displayName }} 님</span>
         <img src="@/assets/images/header/3dots.svg" alt="3dots" class="headerImg 3dots" @click="toggleSetting" />
       </div>
 
@@ -50,6 +50,7 @@ export default {
     }
   },
   computed: {
+    _user () { return this.$store.getters['user/getUser'] }
   },
   components: {
   },

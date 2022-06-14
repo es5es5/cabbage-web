@@ -192,7 +192,7 @@ export default {
       this.$modal.show('ModalAgricultureUpdate')
     },
     async getContents () {
-      const { data } = await this.$axios.get(`${this.ENV_CUOME}/rest/microorganism`)
+      const { data } = await this.$axios.get(`${this.ENV_CUOME}/microorganism`)
       this.contents = data
     }
   }
