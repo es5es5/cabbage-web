@@ -15,10 +15,9 @@
         <div class="right_wrap">
           <div class="right_inner">
             <!-- <label for="employeeNumber" class="greeting"></label> -->
-            <input type="text" id="employeeNumber" placeholder="아이디" class="loginInput" maxlength="7" v-model="login.employeeNumber">
-            <input type="password" id="password" placeholder="비밀번호" class="loginInput" v-model="login.passwordPlain" @keyup.enter="postLogin">
-            <!-- <button type="button" class="loginButton" :class="_isVaild" @click="postLogin">로그인</button> -->
-            <button type="button" class="loginButton" :class="'active'" @click="postLogin">로그인</button>
+            <input type="text" id="employeeNumber" placeholder="아이디" class="loginInput" maxlength="7" v-model="login.username">
+            <input type="password" id="password" placeholder="비밀번호" class="loginInput" v-model="login.password" @keyup.enter="postLogin">
+            <button type="button" class="loginButton" :class="_isVaild" @click="postLogin">로그인</button>
             <!-- <p class="find">비밀번호 찾기</p> -->
           </div>
         </div>
@@ -32,20 +31,17 @@
 export default {
   name: 'Login',
   created () {
-    this.$axios.get(`${this.ENV_CUOME}/microorganism`).then(result => {
-      console.log(result)
-    })
   },
   computed: {
     _isVaild () {
-      return this.login.employeeNumber && this.login.passwordPlain ? 'active' : 'disabled'
+      return this.login.username && this.login.password ? 'active' : 'disabled'
     }
   },
   data () {
     return {
       login: {
-        employeeNumber: '',
-        passwordPlain: ''
+        username: '',
+        password: ''
       }
     }
   },
@@ -56,28 +52,23 @@ export default {
   },
   methods: {
     postLogin () {
-      this.$router.push({
-        name: 'Main'
-      })
-
       if (this._isVaild !== 'active') return false
 
-      const apiURL = `${this.ENV_AUTH}/auth/sign-in`
+      const apiURL = `${this.ENV_CUOME}/auth/login`
       const data = this.login
       this.$Progress.start()
 
-      this.$http({
+      this.$axios({
         method: 'post',
         url: apiURL,
-        withCredentials: true,
-        data: data
-      }).then(result => {
+        data
+      }).then(() => {
         this.$Progress.finish()
         location.href = '/'
       }).catch(() => {
         this.$Progress.fail()
         this.$toast.error(
-          '사원번호 혹은 비밀번호가 틀렸습니다.',
+          '아이디 혹은 비밀번호가 틀렸습니다.',
           this.ToastSettings
         )
       })
