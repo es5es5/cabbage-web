@@ -61,8 +61,11 @@ export default {
       this.$axios({
         method: 'post',
         url: apiURL,
+        withCredentials: true,
         data
-      }).then(() => {
+      }).then(result => {
+        console.log(result)
+        this.$axios.defaults.headers.common.Authorization = result.data
         this.getUserInfo()
         this.$Progress.finish()
         this.$router.push({ name: 'Main' })

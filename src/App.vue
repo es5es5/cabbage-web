@@ -11,6 +11,12 @@
 <script>
 export default {
   name: 'App',
+  async created () {
+    this.collectionList.forEach(async (item) => {
+      this.$store.dispatch(`manage/set${item}`, item)
+    })
+    this.$axios.defaults.headers.common.Authorization = `Bearer ${this.$cookies.get('accessToken')}`
+  },
   data () {
     return {
       collectionList: [
@@ -19,11 +25,6 @@ export default {
         '균종_관리',
       ]
     }
-  },
-  async created () {
-    this.collectionList.forEach(async (item) => {
-      this.$store.dispatch(`manage/set${item}`, item)
-    })
   },
 }
 </script>
