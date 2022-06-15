@@ -65,7 +65,7 @@ export default {
         data
       }).then(result => {
         console.log(result)
-        this.$axios.defaults.headers.common.Authorization = result.data
+        this.$axios.defaults.headers.common.Authorization = `Bearer ${result.data}`
         this.getUserInfo()
         this.$Progress.finish()
         this.$router.push({ name: 'Main' })
@@ -78,7 +78,7 @@ export default {
       })
     },
     getUserInfo () {
-      const apiURL = `${this.ENV_CUOME}/users/info`
+      const apiURL = `${this.ENV_CUOME}/auth/profile`
       const data = {}
       this.$Progress.start()
 
