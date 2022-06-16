@@ -68,7 +68,7 @@ export default {
         this.$axios.defaults.headers.common.Authorization = `Bearer ${result.data}`
         this.getUserProfile()
         this.$Progress.finish()
-        this.$cookies.set('cabbage_login_username', this.login.username, new Date())
+        this.$cookies.set('cabbage_login_username', this.login.username)
         this.$router.push({ name: 'Main' })
       }).catch(() => {
         this.$Progress.fail()
