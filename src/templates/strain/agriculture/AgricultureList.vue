@@ -124,7 +124,6 @@
 </template>
 
 <script>
-
 import { collection, getDocs, query, orderBy } from 'firebase/firestore'
 import { firestore } from '@/plugins/firebase'
 import ModalAgricultureCreate from './ModalAgricultureCreate'

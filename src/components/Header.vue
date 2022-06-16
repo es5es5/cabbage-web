@@ -8,7 +8,7 @@
       </div>
       <div class="right">
         <img src="@/assets/images/header/user.svg" alt="user" class="headerImg user" @click="toggleSetting" />
-        <span class="employeeName" @click="toggleSetting">{{ '김루이' }} 님</span>
+        <span class="employeeName" @click="toggleSetting">{{ _user.displayName }} 님</span>
         <img src="@/assets/images/header/3dots.svg" alt="3dots" class="headerImg 3dots" @click="toggleSetting" />
       </div>
 
@@ -45,19 +45,19 @@ export default {
       if (this.isSettingOpen) {
         bodyElement.addEventListener('click', this.handler)
       } else {
-        console.log('remove')
         bodyElement.removeEventListener('click', this.handler)
       }
     }
   },
   computed: {
+    _user () { return this.$store.getters['user/getUser'] }
   },
   components: {
   },
   methods: {
     throwError () {
-      console.error(`Sentry Error ${this.COMMON.UUID()}`)
-      throw new Error(`Sentry Error ${this.COMMON.UUID()}`)
+      // console.error(`Sentry Error ${this.COMMON.UUID()}`)
+      // throw new Error(`Sentry Error ${this.COMMON.UUID()}`)
     },
     handler () {
       if (this.isSettingOpen) this.isSettingOpen = false
@@ -66,8 +66,19 @@ export default {
       this.isSettingOpen = !this.isSettingOpen
     },
     signout () {
-      this.$store.dispatch('user/logout')
-    }
+      const apiURL = `${this.ENV_CUOME}/auth/logout`
+      const data = {}
+      this.$axios({
+        method: 'post',
+        url: apiURL,
+        data
+      }).then(() => {
+        this.$axios.defaults.headers.common.Authorization = ''
+        this.$cookies.remove('accessToken')
+        this.$store.dispatch('user/logout')
+        location.href = '/login'
+      })
+    },
   }
 }
 </script>

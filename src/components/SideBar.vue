@@ -1,7 +1,7 @@
 <template>
   <aside id="sideBar">
     <!-- <div class="bookmark_wrap"></div> -->
-    <router-link tag="h1" class="logo_wrap" to="/">
+    <router-link tag="h1" class="logo_wrap" :to="{ name: 'Main' }">
       <!-- <img src="@/assets/images/logo.png" alt="logo" class="logoImg"> -->
       <img src="@/assets/images/logo.svg" alt="logo" class="logoImg">
       <span class="logoTxt"></span>

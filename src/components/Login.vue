@@ -15,10 +15,9 @@
         <div class="right_wrap">
           <div class="right_inner">
             <!-- <label for="employeeNumber" class="greeting"></label> -->
-            <input type="text" id="employeeNumber" placeholder="아이디" class="loginInput" maxlength="7" v-model="login.employeeNumber">
-            <input type="password" id="password" placeholder="비밀번호" class="loginInput" v-model="login.passwordPlain" @keyup.enter="postLogin">
-            <!-- <button type="button" class="loginButton" :class="_isVaild" @click="postLogin">로그인</button> -->
-            <button type="button" class="loginButton" :class="'active'" @click="postLogin">로그인</button>
+            <input type="text" id="employeeNumber" placeholder="아이디" class="loginInput" v-model="login.username">
+            <input type="password" id="password" placeholder="비밀번호" class="loginInput" v-model="login.password" @keyup.enter="postLogin">
+            <button type="button" class="loginButton" :class="_isVaild" @click="postLogin">로그인</button>
             <!-- <p class="find">비밀번호 찾기</p> -->
           </div>
         </div>
@@ -31,16 +30,18 @@
 <script>
 export default {
   name: 'Login',
+  created () {
+  },
   computed: {
     _isVaild () {
-      return this.login.employeeNumber && this.login.passwordPlain ? 'active' : 'disabled'
+      return this.login.username && this.login.password ? 'active' : 'disabled'
     }
   },
   data () {
     return {
       login: {
-        employeeNumber: '',
-        passwordPlain: ''
+        username: 'string',
+        password: 'string'
       }
     }
   },
@@ -51,32 +52,41 @@ export default {
   },
   methods: {
     postLogin () {
-      this.$router.push({
-        name: 'Main'
-      })
-
       if (this._isVaild !== 'active') return false
 
-      const apiURL = `${this.ENV_AUTH}/auth/sign-in`
+      const apiURL = `${this.ENV_CUOME}/auth/login`
       const data = this.login
       this.$Progress.start()
 
-      this.$http({
+      this.$axios({
         method: 'post',
         url: apiURL,
         withCredentials: true,
-        data: data
+        data
       }).then(result => {
+        this.$axios.defaults.headers.common.Authorization = `Bearer ${result.data}`
+        this.getUserProfile()
         this.$Progress.finish()
-        location.href = '/'
+        this.$router.push({ name: 'Main' })
       }).catch(() => {
         this.$Progress.fail()
         this.$toast.error(
-          '사원번호 혹은 비밀번호가 틀렸습니다.',
+          '아이디 혹은 비밀번호가 틀렸습니다.',
           this.ToastSettings
         )
       })
-    }
+    },
+    getUserProfile () {
+      const apiURL = `${this.ENV_CUOME}/auth/profile`
+      const data = {}
+      this.$axios({
+        method: 'get',
+        url: apiURL,
+        data
+      }).then(result => {
+        this.$store.commit('user/setUser', result.data)
+      })
+    },
   }
 }
 </script>
