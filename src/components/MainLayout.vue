@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     getUserProfile () {
-      // if (!this.$cookies.get('accessToken')) return
+      if (!this.$cookies.get('accessToken')) return
       const apiURL = `${this.ENV_CUOME}/auth/profile`
       const data = {}
       this.$axios({
