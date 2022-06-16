@@ -16,6 +16,7 @@ export default {
       this.$store.dispatch(`manage/set${item}`, item)
     })
     this.$axios.defaults.headers.common.Authorization = `Bearer ${this.$cookies.get('accessToken')}`
+    this.getUserProfile()
   },
   data () {
     return {
@@ -26,6 +27,19 @@ export default {
       ]
     }
   },
+  methods: {
+    getUserProfile () {
+      const apiURL = `${this.ENV_CUOME}/auth/profile`
+      const data = {}
+      this.$axios({
+        method: 'get',
+        url: apiURL,
+        data
+      }).then(result => {
+        this.$store.commit('user/setUser', result.data)
+      })
+    },
+  }
 }
 </script>
 
