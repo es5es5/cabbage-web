@@ -40,13 +40,14 @@ export default {
   data () {
     return {
       login: {
-        username: 'string',
-        password: 'string'
+        username: '',
+        password: ''
       }
     }
   },
   mounted () {
     this.$nextTick(() => {
+      this.login.username = this.$cookies.get('cabbage_login_username') || ''
       document.getElementById('employeeNumber').focus()
     })
   },
@@ -67,6 +68,7 @@ export default {
         this.$axios.defaults.headers.common.Authorization = `Bearer ${result.data}`
         this.getUserProfile()
         this.$Progress.finish()
+        this.$cookies.set('cabbage_login_username', this.login.username, new Date())
         this.$router.push({ name: 'Main' })
       }).catch(() => {
         this.$Progress.fail()
