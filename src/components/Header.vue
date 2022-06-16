@@ -73,7 +73,7 @@ export default {
         url: apiURL,
         data
       }).then(() => {
-        this.$http.defaults.headers.common.Authorization = ''
+        this.$axios.defaults.headers.common.Authorization = ''
         this.$cookies.remove('accessToken')
         this.$store.dispatch('user/logout')
         location.href = '/login'

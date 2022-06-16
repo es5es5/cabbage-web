@@ -15,7 +15,7 @@
         <div class="right_wrap">
           <div class="right_inner">
             <!-- <label for="employeeNumber" class="greeting"></label> -->
-            <input type="text" id="employeeNumber" placeholder="아이디" class="loginInput" maxlength="7" v-model="login.username">
+            <input type="text" id="employeeNumber" placeholder="아이디" class="loginInput" v-model="login.username">
             <input type="password" id="password" placeholder="비밀번호" class="loginInput" v-model="login.password" @keyup.enter="postLogin">
             <button type="button" class="loginButton" :class="_isVaild" @click="postLogin">로그인</button>
             <!-- <p class="find">비밀번호 찾기</p> -->

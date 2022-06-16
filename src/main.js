@@ -13,6 +13,29 @@ import GlobalComponents from './components'
 
 import { NODE_ENV, ENV_CUOME } from './js/api'
 
+axios.interceptors.response.use(
+  response => {
+    return response
+  },
+  error => {
+    if (error.response && error.response.status) {
+      switch (error.response.status) {
+        case 400:
+        case 401:
+        case 403:
+          alert('사용자 정보가 없습니다.\n다시 로그인해주세요!')
+          location.href = '/login'
+          return
+        case 404:
+          return
+        case 500:
+          return
+      }
+    }
+    return Promise.reject(error)
+  }
+)
+
 Vue.use(MIXSINS)
 Vue.use(FILTER)
 Vue.use(GlobalComponents)
