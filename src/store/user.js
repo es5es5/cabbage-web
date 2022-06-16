@@ -9,7 +9,6 @@ const getters = {
 const actions = {
   logout (context) {
     context.commit('setUser', {})
-    location.href = '/'
   }
 }
 

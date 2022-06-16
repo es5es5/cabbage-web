@@ -64,7 +64,6 @@ export default {
         withCredentials: true,
         data
       }).then(result => {
-        console.log(result)
         this.$axios.defaults.headers.common.Authorization = `Bearer ${result.data}`
         this.getUserProfile()
         this.$Progress.finish()

@@ -66,8 +66,19 @@ export default {
       this.isSettingOpen = !this.isSettingOpen
     },
     signout () {
-      this.$store.dispatch('user/logout')
-    }
+      const apiURL = `${this.ENV_CUOME}/auth/logout`
+      const data = {}
+      this.$axios({
+        method: 'post',
+        url: apiURL,
+        data
+      }).then(() => {
+        this.$http.defaults.headers.common.Authorization = ''
+        this.$cookies.remove('accessToken')
+        this.$store.dispatch('user/logout')
+        location.href = '/login'
+      })
+    },
   }
 }
 </script>
