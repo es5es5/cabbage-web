@@ -31,6 +31,7 @@
 export default {
   name: 'Login',
   created () {
+    this.checkIsLogin()
   },
   computed: {
     _isVaild () {
@@ -88,6 +89,22 @@ export default {
         data
       }).then(result => {
         this.$store.commit('user/setUser', result.data)
+      })
+    },
+    checkIsLogin () {
+      if (!this.$cookies.get('accessToken')) return
+      this.$axios.defaults.headers.common.Authorization = `Bearer ${this.$cookies.get('accessToken')}`
+      const apiURL = `${this.ENV_CUOME}/auth/profile`
+      const data = {}
+      this.$axios({
+        method: 'get',
+        url: apiURL,
+        data
+      }).then(result => {
+        this.$store.commit('user/setUser', result.data)
+        this.$router.push({
+          name: 'Main'
+        })
       })
     },
   }
