@@ -1,5 +1,33 @@
 export const MENUS = [
   {
+    name: '생물 자원',
+    route: '균주',
+    params: null,
+    order: 0,
+    icon: 'list-alt',
+    roles: [],
+    subMenus: [
+      {
+        name: '뱅크',
+        route: '균주_농업균주관리',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
+      {
+        name: '입출입',
+        route: 'NotFound',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
+    ]
+  },
+  {
     name: '연구',
     route: '균주',
     params: null,
@@ -36,34 +64,6 @@ export const MENUS = [
       },
       {
         name: '국책사업',
-        route: '균주_농업균주관리',
-        params: null,
-        order: 0,
-        icon: null,
-        roles: [],
-        subMenus: null
-      },
-    ]
-  },
-  {
-    name: '생물 자원',
-    route: '균주',
-    params: null,
-    order: 0,
-    icon: 'list-alt',
-    roles: [],
-    subMenus: [
-      {
-        name: '데이터베이스',
-        route: '균주_농업균주관리',
-        params: null,
-        order: 0,
-        icon: null,
-        roles: [],
-        subMenus: null
-      },
-      {
-        name: '입출입',
         route: '균주_농업균주관리',
         params: null,
         order: 0,

@@ -8,39 +8,6 @@
     </router-link>
     <div class="menu_wrap">
       <ul class="menu">
-        <template v-for="(menu, menuIndex) in OLD_MENUS">
-          <template v-if="checkRoles(menu.roles)">
-            <router-link v-if="menu.route" tag="a" class="menu-item" :to="{name: menu.route}" :key="`m_link_${menuIndex}`">
-            <p class="menuTitle">
-              <!-- <img :src="`@/assets/images/menu/${menu.icon}.svg`" :alt="menu.icon"> -->
-              <img src="@/assets/images/menu/Distribution.svg" :alt="menu.icon" class="menuIcon">
-              {{ menu.name }}
-            </p>
-            <ul class="subMenu" v-if="menu.subMenus && checkRoles(menu.roles)">
-              <template v-for="(subMenu, subMenuIndex) in menu.subMenus" >
-                <li v-if="checkRoles(subMenu.roles)" :key="`s_${subMenuIndex}`">
-                  <router-link v-if="subMenu.route" tag="a" class="subMenu-item" :to="{name: subMenu.route}" :key="`ss_link_${subMenuIndex}`">
-                    <p class="subMenuTitle">
-                      <i class="fa" :class="`fa-${subMenu.icon}`"></i>
-                      {{ subMenu.name }}
-                    </p>
-                  </router-link>
-                </li>
-              </template>
-            </ul>
-            </router-link>
-            <li v-else class="menu-item" :key="`m_none_link_${menuIndex}`">
-              <span>{{ menu.name }}</span>
-            </li>
-          </template>
-        </template>
-      </ul>
-      <br>
-      <br>
-      <hr>
-      <br>
-      <br>
-      <ul class="menu">
         <template v-for="(menu, menuIndex) in menus">
           <template v-if="checkRoles(menu.roles)">
             <router-link v-if="menu.route" tag="a" class="menu-item" :to="{name: menu.route}" :key="`m_link_${menuIndex}`">

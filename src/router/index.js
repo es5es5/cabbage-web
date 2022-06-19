@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import Home from '@/components/Home'
 import Login from '@/components/Login'
+import NotFound from '@/components/NotFound'
 import MainLayout from '@/components/MainLayout'
 import ContentsLayout from '@/components/ContentsLayout'
 
@@ -30,6 +31,14 @@ const routes = [
     //     next()
     //   }
     // }
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: NotFound,
+    meta: {
+      title: '페이지를 찾을 수 없습니다.'
+    }
   },
   {
     path: '/main',
