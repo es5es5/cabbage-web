@@ -77,7 +77,7 @@
               <Td>{{ item.species }}</Td>
               <Td>{{ item.number }}</Td>
               <Td>{{ item.category }}</Td>
-              <Td>{{ item.origin }}</Td>
+              <Td>{{ item.origin ? item.origin.name : '' }}</Td>
               <Td>{{ item.gettingDate }}</Td>
               <Td>{{ item.stockPlacement }}</Td>
               <Td>{{ item.rentPlacement }}</Td>
@@ -156,6 +156,9 @@ export default {
     },
     getContents () {
       this.$axios.get(`${this.ENV_CUOME}/bank`)
+        .then(result => {
+          this.contents = result.data
+        })
     }
   }
 }
