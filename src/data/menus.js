@@ -29,7 +29,7 @@ export const MENUS = [
   },
   {
     name: '연구',
-    route: '균주',
+    route: 'NotFound',
     params: null,
     order: 0,
     icon: 'list-alt',
@@ -37,7 +37,7 @@ export const MENUS = [
     subMenus: [
       {
         name: '연구 주제·목표',
-        route: '균주_농업균주관리',
+        route: 'NotFound',
         params: null,
         order: 0,
         icon: null,
@@ -46,7 +46,7 @@ export const MENUS = [
       },
       {
         name: '자료',
-        route: '균주_농업균주관리',
+        route: 'NotFound',
         params: null,
         order: 0,
         icon: null,
@@ -55,7 +55,7 @@ export const MENUS = [
       },
       {
         name: '장비·시약',
-        route: '균주_농업균주관리',
+        route: 'NotFound',
         params: null,
         order: 0,
         icon: null,
@@ -64,7 +64,7 @@ export const MENUS = [
       },
       {
         name: '국책사업',
-        route: '균주_농업균주관리',
+        route: 'NotFound',
         params: null,
         order: 0,
         icon: null,

@@ -33,7 +33,7 @@ const routes = [
     // }
   },
   {
-    path: '*',
+    path: '/404',
     name: 'NotFound',
     component: NotFound,
     meta: {
