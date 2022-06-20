@@ -1,7 +1,7 @@
 export const MENUS = [
   {
     name: '생물 자원',
-    route: '균주',
+    route: '생물자원',
     params: null,
     order: 0,
     icon: 'list-alt',
@@ -9,7 +9,7 @@ export const MENUS = [
     subMenus: [
       {
         name: '뱅크',
-        route: '균주_농업균주관리',
+        route: '생물자원_뱅크',
         params: null,
         order: 0,
         icon: null,

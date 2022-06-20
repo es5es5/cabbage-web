@@ -43,9 +43,85 @@ const routes = [
   {
     path: '/main',
     name: 'Main',
-    redirect: 'main/strain',
+    redirect: 'main/resources',
     component: MainLayout,
     children: [
+      {
+        path: 'resources',
+        name: '생물자원',
+        redirect: 'resources/bank',
+        component: ContentsLayout,
+        meta: {
+          title: '생물 자원'
+        },
+        children: [
+          {
+            path: 'bank',
+            name: '생물자원_뱅크',
+            redirect: 'bank/list',
+            meta: {
+              title: '뱅크'
+            },
+            component: () => import('@/templates/resources/bank/ResourcesBankLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '생물자원_뱅크_리스트',
+                meta: {
+                  title: '뱅크'
+                },
+                component: () => import('@/templates/resources/bank/BankList')
+              },
+              {
+                path: 'statics',
+                name: '생물자원_뱅크_통계',
+                meta: {
+                  title: '농업균주'
+                },
+                component: () => import('@/templates/strain/agriculture/AgricultureStatics')
+              },
+            ]
+          },
+          {
+            path: 'fisheries',
+            name: '균주_수산업균주관리',
+            redirect: 'fisheries/list',
+            meta: {
+              title: '수산업균주'
+            },
+            component: () => import('@/templates/strain/StrainLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '균주_수산업균주관리_리스트',
+                meta: {
+                  title: '수산업균주'
+                },
+                component: () => import('@/templates/strain/fisheries/FisheriesList')
+              },
+            ]
+          },
+          {
+            path: 'extra',
+            name: '균주_기타균주관리',
+            redirect: 'extra/list',
+            meta: {
+              title: '기타균주'
+            },
+            component: () => import('@/templates/strain/StrainLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '균주_기타균주관리_리스트',
+                meta: {
+                  title: '기타균주'
+                },
+                component: () => import('@/templates/strain/extra/ExtraList')
+              },
+            ]
+          },
+        ]
+      },
       {
         path: 'strain',
         name: '균주',
