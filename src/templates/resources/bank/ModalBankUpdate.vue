@@ -1,6 +1,6 @@
 <template>
   <modal
-    name="ModalAgricultureUpdate"
+    name="ModalBankUpdate"
     class="modal"
     adaptive
     reset
@@ -14,7 +14,7 @@
 
     <div class="header_wrap">
       <h3 class="header">농업균주 수정</h3>
-      <div class="closeButton" @click="$modal.hide('ModalAgricultureUpdate')"></div>
+      <div class="closeButton" @click="$modal.hide('ModalBankUpdate')"></div>
     </div>
 
     <div class="content_wrap">
@@ -139,7 +139,7 @@ import { doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore'
 import { firestore } from '@/plugins/firebase'
 
 export default {
-  name: 'ModalAgricultureUpdate',
+  name: 'ModalBankUpdate',
   created () {
   },
   props: {
@@ -205,7 +205,7 @@ export default {
           '삭제되었습니다.',
           this.ToastSettings
         )
-        this.$modal.hide('ModalAgricultureUpdate')
+        this.$modal.hide('ModalBankUpdate')
       }
     },
     async doUpdate ($event) {
@@ -217,7 +217,7 @@ export default {
           '수정되었습니다.',
           this.ToastSettings
         )
-        this.$modal.hide('ModalAgricultureUpdate')
+        this.$modal.hide('ModalBankUpdate')
       } else {
         this.setValidateError()
         $event.target.disabled = false

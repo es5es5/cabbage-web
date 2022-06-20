@@ -41,8 +41,8 @@
             <th scope="col">Origin</th>
             <th scope="col">확보일</th>
             <th scope="col">보관 장소</th>
-            <th scope="col">기탁장소</th>
-            <th scope="col">stock 개수</th>
+            <th scope="col">기탁 장소</th>
+            <th scope="col">stock<br>(액체 / 분말)</th>
             <th scope="col">sequencing</th>
             <th scope="col">Whole Genome</th>
             <th scope="col">Safety analysis</th>
@@ -81,7 +81,7 @@
               <Td>{{ item.gettingDate }}</Td>
               <Td>{{ item.stockPlacement }}</Td>
               <Td>{{ item.rentPlacement }}</Td>
-              <Td>{{ item.stockCount }}</Td>
+              <Td>{{ item.liquidCount }} / {{ item.powderCount }}</Td>
               <Td>{{ item.sequencing }}</Td>
               <Td>{{ item.wholeGenome }}</Td>
               <Td>{{ item.safetyAnalysis }}</Td>
@@ -155,9 +155,16 @@ export default {
       this.$modal.show('ModalBankUpdate')
     },
     getContents () {
-      this.$axios.get(`${this.ENV_CUOME}/bank`)
+      this.$Progress.start()
+      this.$axios
+        .get(`${this.ENV_CUOME}/bank`)
         .then(result => {
           this.contents = result.data
+          this.$Progress.finish()
+        })
+        .catch(error => {
+          this.$Progress.fail()
+          throw new Error(error)
         })
     }
   }
