@@ -13,7 +13,7 @@
     >
 
     <div class="header_wrap">
-      <h3 class="header">농업균주 수정</h3>
+      <h3 class="header">뱅크 수정</h3>
       <div class="closeButton" @click="$modal.hide('ModalBankUpdate')"></div>
     </div>
 
@@ -24,22 +24,20 @@
             <legend>균주 정보</legend>
             <div class="modalRow row-3">
               <div class="column column-1">
-                <label for="균종" class="required">균종</label>
-                <select name="균종" id="균종" v-model="modalForm.균종" v-validate="'required'">
+                <label for="Genus" class="required">Genus</label>
+                <select name="Genus" id="Genus" v-model="modalForm.genus" v-validate="'required'">
                   <option value="">선택</option>
-                  <option :value="item.id" v-for="(item, index) in _균종" :key="`${index}_균종`">{{ item.name }}</option>
                 </select>
               </div>
               <div class="column column-1">
-                <label for="균주번호" class="required">균주번호</label>
-                <input type="text" id="균주번호" name="균주번호" v-model="modalForm.균주번호" v-validate="'required'">
+                <label for="Species" class="required">Species</label>
+                <select name="Species" id="Species" v-model="modalForm.species" v-validate="'required'">
+                  <option value="">선택</option>
+                </select>
               </div>
               <div class="column column-1">
-                <label for="Origin">Origin</label>
-                <select name="Origin" id="Origin" v-model="modalForm.Origin">
-                  <option value="">선택</option>
-                  <option :value="item.id" v-for="(item, index) in _Origin" :key="`${index}_Origin`">{{ item.name }}</option>
-                </select>
+                <label for="No" class="required">No.</label>
+                <input type="text" id="No" name="No" v-model="modalForm.no" v-validate="'required'">
               </div>
             </div>
           </fieldset>
@@ -48,49 +46,33 @@
             <legend>보관 정보</legend>
             <div class="modalRow row-3">
               <div class="column column-1">
-                <label for="보관장소">보관장소</label>
-                <select name="보관장소" id="보관장소" v-model="modalForm.보관장소">
+                <label for="stockPlacementId" class="required">보관 장소</label>
+                <select name="stockPlacementId" id="stockPlacementId" v-model="modalForm.stockPlacementId">
                   <option value="">선택</option>
-                  <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_보관장소`">{{ item.name }}</option>
                 </select>
               </div>
-
               <div class="column column-1">
-                <label for="stock갯수">stock갯수</label>
-                <input type="number" id="stock갯수" v-model="modalForm.stock갯수">
-              </div>
-
-              <div class="column column-1">
-                <label for="현재stock">현재stock</label>
-                <input type="number" id="현재stock" v-model="modalForm.현재stock">
-              </div>
-            </div>
-
-            <div class="modalRow row-3">
-              <div class="column column-1">
-                <label for="기탁여부Y" class="required">기탁여부</label>
-                <div class="checkbox_wrap">
-                  <input type="radio" name="기탁여부Yn" id="기탁여부Y" :value="true" v-model="modalForm.기탁여부">
-                  <label for="기탁여부Y">Y</label>
-                  <input type="radio" name="기탁여부Yn" id="기탁여부N" :value="false" v-model="modalForm.기탁여부">
-                  <label for="기탁여부N">N</label>
-                </div>
-              </div>
-
-              <div class="column column-1">
-                <label for="기탁장소">기탁장소</label>
-                <select name="기탁장소" id="기탁장소" v-model="modalForm.기탁장소">
+                <label for="rentPlacement" class="required">기탁 장소</label>
+                <select name="rentPlacement" id="rentPlacement" v-model="modalForm.rentPlacement" v-validate="'required'">
                   <option value="">선택</option>
-                  <option :value="item.id" v-for="(item, index) in _장소" :key="`${index}_기탁장소`">{{ item.name }}</option>
                 </select>
               </div>
-
               <div class="column column-1">
                 <label for="확보일-input">확보일</label>
                 <DatePicker
                   id="확보일"
-                  v-model="modalForm.확보일"
+                  v-model="modalForm.gettingDate"
                 />
+              </div>
+            </div>
+            <div class="modalRow row-3">
+              <div class="column column-1">
+                <label for="liquidCount" class="required">액체</label>
+                <input type="number" id="liquidCount" name="liquidCount" v-model="modalForm.liquidCount">
+              </div>
+              <div class="column column-1">
+                <label for="powderCount" class="required">분말</label>
+                <input type="number" id="powderCount" name="powderCount" v-model="modalForm.powderCount">
               </div>
             </div>
           </fieldset>
@@ -98,28 +80,31 @@
           <fieldset>
             <legend>특허 정보</legend>
             <div class="modalRow row-3">
-              <div class="column column">
-                <label for="특허">특허</label>
-                <input type="text" name="특허" id="특허" v-model="modalForm.특허">
+              <div class="column column-1">
+                <label for="sequencing">Sequencing</label>
+                <input type="text" id="sequencing" name="sequencing" v-model="modalForm.sequencing">
               </div>
-
               <div class="column column-2">
-                <label for="특허내용">특허내용</label>
-                <input type="text" name="특허내용" id="특허내용" v-model="modalForm.특허내용">
+                <label for="safetyAnalysis">Safety Analysis</label>
+                <input type="text" id="safetyAnalysis" name="safetyAnalysis" v-model="modalForm.safetyAnalysis">
+              </div>
+            </div>
+
+            <div class="modalRow row-3">
+              <div class="column column-1">
+                <label for="immunaryTest">Immunary Test</label>
+                <input type="text" id="immunaryTest" name="immunaryTest" v-model="modalForm.immunaryTest">
+              </div>
+              <div class="column column-2">
+                <label for="etcActivity">ETC Activity</label>
+                <input type="text" id="etcActivity" name="etcActivity" v-model="modalForm.etcActivity">
               </div>
             </div>
 
             <div class="modalRow row">
               <div class="column column">
-                <label for="활성테스트">활성테스트</label>
-                <input type="text" name="활성테스트" id="활성테스트" v-model="modalForm.활성테스트">
-              </div>
-            </div>
-
-            <div class="modalRow row">
-              <div class="column column">
-                <label for="메모">메모</label>
-                <textarea name="메모" id="메모" v-model="modalForm.메모"></textarea>
+                <label for="wholeGenome">Whole Genome</label>
+                <input type="text" id="wholeGenome" name="wholeGenome" v-model="modalForm.wholeGenome">
               </div>
             </div>
           </fieldset>
@@ -135,40 +120,34 @@
 </template>
 
 <script>
-import { doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore'
-import { firestore } from '@/plugins/firebase'
-
 export default {
   name: 'ModalBankUpdate',
   created () {
   },
   props: {
     id: {
-      type: String,
+      type: [String, Number],
       require: true
     }
   },
   computed: {
-    _장소 () { return this.$store.getters['manage/get장소_관리List'] },
-    _Origin () { return this.$store.getters['manage/getOrigin_관리List'] },
-    _균종 () { return this.$store.getters['manage/get균종_관리List'] },
   },
   data () {
     return {
       modalForm: {
-        균종: '',
-        균주번호: '',
-        Origin: '',
-        확보일: '',
-        기탁여부: false,
-        기탁장소: '',
-        보관장소: '',
-        stock갯수: '',
-        현재stock: '',
-        활성테스트: '',
-        특허: '',
-        특허내용: '',
-        메모: '',
+        genus: '',
+        species: '',
+        no: '',
+        stockPlacementId: '',
+        rentPlacement: '',
+        gettingDate: '',
+        liquidCount: 0,
+        powderCount: 0,
+        sequencing: '',
+        safetyAnalysis: '',
+        immunaryTest: '',
+        etcActivity: '',
+        wholeGenome: '',
       }
     }
   },
@@ -179,49 +158,64 @@ export default {
     closeEvent () { this.$emit('callback') },
     initData () {
       this.modalForm = {
-        균종: '',
-        균주번호: '',
-        Origin: '',
-        확보일: '',
-        기탁여부: false,
-        기탁장소: '',
-        보관장소: '',
-        stock갯수: '',
-        현재stock: '',
-        활성테스트: '',
-        특허: '',
-        특허내용: '',
-        메모: '',
+        genus: '',
+        species: '',
+        no: '',
+        stockPlacementId: '',
+        rentPlacement: '',
+        gettingDate: '',
+        liquidCount: 0,
+        powderCount: 0,
+        sequencing: '',
+        safetyAnalysis: '',
+        immunaryTest: '',
+        etcActivity: '',
+        wholeGenome: '',
       }
     },
     async getContent () {
-      const content = await getDoc(doc(firestore, '농업균주', this.id))
-      this.modalForm = content.data()
+      const data = {}
+      const apiURL = `${this.ENV_CUOME}/bank/${this.id}`
+
+      this.$axios({
+        method: 'get',
+        url: apiURL,
+        data
+      }).then(result => {
+        this.modalForm = result.data
+      }).catch(error => {
+        console.error(error)
+      })
     },
     async doDelete () {
       if (confirm('삭제하시겠습니까?')) {
-        await deleteDoc(doc(firestore, '농업균주', this.id))
-        this.$toast.success(
-          '삭제되었습니다.',
-          this.ToastSettings
-        )
-        this.$modal.hide('ModalBankUpdate')
+        const data = {}
+        const apiURL = `${this.ENV_CUOME}/bank/${this.id}`
+
+        this.$axios({
+          method: 'delete',
+          url: apiURL,
+          data
+        }).then(result => {
+          console.log(result)
+        }).catch(error => {
+          console.error(error)
+        })
       }
     },
-    async doUpdate ($event) {
-      $event.target.disabled = true
-      if (await this.$validator.validate()) {
-        await setDoc(doc(firestore, '농업균주', this.id), this.modalForm)
-        this.initData()
-        this.$toast.success(
-          '수정되었습니다.',
-          this.ToastSettings
-        )
-        this.$modal.hide('ModalBankUpdate')
-      } else {
-        this.setValidateError()
-        $event.target.disabled = false
-      }
+    doUpdate () {
+      const data = this.modalForm
+      const apiURL = `${this.ENV_CUOME}/bank/${this.id}`
+
+      this.$axios({
+        method: 'put',
+        url: apiURL,
+        data
+      }).then(result => {
+        console.log(result)
+      }).catch(error => {
+        console.error(error)
+      })
     },
   }
 }

@@ -148,6 +148,19 @@ export default {
     closeEvent () { this.$emit('callback') },
     initData () {
       this.modalForm = {
+        genus: '',
+        species: '',
+        no: '',
+        stockPlacementId: '',
+        rentPlacement: '',
+        gettingDate: '',
+        liquidCount: 0,
+        powderCount: 0,
+        sequencing: '',
+        safetyAnalysis: '',
+        immunaryTest: '',
+        etcActivity: '',
+        wholeGenome: '',
       }
     },
     doCreate () {
