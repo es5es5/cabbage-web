@@ -1,8 +1,8 @@
 <template>
   <main>
     <div class="search_wrap">
-      <label for="search균주번호">균주번호</label>
-      <input id="search균주번호" type="text" placeholder="">
+      <label for="검색">검색</label>
+      <input id="검색" type="text" placeholder="">
       <span class="separator">|</span>
 
       <button type="button" class="btn-search" @click="getContents">검색</button>
@@ -13,7 +13,7 @@
     </div>
     <div class="table_wrap table-hover table_wrap-scoll-y">
       <table>
-        <caption>농업 균주 리스트</caption>
+        <caption>뱅크 리스트</caption>
         <colgroup>
           <col style="width: 10rem;">
           <col style="width: 10rem;">

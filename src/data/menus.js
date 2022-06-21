@@ -25,6 +25,15 @@ export const MENUS = [
         roles: [],
         subMenus: null
       },
+      {
+        name: '속·종',
+        route: '생물자원_속종',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
     ]
   },
   {

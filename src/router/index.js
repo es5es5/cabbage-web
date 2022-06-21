@@ -83,21 +83,21 @@ const routes = [
             ]
           },
           {
-            path: 'fisheries',
-            name: '균주_수산업균주관리',
-            redirect: 'fisheries/list',
+            path: 'genus',
+            name: '생물자원_속종',
+            redirect: 'genus/list',
             meta: {
-              title: '수산업균주'
+              title: '속·종'
             },
-            component: () => import('@/templates/strain/StrainLayout'),
+            component: () => import('@/templates/resources/ResourcesLayout'),
             children: [
               {
                 path: 'list',
-                name: '균주_수산업균주관리_리스트',
+                name: '생물자원_속종_리스트',
                 meta: {
-                  title: '수산업균주'
+                  title: '속·종'
                 },
-                component: () => import('@/templates/strain/fisheries/FisheriesList')
+                component: () => import('@/templates/resources/genus/GenusList')
               },
             ]
           },
