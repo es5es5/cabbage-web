@@ -42,6 +42,16 @@
                 <input type="text" id="bankNumber" name="bankNumber" v-model="modalForm.bankNumber" v-validate="'required'">
               </div>
             </div>
+
+            <div class="modalRow row-3">
+              <div class="column column-1">
+                <label for="Origin" class="required">Origin</label>
+                <select name="Origin" id="Origin" v-model="modalForm.originId" v-validate="'required'">
+                  <option value="">선택</option>
+                  <option :value="item.id" v-for="(item, index) in originList" :key="index">{{ item.name }}</option>
+                </select>
+              </div>
+            </div>
           </fieldset>
 
           <fieldset>
@@ -145,12 +155,17 @@ export default {
       type: Array,
       default: () => [],
     },
+    originList: {
+      type: Array,
+      default: () => [],
+    },
   },
   data () {
     return {
       modalForm: {
         genusId: '',
         speciesId: '',
+        originId: '',
         bankNumber: '',
         stockPlacementId: '',
         rentPlacementId: '',
@@ -174,6 +189,7 @@ export default {
       this.modalForm = {
         genusId: '',
         speciesId: '',
+        originId: '',
         bankNumber: '',
         stockPlacementId: '',
         rentPlacementId: '',

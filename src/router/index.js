@@ -121,6 +121,25 @@ const routes = [
             ]
           },
           {
+            path: 'origin',
+            name: '생물자원_Origin',
+            redirect: 'origin/list',
+            meta: {
+              title: 'Origin'
+            },
+            component: () => import('@/templates/resources/ResourcesLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '생물자원_Origin_리스트',
+                meta: {
+                  title: 'Origin'
+                },
+                component: () => import('@/templates/resources/origin/OriginList')
+              },
+            ]
+          },
+          {
             path: 'extra',
             name: '균주_기타균주관리',
             redirect: 'extra/list',

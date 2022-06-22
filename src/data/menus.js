@@ -16,15 +16,15 @@ export const MENUS = [
         roles: [],
         subMenus: null
       },
-      {
-        name: '입출입',
-        route: 'NotFound',
-        params: null,
-        order: 0,
-        icon: null,
-        roles: [],
-        subMenus: null
-      },
+      // {
+      //   name: '입출입',
+      //   route: 'NotFound',
+      //   params: null,
+      //   order: 0,
+      //   icon: null,
+      //   roles: [],
+      //   subMenus: null
+      // },
       {
         name: '속·종',
         route: '생물자원_속종',
@@ -37,6 +37,15 @@ export const MENUS = [
       {
         name: '장소',
         route: '생물자원_장소',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
+      {
+        name: 'Origin',
+        route: '생물자원_Origin',
         params: null,
         order: 0,
         icon: null,
