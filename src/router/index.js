@@ -102,6 +102,25 @@ const routes = [
             ]
           },
           {
+            path: 'placement',
+            name: '생물자원_장소',
+            redirect: 'placement/list',
+            meta: {
+              title: '장소'
+            },
+            component: () => import('@/templates/resources/ResourcesLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '생물자원_장소_리스트',
+                meta: {
+                  title: '장소'
+                },
+                component: () => import('@/templates/resources/placement/PlacementList')
+              },
+            ]
+          },
+          {
             path: 'extra',
             name: '균주_기타균주관리',
             redirect: 'extra/list',

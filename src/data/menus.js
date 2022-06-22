@@ -34,6 +34,15 @@ export const MENUS = [
         roles: [],
         subMenus: null
       },
+      {
+        name: '장소',
+        route: '생물자원_장소',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
     ]
   },
   {
