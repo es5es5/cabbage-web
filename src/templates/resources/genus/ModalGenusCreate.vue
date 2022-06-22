@@ -65,19 +65,27 @@ export default {
         memo: '',
       }
     },
-    doCreate () {
-      const data = this.modalForm
-      const apiURL = `${this.ENV_CUOME}/genus`
+    async doCreate ($event) {
+      $event.target.disabled = true
+      if (await this.$validator.validate()) {
+        const data = this.modalForm
+        const url = `${this.ENV_CUOME}/genus`
 
-      this.$axios({
-        method: 'post',
-        url: apiURL,
-        data
-      }).then(result => {
-        console.log(result)
-      }).catch(error => {
-        console.error(error)
-      })
+        this.$axios({ method: 'post', url, data })
+          .then(result => {
+            this.initData()
+            this.$toast.success(
+              '등록되었습니다.',
+              this.ToastSettings
+            )
+            this.$modal.hide('ModalGenusCreate')
+          }).catch(error => {
+            throw new Error(error)
+          })
+      } else {
+        this.setValidateError()
+        $event.target.disabled = false
+      }
     },
   }
 }

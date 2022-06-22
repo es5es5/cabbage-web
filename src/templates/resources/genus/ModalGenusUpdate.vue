@@ -99,25 +99,37 @@ export default {
           url: apiURL,
           data
         }).then(result => {
-          console.log(result)
+          this.initData()
+          this.$toast.success(
+            '삭제되었습니다.',
+            this.ToastSettings
+          )
         }).catch(error => {
-          console.error(error)
+          throw new Error(error)
         })
       }
     },
-    doUpdate () {
-      const data = this.modalForm
-      const apiURL = `${this.ENV_CUOME}/genus/${this.id}`
+    async doUpdate ($event) {
+      $event.target.disabled = true
+      if (await this.$validator.validate()) {
+        const data = this.modalForm
+        const url = `${this.ENV_CUOME}/genus/${this.id}`
 
-      this.$axios({
-        method: 'put',
-        url: apiURL,
-        data
-      }).then(result => {
-        console.log(result)
-      }).catch(error => {
-        console.error(error)
-      })
+        this.$axios({ method: 'put', url, data })
+          .then(result => {
+            this.initData()
+            this.$toast.success(
+              '수정되었습니다.',
+              this.ToastSettings
+            )
+            this.$modal.hide('ModalGenusUpdate')
+          }).catch(error => {
+            throw new Error(error)
+          })
+      } else {
+        this.setValidateError()
+        $event.target.disabled = false
+      }
     },
   }
 }
