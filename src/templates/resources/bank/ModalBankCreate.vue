@@ -168,7 +168,7 @@ export default {
         speciesId: '',
         bankNumber: '',
         stockPlacementId: '',
-        rentPlacement: '',
+        rentPlacementId: '',
         gettingDate: this.COMMON.getToDate(),
         liquidCount: 0,
         powderCount: 0,

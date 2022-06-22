@@ -176,7 +176,7 @@ export default {
         speciesId: '',
         bankNumber: '',
         stockPlacementId: '',
-        rentPlacement: '',
+        rentPlacementId: '',
         gettingDate: '',
         liquidCount: 0,
         powderCount: 0,

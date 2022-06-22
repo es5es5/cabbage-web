@@ -79,8 +79,8 @@
               <Td>{{ item.category }}</Td>
               <Td>{{ item.originInfo ? item.originInfo.name : '' }}</Td>
               <Td>{{ item.gettingDate }}</Td>
-              <Td>{{ item.stockPlacement }}</Td>
-              <Td>{{ item.rentPlacement }}</Td>
+              <Td>{{ item.stockPlacementInfo ? item.stockPlacementInfo.name : '' }}</Td>
+              <Td>{{ item.rentPlacementInfo ? item.rentPlacementInfo.name : '' }}</Td>
               <Td>{{ item.liquidCount }} / {{ item.powderCount }}</Td>
               <Td>{{ item.sequencing }}</Td>
               <Td>{{ item.wholeGenome }}</Td>
