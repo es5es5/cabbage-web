@@ -103,8 +103,8 @@
       </Pagination> -->
       <span class="total">Total: {{ (contents.length || 0) | numberWithComma }}</span>
     </div>
-    <ModalBankCreate :genusList="genusList" @callback="getContents" />
-    <ModalBankUpdate :genusList="genusList" :id="selectedId" @callback="getContents" />
+    <ModalBankCreate :genusList="genusList" :placementList="placementList" @callback="getContents" />
+    <ModalBankUpdate :genusList="genusList" :placementList="placementList" :id="selectedId" @callback="getContents" />
   </main>
 </template>
 
@@ -118,6 +118,7 @@ export default {
   async created () {
     this.getContents()
     this.getGenusList()
+    this.getPlacementList()
   },
   watch: {
   },
@@ -130,6 +131,7 @@ export default {
       selectedId: '',
       contents: [],
       genusList: [],
+      placementList: [],
       searchForm: {
         pageIndex: 1,
         pageSize: 15,
@@ -163,6 +165,17 @@ export default {
       this.$axios({ method: 'get', url, data })
         .then(result => {
           this.genusList = result.data
+        }).catch(error => {
+          throw new Error(error)
+        })
+    },
+    getPlacementList () {
+      const data = this.modalForm
+      const url = `${this.ENV_CUOME}/placement`
+
+      this.$axios({ method: 'get', url, data })
+        .then(result => {
+          this.placementList = result.data
         }).catch(error => {
           throw new Error(error)
         })

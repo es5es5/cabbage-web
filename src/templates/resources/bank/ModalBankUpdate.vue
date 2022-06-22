@@ -51,12 +51,14 @@
                 <label for="stockPlacementId" class="required">보관 장소</label>
                 <select name="stockPlacementId" id="stockPlacementId" v-model="modalForm.stockPlacementId">
                   <option value="">선택</option>
+                  <option :value="item.id" v-for="(item, index) in placementList" :key="index">{{ item.name }}</option>
                 </select>
               </div>
               <div class="column column-1">
-                <label for="rentPlacement" class="required">기탁 장소</label>
-                <select name="rentPlacement" id="rentPlacement" v-model="modalForm.rentPlacement" v-validate="'required'">
+                <label for="rentPlacementId" class="required">기탁 장소</label>
+                <select name="rentPlacementId" id="rentPlacementId" v-model="modalForm.rentPlacementId" v-validate="'required'">
                   <option value="">선택</option>
+                  <option :value="item.id" v-for="(item, index) in placementList" :key="index">{{ item.name }}</option>
                 </select>
               </div>
               <div class="column column-1">
@@ -139,6 +141,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    placementList: {
+      type: Array,
+      default: () => [],
+    },
   },
   data () {
     return {
@@ -147,7 +153,7 @@ export default {
         speciesId: '',
         bankNumber: '',
         stockPlacementId: '',
-        rentPlacement: '',
+        rentPlacementId: '',
         gettingDate: '',
         liquidCount: 0,
         powderCount: 0,
