@@ -16,12 +16,14 @@
         <caption>속종 리스트</caption>
         <colgroup>
           <col style="width: 1rem;">
+          <col style="width: 3rem;">
           <col style="width: 5rem;">
           <col style="width: 10rem;">
         </colgroup>
         <thead>
           <tr>
             <th scope="col">No.</th>
+            <th scope="col">구분</th>
             <th scope="col">이름</th>
             <th scope="col">메모</th>
           </tr>
@@ -31,16 +33,18 @@
         <table>
           <colgroup>
             <col style="width: 1rem;">
+            <col style="width: 3rem;">
             <col style="width: 5rem;">
             <col style="width: 10rem;">
           </colgroup>
           <tbody>
             <tr v-for="(item, index) in contents" :key="index" @click="showModalGenusUpdate(item.id)">
               <Td>{{ item.id }}</Td>
+              <Td>{{ item.type }}</Td>
               <Td>{{ item.name }}</Td>
               <Td>{{ item.memo }}</Td>
             </tr>
-            <no-data-message :list="contents" :colspan="15"></no-data-message>
+            <no-data-message :list="contents" :colspan="4"></no-data-message>
           </tbody>
         </table>
       </div>

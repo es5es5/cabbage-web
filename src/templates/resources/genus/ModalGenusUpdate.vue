@@ -23,6 +23,17 @@
           <fieldset>
             <div class="modalRow row-2">
               <div class="column column-1">
+                <label for="typeGS" class="required">구분</label>
+                <div class="checkbox_wrap">
+                  <input type="radio" name="typeGS" id="typeG" value="Genus" v-model="modalForm.type">
+                  <label for="typeG">Genus</label>
+                  <input type="radio" name="typeGS" id="typeS" value="Species" v-model="modalForm.type">
+                  <label for="typeS">Species</label>
+                </div>
+              </div>
+            </div>
+            <div class="modalRow row-2">
+              <div class="column column-1">
                 <label for="이름" class="required">이름</label>
                 <input type="text" id="이름" name="이름" v-model="modalForm.name" v-validate="'required'">
               </div>
@@ -59,6 +70,7 @@ export default {
   data () {
     return {
       modalForm: {
+        type: 'Genus',
         name: '',
         memo: '',
       }
@@ -71,6 +83,7 @@ export default {
     closeEvent () { this.$emit('callback') },
     initData () {
       this.modalForm = {
+        type: 'Genus',
         name: '',
         memo: '',
       }
