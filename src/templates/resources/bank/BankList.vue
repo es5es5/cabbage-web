@@ -36,7 +36,7 @@
             <th scope="col">Code</th>
             <th scope="col">Genus</th>
             <th scope="col">Species</th>
-            <th scope="col">No.</th>
+            <th scope="col">Number</th>
             <th scope="col">Category</th>
             <th scope="col">Origin</th>
             <th scope="col">확보일</th>
