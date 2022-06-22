@@ -25,19 +25,21 @@
             <div class="modalRow row-3">
               <div class="column column-1">
                 <label for="Genus" class="required">Genus</label>
-                <select name="Genus" id="Genus" v-model="modalForm.genus" v-validate="'required'">
+                <select name="Genus" id="Genus" v-model="modalForm.genusId" v-validate="'required'">
                   <option value="">선택</option>
+                  <option :value="item.id" v-for="(item, index) in _Genus" :key="index">{{ item.name }}</option>
                 </select>
               </div>
               <div class="column column-1">
                 <label for="Species" class="required">Species</label>
-                <select name="Species" id="Species" v-model="modalForm.species" v-validate="'required'">
+                <select name="Species" id="Species" v-model="modalForm.speciesId" v-validate="'required'">
                   <option value="">선택</option>
+                  <option :value="item.id" v-for="(item, index) in _Species" :key="index">{{ item.name }}</option>
                 </select>
               </div>
               <div class="column column-1">
-                <label for="No" class="required">No.</label>
-                <input type="text" id="No" name="No" v-model="modalForm.no" v-validate="'required'">
+                <label for="bankNumber" class="required">No.</label>
+                <input type="text" id="bankNumber" name="bankNumber" v-model="modalForm.bankNumber" v-validate="'required'">
               </div>
             </div>
           </fieldset>
@@ -124,20 +126,26 @@ export default {
   name: 'ModalBankUpdate',
   created () {
   },
+  computed: {
+    _Genus () { return this.genusList.filter(item => item.type === 'Genus') || [] },
+    _Species () { return this.genusList.filter(item => item.type === 'Species') || [] },
+  },
   props: {
     id: {
       type: [String, Number],
       require: true
-    }
-  },
-  computed: {
+    },
+    genusList: {
+      type: Array,
+      default: () => [],
+    },
   },
   data () {
     return {
       modalForm: {
-        genus: '',
-        species: '',
-        no: '',
+        genusId: '',
+        speciesId: '',
+        bankNumber: '',
         stockPlacementId: '',
         rentPlacement: '',
         gettingDate: '',
@@ -158,9 +166,9 @@ export default {
     closeEvent () { this.$emit('callback') },
     initData () {
       this.modalForm = {
-        genus: '',
-        species: '',
-        no: '',
+        genusId: '',
+        speciesId: '',
+        bankNumber: '',
         stockPlacementId: '',
         rentPlacement: '',
         gettingDate: '',
@@ -197,25 +205,38 @@ export default {
           url: apiURL,
           data
         }).then(result => {
-          console.log(result)
+          this.initData()
+          this.$toast.success(
+            '삭제되었습니다.',
+            this.ToastSettings
+          )
+          this.$modal.hide('ModalBankUpdate')
         }).catch(error => {
-          console.error(error)
+          throw new Error(error)
         })
       }
     },
-    doUpdate () {
-      const data = this.modalForm
-      const apiURL = `${this.ENV_CUOME}/bank/${this.id}`
+    async doUpdate ($event) {
+      $event.target.disabled = true
+      if (await this.$validator.validate()) {
+        const data = this.modalForm
+        const url = `${this.ENV_CUOME}/bank/${this.id}`
 
-      this.$axios({
-        method: 'put',
-        url: apiURL,
-        data
-      }).then(result => {
-        console.log(result)
-      }).catch(error => {
-        console.error(error)
-      })
+        this.$axios({ method: 'put', url, data })
+          .then(result => {
+            this.initData()
+            this.$toast.success(
+              '수정되었습니다.',
+              this.ToastSettings
+            )
+            this.$modal.hide('ModalBankUpdate')
+          }).catch(error => {
+            throw new Error(error)
+          })
+      } else {
+        this.setValidateError()
+        $event.target.disabled = false
+      }
     },
   }
 }

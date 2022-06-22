@@ -104,6 +104,7 @@ export default {
             '삭제되었습니다.',
             this.ToastSettings
           )
+          this.$modal.hide('ModalGenusUpdate')
         }).catch(error => {
           throw new Error(error)
         })

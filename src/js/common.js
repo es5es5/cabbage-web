@@ -78,7 +78,7 @@ const COMMON = {
 
     return result
   },
-  getToDateFormat (value, format) {
+  getToDate (value, format) {
     let _format = format
     if (!_format) _format = 'YYYY-MM-DD'
     return moment(value).locale('ko').format(_format) || '-'

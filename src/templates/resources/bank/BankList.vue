@@ -73,11 +73,11 @@
           <tbody>
             <tr v-for="(item, index) in contents" :key="index" @click="showModalBankUpdate(item.id)">
               <Td>{{ item.code }}</Td>
-              <Td>{{ item.genus }}</Td>
-              <Td>{{ item.species }}</Td>
-              <Td>{{ item.number }}</Td>
+              <Td>{{ item.genusInfo ? item.genusInfo.name : '' }}</Td>
+              <Td>{{ item.speciesInfo ? item.speciesInfo.name : '' }}</Td>
+              <Td>{{ item.bankNumber }}</Td>
               <Td>{{ item.category }}</Td>
-              <Td>{{ item.origin ? item.origin.name : '' }}</Td>
+              <Td>{{ item.originInfo ? item.originInfo.name : '' }}</Td>
               <Td>{{ item.gettingDate }}</Td>
               <Td>{{ item.stockPlacement }}</Td>
               <Td>{{ item.rentPlacement }}</Td>
@@ -103,8 +103,8 @@
       </Pagination> -->
       <span class="total">Total: {{ (contents.length || 0) | numberWithComma }}</span>
     </div>
-    <ModalBankCreate @callback="getContents" />
-    <ModalBankUpdate :id="selectedId" @callback="getContents" />
+    <ModalBankCreate :genusList="genusList" @callback="getContents" />
+    <ModalBankUpdate :genusList="genusList" :id="selectedId" @callback="getContents" />
   </main>
 </template>
 
@@ -117,6 +117,7 @@ export default {
   name: 'BankList',
   async created () {
     this.getContents()
+    this.getGenusList()
   },
   watch: {
   },
@@ -128,6 +129,7 @@ export default {
     return {
       selectedId: '',
       contents: [],
+      genusList: [],
       searchForm: {
         pageIndex: 1,
         pageSize: 15,
@@ -153,6 +155,17 @@ export default {
     showModalBankUpdate (id) {
       this.selectedId = id
       this.$modal.show('ModalBankUpdate')
+    },
+    getGenusList () {
+      const data = this.modalForm
+      const url = `${this.ENV_CUOME}/genus`
+
+      this.$axios({ method: 'get', url, data })
+        .then(result => {
+          this.genusList = result.data
+        }).catch(error => {
+          throw new Error(error)
+        })
     },
     getContents () {
       this.$Progress.start()

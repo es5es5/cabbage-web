@@ -25,19 +25,21 @@
             <div class="modalRow row-3">
               <div class="column column-1">
                 <label for="Genus" class="required">Genus</label>
-                <select name="Genus" id="Genus" v-model="modalForm.genus" v-validate="'required'">
+                <select name="Genus" id="Genus" v-model="modalForm.genusId" v-validate="'required'">
                   <option value="">선택</option>
+                  <option :value="item.id" v-for="(item, index) in _Genus" :key="index">{{ item.name }}</option>
                 </select>
               </div>
               <div class="column column-1">
                 <label for="Species" class="required">Species</label>
-                <select name="Species" id="Species" v-model="modalForm.species" v-validate="'required'">
+                <select name="Species" id="Species" v-model="modalForm.speciesId" v-validate="'required'">
                   <option value="">선택</option>
+                  <option :value="item.id" v-for="(item, index) in _Species" :key="index">{{ item.name }}</option>
                 </select>
               </div>
               <div class="column column-1">
-                <label for="No" class="required">No.</label>
-                <input type="text" id="No" name="No" v-model="modalForm.no" v-validate="'required'">
+                <label for="bankNumber" class="required">No.</label>
+                <input type="text" id="bankNumber" name="bankNumber" v-model="modalForm.bankNumber" v-validate="'required'">
               </div>
             </div>
           </fieldset>
@@ -123,16 +125,24 @@ export default {
   created () {
   },
   computed: {
+    _Genus () { return this.genusList.filter(item => item.type === 'Genus') || [] },
+    _Species () { return this.genusList.filter(item => item.type === 'Species') || [] },
+  },
+  props: {
+    genusList: {
+      type: Array,
+      default: () => [],
+    }
   },
   data () {
     return {
       modalForm: {
-        genus: '',
-        species: '',
-        no: '',
-        stockPlacementId: '',
-        rentPlacement: '',
-        gettingDate: '',
+        genusId: '',
+        speciesId: '',
+        bankNumber: '',
+        stockPlacementId: '1',
+        rentPlacement: '1',
+        gettingDate: this.COMMON.getToDate(),
         liquidCount: 0,
         powderCount: 0,
         sequencing: '',
@@ -148,12 +158,12 @@ export default {
     closeEvent () { this.$emit('callback') },
     initData () {
       this.modalForm = {
-        genus: '',
-        species: '',
-        no: '',
-        stockPlacementId: '',
-        rentPlacement: '',
-        gettingDate: '',
+        genusId: '',
+        speciesId: '',
+        bankNumber: '',
+        stockPlacementId: '1',
+        rentPlacement: '1',
+        gettingDate: this.COMMON.getToDate(),
         liquidCount: 0,
         powderCount: 0,
         sequencing: '',
@@ -163,19 +173,27 @@ export default {
         wholeGenome: '',
       }
     },
-    doCreate () {
-      const data = this.modalForm
-      const apiURL = `${this.ENV_CUOME}/bank`
+    async doCreate ($event) {
+      $event.target.disabled = true
+      if (await this.$validator.validate()) {
+        const data = this.modalForm
+        const url = `${this.ENV_CUOME}/bank`
 
-      this.$axios({
-        method: 'post',
-        url: apiURL,
-        data
-      }).then(result => {
-        console.log(result)
-      }).catch(error => {
-        console.error(error)
-      })
+        this.$axios({ method: 'post', url, data })
+          .then(result => {
+            this.initData()
+            this.$toast.success(
+              '등록되었습니다.',
+              this.ToastSettings
+            )
+            this.$modal.hide('ModalBankCreate')
+          }).catch(error => {
+            throw new Error(error)
+          })
+      } else {
+        this.setValidateError()
+        $event.target.disabled = false
+      }
     },
   }
 }
