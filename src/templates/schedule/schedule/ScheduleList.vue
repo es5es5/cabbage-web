@@ -42,15 +42,37 @@ export default {
         dateClick: this.handleDateClick,
         events: [
           { title: '학회', date: this.COMMON.getToDate() },
-        ]
+        ],
+        editable: true,
+        selectable: true,
+        select: this.handleDateSelect,
+        eventClick: this.handleEventClick,
       }
     }
   },
   computed: {
   },
   methods: {
-    handleDateClick (arg) {
-      alert('date click! ' + arg.dateStr)
+    handleDateSelect (selectInfo) {
+      const title = prompt('Please enter a new title for your event')
+      const calendarApi = selectInfo.view.calendar
+
+      calendarApi.unselect() // clear date selection
+
+      if (title) {
+        calendarApi.addEvent({
+          id: this.COMMON.UUID(),
+          title,
+          start: selectInfo.startStr,
+          end: selectInfo.endStr,
+          allDay: selectInfo.allDay
+        })
+      }
+    },
+    handleEventClick (clickInfo) {
+      if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+        clickInfo.event.remove()
+      }
     },
     getContents () {
       this.$Progress.start()
