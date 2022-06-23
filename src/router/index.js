@@ -161,6 +161,112 @@ const routes = [
         ]
       },
       {
+        path: 'schedule',
+        name: '일정',
+        redirect: 'schedule/schedule',
+        component: ContentsLayout,
+        meta: {
+          title: '일정'
+        },
+        children: [
+          {
+            path: 'schedule',
+            name: '일정_일정',
+            redirect: 'schedule/list',
+            meta: {
+              title: '일정'
+            },
+            component: () => import('@/templates/schedule/ScheduleLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '일정_일정_리스트',
+                meta: {
+                  title: '일정'
+                },
+                component: () => import('@/templates/schedule/schedule/ScheduleList')
+              },
+            ]
+          },
+          {
+            path: 'genus',
+            name: '생물자원_속종',
+            redirect: 'genus/list',
+            meta: {
+              title: '속·종'
+            },
+            component: () => import('@/templates/resources/ResourcesLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '생물자원_속종_리스트',
+                meta: {
+                  title: '속·종'
+                },
+                component: () => import('@/templates/resources/genus/GenusList')
+              },
+            ]
+          },
+          {
+            path: 'placement',
+            name: '생물자원_장소',
+            redirect: 'placement/list',
+            meta: {
+              title: '장소'
+            },
+            component: () => import('@/templates/resources/ResourcesLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '생물자원_장소_리스트',
+                meta: {
+                  title: '장소'
+                },
+                component: () => import('@/templates/resources/placement/PlacementList')
+              },
+            ]
+          },
+          {
+            path: 'origin',
+            name: '생물자원_Origin',
+            redirect: 'origin/list',
+            meta: {
+              title: 'Origin'
+            },
+            component: () => import('@/templates/resources/ResourcesLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '생물자원_Origin_리스트',
+                meta: {
+                  title: 'Origin'
+                },
+                component: () => import('@/templates/resources/origin/OriginList')
+              },
+            ]
+          },
+          {
+            path: 'extra',
+            name: '균주_기타균주관리',
+            redirect: 'extra/list',
+            meta: {
+              title: '기타균주'
+            },
+            component: () => import('@/templates/strain/StrainLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '균주_기타균주관리_리스트',
+                meta: {
+                  title: '기타균주'
+                },
+                component: () => import('@/templates/strain/extra/ExtraList')
+              },
+            ]
+          },
+        ]
+      },
+      {
         path: 'strain',
         name: '균주',
         redirect: 'strain/agriculture',

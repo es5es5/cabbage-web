@@ -56,7 +56,7 @@ export const MENUS = [
   },
   {
     name: '연구',
-    route: 'NotFound',
+    route: '균주',
     params: null,
     order: 0,
     icon: 'list-alt',
@@ -102,12 +102,21 @@ export const MENUS = [
   },
   {
     name: '일정',
-    route: '균주',
+    route: '일정',
     params: null,
     order: 0,
     icon: 'list-alt',
     roles: [],
     subMenus: [
+      {
+        name: '일정',
+        route: '일정_일정',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
     ]
   },
 ]
