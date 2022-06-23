@@ -14,10 +14,16 @@
     <div class="calendar_wrap">
       <FullCalendar :options="calendarOptions" />
     </div>
+
+    <ModalScheduleCreate @callback="getContents" />
+    <ModalScheduleUpdate :id="selectedId" @callback="getContents" />
   </main>
 </template>
 
 <script>
+import ModalScheduleCreate from './ModalScheduleCreate'
+import ModalScheduleUpdate from './ModalScheduleUpdate'
+
 import '@fullcalendar/core/vdom'
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -31,10 +37,13 @@ export default {
   watch: {
   },
   components: {
+    ModalScheduleCreate,
+    ModalScheduleUpdate,
     FullCalendar,
   },
   data () {
     return {
+      contents: [],
       calendarOptions: {
         locale: 'ko',
         plugins: [dayGridPlugin, interactionPlugin],
@@ -47,6 +56,7 @@ export default {
         selectable: true,
         select: this.handleDateSelect,
         eventClick: this.handleEventClick,
+        eventsSet: this.handleEvents,
       }
     }
   },
@@ -54,25 +64,34 @@ export default {
   },
   methods: {
     handleDateSelect (selectInfo) {
-      const title = prompt('Please enter a new title for your event')
-      const calendarApi = selectInfo.view.calendar
+      // console.log(selectInfo)
+      // const title = prompt('Please enter a new title for your event')
+      // const calendarApi = selectInfo.view.calendar
+      this.$modal.show('ModalScheduleCreate')
 
-      calendarApi.unselect() // clear date selection
-
-      if (title) {
-        calendarApi.addEvent({
-          id: this.COMMON.UUID(),
-          title,
-          start: selectInfo.startStr,
-          end: selectInfo.endStr,
-          allDay: selectInfo.allDay
-        })
-      }
+      // calendarApi.unselect()
+      // if (title) {
+      //   calendarApi.addEvent({
+      //     id: this.COMMON.UUID(),
+      //     title,
+      //     start: '2022-06-22 01:30',
+      //     end: '2022-06-22 02:00',
+      //     // start: selectInfo.startStr,
+      //     // end: selectInfo.endStr,
+      //     editable: true,
+      //     allDay: false,
+      //     // allDay: selectInfo.allDay
+      //   })
+      // }
     },
     handleEventClick (clickInfo) {
       if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
         clickInfo.event.remove()
       }
+    },
+    handleEvents (events) {
+      console.log(events)
+      this.contents = events
     },
     getContents () {
       this.$Progress.start()

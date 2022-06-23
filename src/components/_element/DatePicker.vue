@@ -10,6 +10,7 @@
     :disabled="disabled"
     :onlyDate="_onlyDate"
     :label="_placeholder"
+    :minuteInterval="minuteInterval"
   ></VueCtkDateTimePicker>
 </template>
 
@@ -63,6 +64,9 @@ export default {
       default: () => 'YYYY-MM-DD'
     },
     placeholder: {
+      type: String,
+    },
+    minuteInterval: {
       type: String,
     }
   },
