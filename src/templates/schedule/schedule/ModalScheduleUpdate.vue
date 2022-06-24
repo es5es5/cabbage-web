@@ -13,7 +13,7 @@
     >
 
     <div class="header_wrap">
-      <h3 class="header">속·종 수정</h3>
+      <h3 class="header">일정 수정</h3>
       <div class="closeButton" @click="$modal.hide('ModalScheduleUpdate')"></div>
     </div>
 
@@ -21,25 +21,33 @@
       <div class="modalForm_wrap">
         <form action="" class="form">
           <fieldset>
-            <div class="modalRow row-2">
-              <div class="column column-1">
-                <label for="typeGS" class="required">구분</label>
-                <div class="checkbox_wrap">
-                  <input type="radio" name="typeGS" id="typeG" value="Schedule" v-model="modalForm.type">
-                  <label for="typeG">Schedule</label>
-                  <input type="radio" name="typeGS" id="typeS" value="Species" v-model="modalForm.type">
-                  <label for="typeS">Species</label>
-                </div>
+            <div class="modalRow row">
+              <div class="column column">
+                <label for="title" class="required">제목</label>
+                <input type="text" id="title" name="title" v-model="modalForm.title" v-validate="'required'">
               </div>
             </div>
-            <div class="modalRow row-2">
-              <div class="column column-1">
-                <label for="이름" class="required">이름</label>
-                <input type="text" id="이름" name="이름" v-model="modalForm.name" v-validate="'required'">
+
+            <!-- <div class="modalRow row-4">
+              <div class="column column-3">
+                <label for="start-input" class="required">일시</label>
+                <DatePicker
+                  id="start"
+                  v-model="modalForm.start"
+                  format="YYYY-MM-DD HH:mm"
+                  minuteInterval="15"
+                />
               </div>
               <div class="column column-1">
-                <label for="메모">메모</label>
-                <input type="text" id="메모" name="메모" v-model="modalForm.memo">
+                <input type="checkbox" name="allDay" id="allDay" v-model="modalForm.allDay">
+                <label for="allDay">하루종일</label>
+              </div>
+            </div> -->
+
+            <div class="modalRow row">
+              <div class="column column">
+                <label for="memo">메모</label>
+                <textarea name="memo" id="memo" v-model="modalForm.memo" />
               </div>
             </div>
           </fieldset>
@@ -70,58 +78,34 @@ export default {
   data () {
     return {
       modalForm: {
-        type: 'Schedule',
-        name: '',
+        title: '',
+        allDay: true,
         memo: '',
       }
     }
   },
   methods: {
-    openEvent () {
-      this.getContent()
+    openEvent () { this.getContents() },
+    closeEvent () {
+      this.initData()
+      this.$emit('callback')
     },
-    closeEvent () { this.$emit('callback') },
     initData () {
       this.modalForm = {
-        type: 'Schedule',
-        name: '',
+        title: '',
+        allDay: true,
         memo: '',
       }
     },
-    async getContent () {
-      const data = {}
-      const apiURL = `${this.ENV_CUOME}/schedule/${this.id}`
-
-      this.$axios({
-        method: 'get',
-        url: apiURL,
-        data
-      }).then(result => {
-        this.modalForm = result.data
-      }).catch(error => {
-        console.error(error)
-      })
-    },
-    async doDelete () {
-      if (confirm('삭제하시겠습니까?')) {
-        const data = {}
-        const apiURL = `${this.ENV_CUOME}/schedule/${this.id}`
-
-        this.$axios({
-          method: 'delete',
-          url: apiURL,
-          data
-        }).then(result => {
-          this.initData()
-          this.$toast.success(
-            '삭제되었습니다.',
-            this.ToastSettings
-          )
-          this.$modal.hide('ModalScheduleUpdate')
-        }).catch(error => {
+    getContents () {
+      this.$axios
+        .get(`${this.ENV_CUOME}/schedule/${this.id}`)
+        .then(result => {
+          this.modalForm = result.data
+        })
+        .catch(error => {
           throw new Error(error)
         })
-      }
     },
     async doUpdate ($event) {
       $event.target.disabled = true
@@ -131,18 +115,37 @@ export default {
 
         this.$axios({ method: 'put', url, data })
           .then(result => {
-            this.initData()
+            console.log(result)
             this.$toast.success(
               '수정되었습니다.',
               this.ToastSettings
             )
+          }).catch(error => {
+            throw new Error(error)
+          })
+        this.$emit('callback-update')
+        this.$modal.hide('ModalScheduleUpdate')
+      } else {
+        this.setValidateError()
+        $event.target.disabled = false
+      }
+    },
+    async doDelete ($event) {
+      const data = {}
+      const url = `${this.ENV_CUOME}/schedule/${this.id}`
+      if (confirm('삭제하시겠습니까?')) {
+        this.$axios({ method: 'delete', url, data })
+          .then(result => {
+            console.log(result)
+            this.$toast.success(
+              '삭제되었습니다.',
+              this.ToastSettings
+            )
+            this.$emit('callback')
             this.$modal.hide('ModalScheduleUpdate')
           }).catch(error => {
             throw new Error(error)
           })
-      } else {
-        this.setValidateError()
-        $event.target.disabled = false
       }
     },
   }

@@ -18,7 +18,7 @@
     </div>
 
     <ModalScheduleCreate @callback="callbackCreate" />
-    <ModalScheduleUpdate @callback="callbackUpdate" />
+    <ModalScheduleUpdate :id="selectId" @callback="getContents" />
   </main>
 </template>
 
@@ -46,6 +46,7 @@ export default {
   data () {
     return {
       calendarInit: false,
+      selectId: '',
       contents: [],
       calendarOptions: {
         locale: 'ko',
@@ -73,7 +74,7 @@ export default {
   computed: {
   },
   methods: {
-    callbackUpdate () {},
+    callbackDelete () {},
     callbackCreate (validate, modalForm) {
       console.log('validate, modalForm', validate, modalForm)
       if (!validate) {
@@ -147,9 +148,12 @@ export default {
         })
     },
     handleEventClick (clickInfo) {
-      if (confirm(`[${clickInfo.event.title}] 일정을 삭제하시겠습니까?`)) {
-        clickInfo.event.remove()
-      }
+      this.selectId = clickInfo.event.id
+      this.$modal.show('ModalScheduleUpdate')
+
+      // if (confirm(`[${clickInfo.event.title}] 일정을 삭제하시겠습니까?`)) {
+      //   clickInfo.event.remove()
+      // }
     },
     deleteSchedule (value) {
       const data = {}
