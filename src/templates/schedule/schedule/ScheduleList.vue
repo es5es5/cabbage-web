@@ -62,8 +62,8 @@ export default {
         eventClick: this.handleEventClick,
         eventsSet: this.handleEvents,
         eventAdd: this.postSchedule,
-        eventChange: this.putSchedule,
-        eventRemove: this.deleteSchedule,
+        // eventChange: this.putSchedule,
+        // eventRemove: this.deleteSchedule,
       },
       validate: false,
       modalForm: {},
@@ -111,6 +111,7 @@ export default {
     },
     postSchedule (value) {
       const data = {
+        id: value.event.id,
         title: value.event.title,
         allDay: value.event.allDay,
         start: value.event.start,
@@ -130,46 +131,42 @@ export default {
           throw new Error(error)
         })
     },
-    putSchedule (value) {
-      const data = {
-        title: value.event.title,
-        allDay: value.event.allDay,
-        start: value.event.start,
-        end: value.event.end,
-        memo: value.event.extendedProps.memo,
-      }
-      const url = `${this.ENV_CUOME}/schedule/${value.event.id}`
+    // putSchedule (value) {
+    //   const data = {
+    //     title: value.event.title,
+    //     allDay: value.event.allDay,
+    //     start: value.event.start,
+    //     end: value.event.end,
+    //     memo: value.event.extendedProps.memo,
+    //   }
+    //   const url = `${this.ENV_CUOME}/schedule/${value.event.id}`
 
-      this.$axios({ method: 'put', url, data })
-        .then(result => {
-          console.log(result)
-        }).catch(error => {
-          throw new Error(error)
-        })
-    },
+    //   this.$axios({ method: 'put', url, data })
+    //     .then(result => {
+    //       console.log(result)
+    //     }).catch(error => {
+    //       throw new Error(error)
+    //     })
+    // },
     handleEventClick (clickInfo) {
       this.selectId = clickInfo.event.id
       this.$modal.show('ModalScheduleUpdate')
-
-      // if (confirm(`[${clickInfo.event.title}] 일정을 삭제하시겠습니까?`)) {
-      //   clickInfo.event.remove()
-      // }
     },
-    deleteSchedule (value) {
-      const data = {}
-      const url = `${this.ENV_CUOME}/schedule/${value.event.id}`
+    // deleteSchedule (value) {
+    //   const data = {}
+    //   const url = `${this.ENV_CUOME}/schedule/${value.event.id}`
 
-      this.$axios({ method: 'delete', url, data })
-        .then(result => {
-          console.log(result)
-          this.$toast.success(
-            '삭제되었습니다.',
-            this.ToastSettings
-          )
-        }).catch(error => {
-          throw new Error(error)
-        })
-    },
+    //   this.$axios({ method: 'delete', url, data })
+    //     .then(result => {
+    //       console.log(result)
+    //       this.$toast.success(
+    //         '삭제되었습니다.',
+    //         this.ToastSettings
+    //       )
+    //     }).catch(error => {
+    //       throw new Error(error)
+    //     })
+    // },
     getContents () {
       this.$Progress.start()
       this.$axios
