@@ -15,8 +15,8 @@
       <FullCalendar :options="calendarOptions" />
     </div>
 
-    <ModalScheduleCreate @callback="getContents" />
-    <ModalScheduleUpdate :id="selectedId" @callback="getContents" />
+    <ModalScheduleCreate @callback="callbackCreate" />
+    <ModalScheduleUpdate @callback="callbackUpdate" />
   </main>
 </template>
 
@@ -57,35 +57,48 @@ export default {
         select: this.handleDateSelect,
         eventClick: this.handleEventClick,
         eventsSet: this.handleEvents,
-      }
+      },
+      validate: false,
+      modalForm: {},
+      createInterval: null,
+      updateInterval: null,
     }
   },
   computed: {
   },
   methods: {
+    callbackUpdate () {},
+    callbackCreate (validate, modalForm) {
+      console.log('validate, modalForm', validate, modalForm)
+      if (!validate) {
+        clearInterval(this.createInterval)
+      }
+      this.validate = validate
+      this.modalForm = modalForm
+    },
     handleDateSelect (selectInfo) {
-      // console.log(selectInfo)
-      // const title = prompt('Please enter a new title for your event')
-      // const calendarApi = selectInfo.view.calendar
+      const calendarApi = selectInfo.view.calendar
       this.$modal.show('ModalScheduleCreate')
 
-      // calendarApi.unselect()
-      // if (title) {
-      //   calendarApi.addEvent({
-      //     id: this.COMMON.UUID(),
-      //     title,
-      //     start: '2022-06-22 01:30',
-      //     end: '2022-06-22 02:00',
-      //     // start: selectInfo.startStr,
-      //     // end: selectInfo.endStr,
-      //     editable: true,
-      //     allDay: false,
-      //     // allDay: selectInfo.allDay
-      //   })
-      // }
+      calendarApi.unselect()
+
+      this.createInterval = setInterval(() => {
+        if (this.validate) {
+          calendarApi.addEvent({
+            id: this.COMMON.UUID(),
+            title: this.modalForm.title,
+            start: selectInfo.startStr,
+            end: selectInfo.endStr,
+            editable: true,
+            allDay: this.modalForm.allDay,
+          })
+          this.validate = false
+          clearInterval(this.createInterval)
+        }
+      }, 100)
     },
     handleEventClick (clickInfo) {
-      if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+      if (confirm(`[${clickInfo.event.title}] 일정을 삭제하시겠습니까?`)) {
         clickInfo.event.remove()
       }
     },
@@ -94,17 +107,17 @@ export default {
       this.contents = events
     },
     getContents () {
-      this.$Progress.start()
-      this.$axios
-        .get(`${this.ENV_CUOME}/schedule`)
-        .then(result => {
-          this.contents = result.data
-          this.$Progress.finish()
-        })
-        .catch(error => {
-          this.$Progress.fail()
-          throw new Error(error)
-        })
+      // this.$Progress.start()
+      // this.$axios
+      //   .get(`${this.ENV_CUOME}/schedule`)
+      //   .then(result => {
+      //     this.contents = result.data
+      //     this.$Progress.finish()
+      //   })
+      //   .catch(error => {
+      //     this.$Progress.fail()
+      //     throw new Error(error)
+      //   })
     }
   }
 }
