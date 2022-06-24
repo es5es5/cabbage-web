@@ -12,7 +12,9 @@
       <!-- <button type="button" class="btn">엑셀다운로드</button> -->
     </div>
     <div class="calendar_wrap">
-      <FullCalendar :options="calendarOptions" />
+      <transition name="fade" mode="out-in">
+        <FullCalendar v-if="calendarInit" :options="calendarOptions" />
+      </transition>
     </div>
 
     <ModalScheduleCreate @callback="callbackCreate" />
@@ -32,7 +34,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 export default {
   name: 'ScheduleList',
   created () {
-    // this.getContents()
+    this.getContents()
   },
   watch: {
   },
@@ -43,6 +45,7 @@ export default {
   },
   data () {
     return {
+      calendarInit: false,
       contents: [],
       calendarOptions: {
         locale: 'ko',
@@ -50,13 +53,16 @@ export default {
         initialView: 'dayGridMonth',
         dateClick: this.handleDateClick,
         events: [
-          { title: '학회', date: this.COMMON.getToDate() },
+          // { title: '학회', date: this.COMMON.getToDate() },
         ],
         editable: true,
         selectable: true,
         select: this.handleDateSelect,
         eventClick: this.handleEventClick,
         eventsSet: this.handleEvents,
+        eventAdd: this.postSchedule,
+        eventChange: this.putSchedule,
+        eventRemove: this.deleteSchedule,
       },
       validate: false,
       modalForm: {},
@@ -87,6 +93,7 @@ export default {
           calendarApi.addEvent({
             id: this.COMMON.UUID(),
             title: this.modalForm.title,
+            memo: this.modalForm.memo,
             start: selectInfo.startStr,
             end: selectInfo.endStr,
             editable: true,
@@ -97,27 +104,84 @@ export default {
         }
       }, 100)
     },
+    handleEvents (events) {
+      console.log(events)
+      this.contents = events
+    },
+    postSchedule (value) {
+      const data = {
+        title: value.event.title,
+        allDay: value.event.allDay,
+        start: value.event.start,
+        end: value.event.end,
+        memo: value.event.extendedProps.memo,
+      }
+      const url = `${this.ENV_CUOME}/schedule`
+
+      this.$axios({ method: 'post', url, data })
+        .then(result => {
+          console.log(result)
+          this.$toast.success(
+            '등록되었습니다.',
+            this.ToastSettings
+          )
+        }).catch(error => {
+          throw new Error(error)
+        })
+    },
+    putSchedule (value) {
+      const data = {
+        title: value.event.title,
+        allDay: value.event.allDay,
+        start: value.event.start,
+        end: value.event.end,
+        memo: value.event.extendedProps.memo,
+      }
+      const url = `${this.ENV_CUOME}/schedule/${value.event.id}`
+
+      this.$axios({ method: 'put', url, data })
+        .then(result => {
+          console.log(result)
+        }).catch(error => {
+          throw new Error(error)
+        })
+    },
     handleEventClick (clickInfo) {
       if (confirm(`[${clickInfo.event.title}] 일정을 삭제하시겠습니까?`)) {
         clickInfo.event.remove()
       }
     },
-    handleEvents (events) {
-      console.log(events)
-      this.contents = events
+    deleteSchedule (value) {
+      const data = {}
+      const url = `${this.ENV_CUOME}/schedule/${value.event.id}`
+
+      this.$axios({ method: 'delete', url, data })
+        .then(result => {
+          console.log(result)
+          this.$toast.success(
+            '삭제되었습니다.',
+            this.ToastSettings
+          )
+        }).catch(error => {
+          throw new Error(error)
+        })
     },
     getContents () {
-      // this.$Progress.start()
-      // this.$axios
-      //   .get(`${this.ENV_CUOME}/schedule`)
-      //   .then(result => {
-      //     this.contents = result.data
-      //     this.$Progress.finish()
-      //   })
-      //   .catch(error => {
-      //     this.$Progress.fail()
-      //     throw new Error(error)
-      //   })
+      this.$Progress.start()
+      this.$axios
+        .get(`${this.ENV_CUOME}/schedule`)
+        .then(result => {
+          console.log(result)
+          this.calendarOptions.events = result.data
+          this.$nextTick(() => {
+            this.calendarInit = true
+          })
+          this.$Progress.finish()
+        })
+        .catch(error => {
+          this.$Progress.fail()
+          throw new Error(error)
+        })
     }
   }
 }
