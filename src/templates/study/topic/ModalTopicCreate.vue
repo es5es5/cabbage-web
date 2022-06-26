@@ -60,7 +60,7 @@
             <div class="modalRow row">
               <div class="column column">
                 <label for="memo">메모</label>
-                <textarea name="memo" id="memo"></textarea>
+                <textarea name="memo" id="memo" v-model="modalForm.memo"></textarea>
               </div>
             </div>
           </fieldset>
@@ -175,9 +175,20 @@ export default {
     closeEvent () { this.$emit('callback') },
     initData () {
       this.modalForm = {
-        name: '',
+        title: '',
+        startDate: '',
+        endDate: '',
+        money: '',
+        manager: '',
+        goal: '',
+        needs: '',
+        plan: '',
         memo: '',
+        consortiumSubs: '',
       }
+      this.consortiumSubs = [{
+        name: ''
+      }]
     },
     addTable () {
       this.consortiumSubs.push({
