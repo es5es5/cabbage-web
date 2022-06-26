@@ -68,24 +68,25 @@
 		&.left { text-align: left; }
 		&.right { text-align: right; }
 
-		// park 추가
 		select {
 			font-size: 12px;
 			width: 128px;
 			height: 33px;
 			padding: 8px 10px;
+			margin: -6px -8px;
 		}
-		//
-		// park 추가
+
 		input[type="checkbox"] {
 			margin-left: 10px;
 		}
-		//
-		// park 추가
+
 		input[type="radio"] {
 			margin-left: 10px;
 		}
-		//
+
+		input[type="text"], input[type="number"] {
+			margin: -10px;
+		}
 	}
 	.total {
 		position: absolute;

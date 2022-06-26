@@ -23,7 +23,7 @@ export default {
 .action {
   position: absolute;
   right: 0;
-  top: -6px;
+  top: -4px;
 }
 
 </style>
