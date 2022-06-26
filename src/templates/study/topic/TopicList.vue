@@ -56,7 +56,7 @@
               <Td>{{ item.manager }}</Td>
               <Td>{{ item.consortiumMain }}</Td>
               <Td>{{ item.needs }}</Td>
-              <Td>{{ item.money }}</Td>
+              <Td>{{ item.money | numberWithComma }}</Td>
               <Td>{{ item.goal }}</Td>
               <Td>{{ item.plan }}</Td>
             </tr>
