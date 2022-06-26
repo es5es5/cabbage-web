@@ -13,34 +13,54 @@
     </div>
     <div class="table_wrap table-hover table_wrap-scoll-y">
       <table>
-        <caption>장소 리스트</caption>
+        <caption>주제 리스트</caption>
         <colgroup>
-          <col style="width: 1rem;">
-          <col style="width: 5rem;">
+          <col style="width: 10rem;">
+          <col style="width: 10rem;">
+          <col style="width: 10rem;">
+          <col style="width: 10rem;">
+          <col style="width: 10rem;">
+          <col style="width: 10rem;">
+          <col style="width: 10rem;">
           <col style="width: 10rem;">
         </colgroup>
         <thead>
           <tr>
-            <th scope="col">No.</th>
-            <th scope="col">이름</th>
-            <th scope="col">메모</th>
+            <th scope="col">연구명</th>
+            <th scope="col">기간</th>
+            <th scope="col">컨소시엄</th>
+            <th scope="col">비용</th>
+            <th scope="col">목표</th>
+            <th scope="col">필요성</th>
+            <th scope="col">활용방안</th>
+            <th scope="col">담당자</th>
           </tr>
         </thead>
       </table>
       <div class="table_scroll">
         <table>
           <colgroup>
-            <col style="width: 1rem;">
-            <col style="width: 5rem;">
+            <col style="width: 10rem;">
+            <col style="width: 10rem;">
+            <col style="width: 10rem;">
+            <col style="width: 10rem;">
+            <col style="width: 10rem;">
+            <col style="width: 10rem;">
+            <col style="width: 10rem;">
             <col style="width: 10rem;">
           </colgroup>
           <tbody>
             <tr v-for="(item, index) in contents" :key="index" @click="showModalTopicUpdate(item.id)">
-              <Td>{{ item.id }}</Td>
-              <Td>{{ item.name }}</Td>
-              <Td>{{ item.memo }}</Td>
+              <Td>{{ item.title }}</Td>
+              <Td>{{ item.startDate }} ~ {{ item.endDate }}</Td>
+              <Td>{{ item.consortiumMain }}</Td>
+              <Td>{{ item.manager }}</Td>
+              <Td>{{ item.goal }}</Td>
+              <Td>{{ item.needs }}</Td>
+              <Td>{{ item.plan }}</Td>
+              <Td>{{ item.money }}</Td>
             </tr>
-            <no-data-message :list="contents" :colspan="3"></no-data-message>
+            <no-data-message :list="contents" :colspan="8"></no-data-message>
           </tbody>
         </table>
       </div>
@@ -109,7 +129,7 @@ export default {
     getContents () {
       this.$Progress.start()
       this.$axios
-        .get(`${this.ENV_CUOME}/placement`)
+        .get(`${this.ENV_CUOME}/study-topic`)
         .then(result => {
           this.contents = result.data
           this.$Progress.finish()
