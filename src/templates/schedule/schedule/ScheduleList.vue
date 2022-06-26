@@ -95,6 +95,7 @@ export default {
             id: this.COMMON.UUID(),
             title: this.modalForm.title,
             memo: this.modalForm.memo,
+            color: this.modalForm.color,
             start: selectInfo.startStr,
             end: selectInfo.endStr,
             editable: true,
@@ -116,6 +117,7 @@ export default {
         allDay: value.event.allDay,
         start: value.event.start,
         end: value.event.end,
+        color: value.event.extendedProps.color,
         memo: value.event.extendedProps.memo,
       }
       const url = `${this.ENV_CUOME}/schedule`
@@ -138,6 +140,7 @@ export default {
         allDay: value.event.allDay,
         start: value.event.start,
         end: value.event.end,
+        color: value.event.extendedProps.color,
         memo: value.event.extendedProps.memo,
       }
       const url = `${this.ENV_CUOME}/schedule/${value.event.id}`

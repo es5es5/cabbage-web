@@ -12,7 +12,7 @@
     :height="'auto'"
     >
 
-    <div class="header_wrap">
+    <div class="header_wrap" :style="`background-color: ${this.modalForm.color} !important;`">
       <h3 class="header">일정 등록</h3>
       <div class="closeButton" @click="doCancel"></div>
     </div>
@@ -26,6 +26,23 @@
                 <label for="title" class="required">제목</label>
                 <input type="text" id="title" name="title" v-model="modalForm.title" v-validate="'required'">
               </div>
+            </div>
+
+            <div class="modalRow row-2">
+              <div class="column column">
+                <label for="color" class="required">구분</label>
+                <select name="color" id="color" v-model="modalForm.color">
+                  <option value="#3688D8">실험</option>
+                  <option value="#D40201">국책사업</option>
+                  <option value="#F6BF25">교육</option>
+                  <option value="#0C7F43">세미나 및 학회</option>
+                  <option value="#8F24AA">연구미팅</option>
+                </select>
+              </div>
+              <!-- <div class="column column">
+                <label for="title" class="required">제목</label>
+                <input type="text" id="title" name="title" v-model="modalForm.title" v-validate="'required'">
+              </div> -->
             </div>
 
             <!-- <div class="modalRow row-4">
@@ -73,6 +90,7 @@ export default {
         title: '',
         allDay: true,
         memo: '',
+        color: '#3688D8',
       }
     }
   },
@@ -84,6 +102,7 @@ export default {
         title: '',
         allDay: true,
         memo: '',
+        color: '#3688D8',
       }
     },
     doCancel () {
