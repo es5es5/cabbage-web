@@ -139,22 +139,33 @@ const routes = [
               },
             ]
           },
+        ]
+      },
+      {
+        path: 'study',
+        name: '연구',
+        redirect: 'study/topic',
+        component: ContentsLayout,
+        meta: {
+          title: '연구'
+        },
+        children: [
           {
-            path: 'extra',
-            name: '균주_기타균주관리',
-            redirect: 'extra/list',
+            path: 'topic',
+            name: '연구_주제',
+            redirect: 'topic/list',
             meta: {
-              title: '기타균주'
+              title: '주제'
             },
-            component: () => import('@/templates/strain/StrainLayout'),
+            component: () => import('@/templates/study/StudyLayout'),
             children: [
               {
                 path: 'list',
-                name: '균주_기타균주관리_리스트',
+                name: '연구_주제_리스트',
                 meta: {
-                  title: '기타균주'
+                  title: '주제'
                 },
-                component: () => import('@/templates/strain/extra/ExtraList')
+                component: () => import('@/templates/study/topic/TopicList')
               },
             ]
           },
@@ -185,275 +196,6 @@ const routes = [
                   title: '일정'
                 },
                 component: () => import('@/templates/schedule/schedule/ScheduleList')
-              },
-            ]
-          },
-          {
-            path: 'genus',
-            name: '생물자원_속종',
-            redirect: 'genus/list',
-            meta: {
-              title: '속·종'
-            },
-            component: () => import('@/templates/resources/ResourcesLayout'),
-            children: [
-              {
-                path: 'list',
-                name: '생물자원_속종_리스트',
-                meta: {
-                  title: '속·종'
-                },
-                component: () => import('@/templates/resources/genus/GenusList')
-              },
-            ]
-          },
-          {
-            path: 'placement',
-            name: '생물자원_장소',
-            redirect: 'placement/list',
-            meta: {
-              title: '장소'
-            },
-            component: () => import('@/templates/resources/ResourcesLayout'),
-            children: [
-              {
-                path: 'list',
-                name: '생물자원_장소_리스트',
-                meta: {
-                  title: '장소'
-                },
-                component: () => import('@/templates/resources/placement/PlacementList')
-              },
-            ]
-          },
-          {
-            path: 'origin',
-            name: '생물자원_Origin',
-            redirect: 'origin/list',
-            meta: {
-              title: 'Origin'
-            },
-            component: () => import('@/templates/resources/ResourcesLayout'),
-            children: [
-              {
-                path: 'list',
-                name: '생물자원_Origin_리스트',
-                meta: {
-                  title: 'Origin'
-                },
-                component: () => import('@/templates/resources/origin/OriginList')
-              },
-            ]
-          },
-          {
-            path: 'extra',
-            name: '균주_기타균주관리',
-            redirect: 'extra/list',
-            meta: {
-              title: '기타균주'
-            },
-            component: () => import('@/templates/strain/StrainLayout'),
-            children: [
-              {
-                path: 'list',
-                name: '균주_기타균주관리_리스트',
-                meta: {
-                  title: '기타균주'
-                },
-                component: () => import('@/templates/strain/extra/ExtraList')
-              },
-            ]
-          },
-        ]
-      },
-      {
-        path: 'strain',
-        name: '균주',
-        redirect: 'strain/agriculture',
-        component: ContentsLayout,
-        meta: {
-          title: '균주'
-        },
-        children: [
-          {
-            path: 'agriculture',
-            name: '균주_농업균주관리',
-            redirect: 'agriculture/list',
-            meta: {
-              title: '농업균주'
-            },
-            component: () => import('@/templates/strain/agriculture/StrainAgricultureLayout'),
-            children: [
-              {
-                path: 'list',
-                name: '균주_농업균주관리_리스트',
-                meta: {
-                  title: '농업균주'
-                },
-                component: () => import('@/templates/strain/agriculture/AgricultureList')
-              },
-              {
-                path: 'statics',
-                name: '균주_농업균주관리_통계',
-                meta: {
-                  title: '농업균주'
-                },
-                component: () => import('@/templates/strain/agriculture/AgricultureStatics')
-              },
-            ]
-          },
-          {
-            path: 'fisheries',
-            name: '균주_수산업균주관리',
-            redirect: 'fisheries/list',
-            meta: {
-              title: '수산업균주'
-            },
-            component: () => import('@/templates/strain/StrainLayout'),
-            children: [
-              {
-                path: 'list',
-                name: '균주_수산업균주관리_리스트',
-                meta: {
-                  title: '수산업균주'
-                },
-                component: () => import('@/templates/strain/fisheries/FisheriesList')
-              },
-            ]
-          },
-          {
-            path: 'extra',
-            name: '균주_기타균주관리',
-            redirect: 'extra/list',
-            meta: {
-              title: '기타균주'
-            },
-            component: () => import('@/templates/strain/StrainLayout'),
-            children: [
-              {
-                path: 'list',
-                name: '균주_기타균주관리_리스트',
-                meta: {
-                  title: '기타균주'
-                },
-                component: () => import('@/templates/strain/extra/ExtraList')
-              },
-            ]
-          },
-        ]
-      },
-      {
-        path: 'groceries',
-        name: '식품',
-        redirect: 'groceries/official',
-        component: ContentsLayout,
-        meta: {
-          title: '고시형'
-        },
-        children: [
-          {
-            path: 'official',
-            name: '식품_고시형',
-            redirect: 'official/list',
-            meta: {
-              title: '고시형'
-            },
-            component: () => import('@/templates/groceries/GroceriesLayout'),
-            children: [
-              {
-                path: 'list',
-                name: '식품_고시형_리스트',
-                meta: {
-                  title: '고시형'
-                },
-                component: () => import('@/templates/groceries/official/OfficialList')
-              },
-            ]
-          },
-          {
-            path: 'general',
-            name: '식품_일반식품',
-            redirect: 'general/list',
-            meta: {
-              title: '일반식품'
-            },
-            component: () => import('@/templates/groceries/GroceriesLayout'),
-            children: [
-              {
-                path: 'list',
-                name: '식품_일반식품_리스트',
-                meta: {
-                  title: '일반식품'
-                },
-                component: () => import('@/templates/groceries/general/GeneralList')
-              },
-            ]
-          },
-        ]
-      },
-      {
-        path: 'manage',
-        name: '관리',
-        redirect: 'manage/microorganism',
-        component: ContentsLayout,
-        meta: {
-          title: '관리'
-        },
-        children: [
-          {
-            path: 'microorganism',
-            name: '관리_균종관리',
-            redirect: 'microorganism/list',
-            meta: {
-              title: '균종 관리'
-            },
-            component: () => import('@/templates/manage/ManageLayout'),
-            children: [
-              {
-                path: 'list',
-                name: '관리_균종관리_리스트',
-                meta: {
-                  title: '균종 관리'
-                },
-                component: () => import('@/templates/manage/microorganism/MicroorganismList')
-              },
-            ]
-          },
-          {
-            path: 'origin',
-            name: '관리_Origin관리',
-            redirect: 'origin/list',
-            meta: {
-              title: 'Origin 관리'
-            },
-            component: () => import('@/templates/manage/ManageLayout'),
-            children: [
-              {
-                path: 'list',
-                name: '관리_Origin관리_리스트',
-                meta: {
-                  title: 'Origin 관리'
-                },
-                component: () => import('@/templates/manage/origin/OriginList')
-              },
-            ]
-          },
-          {
-            path: 'place',
-            name: '관리_장소관리',
-            redirect: 'place/list',
-            meta: {
-              title: '장소 관리'
-            },
-            component: () => import('@/templates/manage/ManageLayout'),
-            children: [
-              {
-                path: 'list',
-                name: '관리_장소관리_리스트',
-                meta: {
-                  title: '장소 관리'
-                },
-                component: () => import('@/templates/manage/place/PlaceList')
               },
             ]
           },

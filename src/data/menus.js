@@ -56,7 +56,7 @@ export const MENUS = [
   },
   {
     name: '연구',
-    route: '균주',
+    route: '연구',
     params: null,
     order: 0,
     icon: 'list-alt',
@@ -64,7 +64,7 @@ export const MENUS = [
     subMenus: [
       {
         name: '연구 주제·목표',
-        route: 'NotFound',
+        route: '연구_주제',
         params: null,
         order: 0,
         icon: null,
