@@ -28,12 +28,12 @@
           <tr>
             <th scope="col">연구명</th>
             <th scope="col">기간</th>
+            <th scope="col">담당자</th>
             <th scope="col">컨소시엄</th>
+            <th scope="col">필요성</th>
             <th scope="col">비용</th>
             <th scope="col">목표</th>
-            <th scope="col">필요성</th>
             <th scope="col">활용방안</th>
-            <th scope="col">담당자</th>
           </tr>
         </thead>
       </table>
@@ -53,12 +53,12 @@
             <tr v-for="(item, index) in contents" :key="index" @click="showModalTopicUpdate(item.id)">
               <Td>{{ item.title }}</Td>
               <Td>{{ item.startDate }} ~ {{ item.endDate }}</Td>
-              <Td>{{ item.consortiumMain }}</Td>
               <Td>{{ item.manager }}</Td>
-              <Td>{{ item.goal }}</Td>
+              <Td>{{ item.consortiumMain }}</Td>
               <Td>{{ item.needs }}</Td>
-              <Td>{{ item.plan }}</Td>
               <Td>{{ item.money }}</Td>
+              <Td>{{ item.goal }}</Td>
+              <Td>{{ item.plan }}</Td>
             </tr>
             <no-data-message :list="contents" :colspan="8"></no-data-message>
           </tbody>
