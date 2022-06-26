@@ -16,7 +16,7 @@
         <caption>주제 리스트</caption>
         <colgroup>
           <col style="width: 10rem;">
-          <col style="width: 10rem;">
+          <col style="width: 20rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
@@ -41,7 +41,7 @@
         <table>
           <colgroup>
             <col style="width: 10rem;">
-            <col style="width: 10rem;">
+            <col style="width: 20rem;">
             <col style="width: 10rem;">
             <col style="width: 10rem;">
             <col style="width: 10rem;">
@@ -52,7 +52,7 @@
           <tbody>
             <tr v-for="(item, index) in contents" :key="index" @click="showModalTopicUpdate(item.id)">
               <Td>{{ item.title }}</Td>
-              <Td>{{ item.startDate }} ~ {{ item.endDate }}</Td>
+              <Td>{{ item.startDate | dateFormat }} ~ {{ item.endDate | dateFormat }}</Td>
               <Td>{{ item.manager }}</Td>
               <Td>{{ item.consortiumMain }}</Td>
               <Td>{{ item.needs }}</Td>
