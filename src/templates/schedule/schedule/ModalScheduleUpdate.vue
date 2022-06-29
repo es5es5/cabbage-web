@@ -135,7 +135,6 @@ export default {
 
         this.$axios({ method: 'put', url, data })
           .then(result => {
-            console.log(result)
             this.$toast.success(
               '수정되었습니다.',
               this.ToastSettings
@@ -156,7 +155,6 @@ export default {
       if (confirm('삭제하시겠습니까?')) {
         this.$axios({ method: 'delete', url, data })
           .then(result => {
-            console.log(result)
             this.$toast.success(
               '삭제되었습니다.',
               this.ToastSettings

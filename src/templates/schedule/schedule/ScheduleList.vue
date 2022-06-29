@@ -8,8 +8,6 @@
       <button type="button" class="btn-search" @click="getContents">검색</button>
     </div> -->
     <div class="action_wrap">
-      <!-- <button type="button" class="btn primary">등록</button> -->
-      <!-- <button type="button" class="btn">엑셀다운로드</button> -->
     </div>
     <div class="calendar_wrap">
       <transition name="fade" mode="out-in">
@@ -60,7 +58,7 @@ export default {
         selectable: true,
         select: this.handleDateSelect,
         eventClick: this.handleEventClick,
-        eventsSet: this.handleEvents,
+        // eventsSet: this.getContents,
         eventAdd: this.postSchedule,
         eventChange: this.putSchedule,
         eventRemove: this.deleteSchedule,
@@ -76,7 +74,6 @@ export default {
   methods: {
     callbackDelete () {},
     callbackCreate (validate, modalForm) {
-      console.log('validate, modalForm', validate, modalForm)
       if (!validate) {
         clearInterval(this.createInterval)
       }
@@ -107,7 +104,7 @@ export default {
       }, 100)
     },
     handleEvents (events) {
-      console.log(events)
+      this.contents = []
       this.contents = events
     },
     postSchedule (value) {
@@ -117,14 +114,13 @@ export default {
         allDay: value.event.allDay,
         start: value.event.start,
         end: value.event.end,
-        color: value.event.extendedProps.color,
+        color: value.event.backgroundColor,
         memo: value.event.extendedProps.memo,
       }
       const url = `${this.ENV_CUOME}/schedule`
 
       this.$axios({ method: 'post', url, data })
         .then(result => {
-          console.log(result)
           this.$toast.success(
             '등록되었습니다.',
             this.ToastSettings
@@ -147,7 +143,6 @@ export default {
 
       this.$axios({ method: 'put', url, data })
         .then(result => {
-          console.log(result)
           this.$toast.success(
             '수정되었습니다.',
             this.ToastSettings
@@ -160,27 +155,12 @@ export default {
       this.selectId = clickInfo.event.id
       this.$modal.show('ModalScheduleUpdate')
     },
-    // deleteSchedule (value) {
-    //   const data = {}
-    //   const url = `${this.ENV_CUOME}/schedule/${value.event.id}`
-
-    //   this.$axios({ method: 'delete', url, data })
-    //     .then(result => {
-    //       console.log(result)
-    //       this.$toast.success(
-    //         '삭제되었습니다.',
-    //         this.ToastSettings
-    //       )
-    //     }).catch(error => {
-    //       throw new Error(error)
-    //     })
-    // },
     getContents () {
       this.$Progress.start()
       this.$axios
         .get(`${this.ENV_CUOME}/schedule`)
         .then(result => {
-          console.log(result)
+          this.calendarInit = false
           this.calendarOptions.events = result.data
           this.$nextTick(() => {
             this.calendarInit = true
@@ -202,5 +182,6 @@ export default {
   background-color: #fff;
   padding: 25px;
   border-radius: 4px;
+  min-height: calc(100vh - 50px);
 }
 </style>
