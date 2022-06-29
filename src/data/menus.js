@@ -25,33 +25,6 @@ export const MENUS = [
         roles: [],
         subMenus: null
       },
-      {
-        name: '속·종',
-        route: '생물자원_속종',
-        params: null,
-        order: 0,
-        icon: null,
-        roles: [],
-        subMenus: null
-      },
-      {
-        name: '장소',
-        route: '생물자원_장소',
-        params: null,
-        order: 0,
-        icon: null,
-        roles: [],
-        subMenus: null
-      },
-      {
-        name: 'Origin',
-        route: '생물자원_Origin',
-        params: null,
-        order: 0,
-        icon: null,
-        roles: [],
-        subMenus: null
-      },
     ]
   },
   {
@@ -111,6 +84,43 @@ export const MENUS = [
       {
         name: '일정',
         route: '일정_일정',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
+    ]
+  },
+  {
+    name: '관리',
+    route: '관리',
+    params: null,
+    order: 0,
+    icon: 'list-alt',
+    roles: [],
+    subMenus: [
+      {
+        name: '속·종',
+        route: '관리_속종',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
+      {
+        name: '장소',
+        route: '관리_장소',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
+      {
+        name: 'Origin',
+        route: '관리_Origin',
         params: null,
         order: 0,
         icon: null,

@@ -82,63 +82,6 @@ const routes = [
               },
             ]
           },
-          {
-            path: 'genus',
-            name: '생물자원_속종',
-            redirect: 'genus/list',
-            meta: {
-              title: '속·종'
-            },
-            component: () => import('@/templates/resources/ResourcesLayout'),
-            children: [
-              {
-                path: 'list',
-                name: '생물자원_속종_리스트',
-                meta: {
-                  title: '속·종'
-                },
-                component: () => import('@/templates/resources/genus/GenusList')
-              },
-            ]
-          },
-          {
-            path: 'placement',
-            name: '생물자원_장소',
-            redirect: 'placement/list',
-            meta: {
-              title: '장소'
-            },
-            component: () => import('@/templates/resources/ResourcesLayout'),
-            children: [
-              {
-                path: 'list',
-                name: '생물자원_장소_리스트',
-                meta: {
-                  title: '장소'
-                },
-                component: () => import('@/templates/resources/placement/PlacementList')
-              },
-            ]
-          },
-          {
-            path: 'origin',
-            name: '생물자원_Origin',
-            redirect: 'origin/list',
-            meta: {
-              title: 'Origin'
-            },
-            component: () => import('@/templates/resources/ResourcesLayout'),
-            children: [
-              {
-                path: 'list',
-                name: '생물자원_Origin_리스트',
-                meta: {
-                  title: 'Origin'
-                },
-                component: () => import('@/templates/resources/origin/OriginList')
-              },
-            ]
-          },
         ]
       },
       {
@@ -196,6 +139,74 @@ const routes = [
                   title: '일정'
                 },
                 component: () => import('@/templates/schedule/schedule/ScheduleList')
+              },
+            ]
+          },
+        ]
+      },
+      {
+        path: 'settings',
+        name: '관리',
+        redirect: 'settings/genus',
+        component: ContentsLayout,
+        meta: {
+          title: '관리'
+        },
+        children: [
+          {
+            path: 'genus',
+            name: '관리_속종',
+            redirect: 'genus/list',
+            meta: {
+              title: '속·종'
+            },
+            component: () => import('@/templates/settings/SettingsLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '생물자원_속종_리스트',
+                meta: {
+                  title: '속·종'
+                },
+                component: () => import('@/templates/settings/genus/GenusList')
+              },
+            ]
+          },
+          {
+            path: 'placement',
+            name: '관리_장소',
+            redirect: 'placement/list',
+            meta: {
+              title: '장소'
+            },
+            component: () => import('@/templates/settings/SettingsLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '생물자원_장소_리스트',
+                meta: {
+                  title: '장소'
+                },
+                component: () => import('@/templates/settings/placement/PlacementList')
+              },
+            ]
+          },
+          {
+            path: 'origin',
+            name: '관리_Origin',
+            redirect: 'origin/list',
+            meta: {
+              title: 'Origin'
+            },
+            component: () => import('@/templates/settings/SettingsLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '생물자원_Origin_리스트',
+                meta: {
+                  title: 'Origin'
+                },
+                component: () => import('@/templates/settings/origin/OriginList')
               },
             ]
           },
