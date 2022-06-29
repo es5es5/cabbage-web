@@ -9,6 +9,7 @@
     :maxDate="max"
     :disabled="disabled"
     :onlyDate="_onlyDate"
+    :onlyTime="_onlyTime"
     :label="_placeholder"
     :minuteInterval="minuteInterval"
   ></VueCtkDateTimePicker>
@@ -29,7 +30,10 @@ export default {
   },
   computed: {
     _onlyDate () {
-      return this.format === 'YYYY-MM-DD'
+      return this.format === 'YYYY-MM-DD' || this.format === 'YYYY-MM' || this.format === 'YYYY'
+    },
+    _onlyTime () {
+      return this.format === 'HH:mm' || this.format === 'HH' || this.format === 'mm'
     },
     _placeholder () {
       return this.placeholder ? this.placeholder : this.format

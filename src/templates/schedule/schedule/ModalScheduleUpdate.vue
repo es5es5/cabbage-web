@@ -35,7 +35,7 @@
                   <option value="#3688D8">실험</option>
                   <option value="#D40201">국책사업</option>
                   <option value="#F6BF25">교육</option>
-                  <option value="#0C7F43">세미나 및 학회</option>
+                  <option value="#0C7F43">학회</option>
                   <option value="#8F24AA">연구미팅</option>
                 </select>
               </div>
