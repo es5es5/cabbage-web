@@ -24,6 +24,25 @@
             <legend>균주 정보</legend>
             <div class="modalRow row-3">
               <div class="column column-1">
+                <label for="category" class="required">구분</label>
+                <select name="category" id="category" v-model="modalForm.category" v-validate="'required'" disabled>
+                  <option value="">선택</option>
+                  <option value="식품">식품</option>
+                  <option value="농업">농업</option>
+                  <option value="수산">수산</option>
+                </select>
+              </div>
+              <div class="column column-1">
+                <label for="Origin" class="required">Origin</label>
+                <select name="Origin" id="Origin" v-model="modalForm.originId" v-validate="'required'">
+                  <option value="">선택</option>
+                  <option :value="item.id" v-for="(item, index) in originList" :key="index">{{ item.name }}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="modalRow row-3">
+              <div class="column column-1">
                 <label for="Genus" class="required">Genus</label>
                 <select name="Genus" id="Genus" v-model="modalForm.genusId" v-validate="'required'">
                   <option value="">선택</option>
@@ -40,16 +59,6 @@
               <div class="column column-1">
                 <label for="bankNumber" class="required">No.</label>
                 <input type="text" id="bankNumber" name="bankNumber" v-model="modalForm.bankNumber" v-validate="'required'">
-              </div>
-            </div>
-
-            <div class="modalRow row-3">
-              <div class="column column-1">
-                <label for="Origin" class="required">Origin</label>
-                <select name="Origin" id="Origin" v-model="modalForm.originId" v-validate="'required'">
-                  <option value="">선택</option>
-                  <option :value="item.id" v-for="(item, index) in originList" :key="index">{{ item.name }}</option>
-                </select>
               </div>
             </div>
           </fieldset>
@@ -163,6 +172,7 @@ export default {
   data () {
     return {
       modalForm: {
+        category: '',
         genusId: '',
         speciesId: '',
         originId: '',
@@ -187,6 +197,7 @@ export default {
     closeEvent () { this.$emit('callback') },
     initData () {
       this.modalForm = {
+        category: '',
         genusId: '',
         speciesId: '',
         originId: '',
