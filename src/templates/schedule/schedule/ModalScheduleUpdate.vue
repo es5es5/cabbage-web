@@ -14,7 +14,7 @@
 
     <div class="header_wrap" :style="`background-color: ${this.modalForm.color} !important;`">
       <h3 class="header">일정 수정</h3>
-      <div class="closeButton" @click="$modal.hide('ModalScheduleUpdate')"></div>
+      <div class="closeButton" @click="doCancel"></div>
     </div>
 
     <div class="content_wrap">
@@ -101,7 +101,6 @@ export default {
     openEvent () { this.getContents() },
     closeEvent () {
       this.initData()
-      this.$emit('callback')
     },
     initData () {
       this.modalForm = {
@@ -120,6 +119,10 @@ export default {
         .catch(error => {
           throw new Error(error)
         })
+    },
+    doCancel () {
+      this.$emit('callback-cancel')
+      this.$modal.hide('ModalScheduleUpdate')
     },
     async doUpdate ($event) {
       $event.target.disabled = true

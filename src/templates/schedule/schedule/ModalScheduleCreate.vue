@@ -100,7 +100,7 @@ export default {
       }
     },
     doCancel () {
-      this.$emit('callback', false, this.modalForm)
+      this.$emit('callback-cancel', false, this.modalForm)
       this.$modal.hide('ModalScheduleCreate')
     },
     async doCreate ($event) {

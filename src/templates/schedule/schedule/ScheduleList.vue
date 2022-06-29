@@ -15,8 +15,8 @@
       </transition>
     </div>
 
-    <ModalScheduleCreate @callback="callbackCreate" />
-    <ModalScheduleUpdate :id="selectId" @callback="getContents" />
+    <ModalScheduleCreate @callback="callbackCreate" @callback-cancel="() => {}" />
+    <ModalScheduleUpdate :id="selectId" @callback="getContents" @callback-cancel="() => {}" />
   </main>
 </template>
 
