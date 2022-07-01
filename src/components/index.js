@@ -10,5 +10,6 @@ export default {
     Vue.component('Confirm', () => import('./_element/Confirm'))
     Vue.component('Legend', () => import('./_element/Legend'))
     Vue.component('Td', () => import('./_element/TableData'))
+    Vue.component('Tr', () => import('./_element/TableRow'))
   }
 }

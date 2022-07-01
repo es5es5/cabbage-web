@@ -15,14 +15,14 @@
       <table>
         <caption>사업 리스트</caption>
         <colgroup>
-          <col style="width: 5rem;">
+          <col style="width: 4rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
+          <col style="width: 20rem;">
+          <col style="width: 8rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
+          <col style="width: 8rem;">
         </colgroup>
         <thead>
           <tr>
@@ -40,26 +40,26 @@
       <div class="table_scroll">
         <table>
           <colgroup>
-            <col style="width: 5rem;">
+            <col style="width: 4rem;">
             <col style="width: 10rem;">
             <col style="width: 10rem;">
+            <col style="width: 20rem;">
+            <col style="width: 8rem;">
             <col style="width: 10rem;">
             <col style="width: 10rem;">
-            <col style="width: 10rem;">
-            <col style="width: 10rem;">
-            <col style="width: 10rem;">
+            <col style="width: 8rem;">
           </colgroup>
           <tbody>
-            <tr v-for="(item, index) in contents" :key="index" @click="showModalBusinessUpdate(item.id)">
+            <Tr v-for="(item, index) in contents" :key="index" @click="showModalBusinessUpdate(item.id)" center>
               <Td>{{ item.id }}</Td>
-              <Td>{{ item.businessTitle }}</Td>
+              <Td left>{{ item.businessTitle }}</Td>
               <Td>{{ item.startDate | dateFormat }} ~ {{ item.endDate | dateFormat }}</Td>
-              <Td>{{ item.projectTitle }}</Td>
-              <Td>{{ item.money }}</Td>
+              <Td left>{{ item.projectTitle }}</Td>
+              <Td right>{{ item.money | numberWithComma }}</Td>
               <Td>{{ item.supervisor }}</Td>
               <Td>{{ item.businessManager }}</Td>
               <Td>{{ item.projectState }} / {{ item.presentationState }}</Td>
-            </tr>
+            </Tr>
             <no-data-message :list="contents" :colspan="8"></no-data-message>
           </tbody>
         </table>

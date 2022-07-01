@@ -71,14 +71,14 @@
             <col style="width: 10rem;">
           </colgroup>
           <tbody>
-            <tr v-for="(item, index) in contents" :key="index" @click="showModalBankUpdate(item.id)">
+            <Tr v-for="(item, index) in contents" :key="index" @click="showModalBankUpdate(item.id)" center>
               <Td>{{ item.code }}</Td>
               <Td>{{ item.genusInfo ? item.genusInfo.name : '' }}</Td>
               <Td>{{ item.speciesInfo ? item.speciesInfo.name : '' }}</Td>
               <Td>{{ item.bankNumber }}</Td>
               <Td>{{ item.category }}</Td>
               <Td>{{ item.originInfo ? item.originInfo.name : '' }}</Td>
-              <Td>{{ item.gettingDate }}</Td>
+              <Td>{{ item.gettingDate | dateFormat }}</Td>
               <Td>{{ item.stockPlacementInfo ? item.stockPlacementInfo.name : '' }}</Td>
               <Td>{{ item.rentPlacementInfo ? item.rentPlacementInfo.name : '' }}</Td>
               <Td>{{ item.liquidCount }} / {{ item.powderCount }}</Td>
@@ -87,7 +87,7 @@
               <Td>{{ item.safetyAnalysis }}</Td>
               <Td>{{ item.immunaryTest }}</Td>
               <Td>{{ item.etcActivity }}</Td>
-            </tr>
+            </Tr>
             <no-data-message :list="contents" :colspan="15"></no-data-message>
           </tbody>
         </table>

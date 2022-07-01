@@ -1,15 +1,13 @@
 <template>
-  <td :title="noTitle ? '' : _title" :style="`text-align: ${right ? 'right' : center ? 'center' : left ? 'left' : 'inherit'}`">
-    <span>
-      <slot>
-      </slot>
-    </span>
-  </td>
+  <tr :style="`text-align: ${right ? 'right' : center ? 'center' : left ? 'left' : 'left'}`">
+    <slot>
+    </slot>
+  </tr>
 </template>
 
 <script>
 export default {
-  name: 'TableData',
+  name: 'TableRow',
   props: {
     right: {
       type: Boolean,
@@ -26,16 +24,8 @@ export default {
       required: false,
       default: () => false,
     },
-    noTitle: {
-      type: Boolean,
-      required: false,
-      default: () => false
-    }
   },
   computed: {
-    _title () {
-      return this.$slots.default ? this.$slots.default[0].text : '' || ''
-    }
   }
 }
 </script>
