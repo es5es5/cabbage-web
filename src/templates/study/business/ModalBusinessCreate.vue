@@ -22,10 +22,14 @@
         <form action="" class="form">
           <fieldset>
             <legend>사업 정보</legend>
-            <div class="modalRow row">
-              <div class="column column">
+            <div class="modalRow row-3">
+              <div class="column column-2">
                 <label for="businessTitle" class="required">사업명</label>
                 <input type="text" id="businessTitle" name="businessTitle" v-model="modalForm.businessTitle" v-validate="'required'">
+              </div>
+              <div class="column column-1">
+                <label for="money">사업비</label>
+                <input type="number" id="money" name="money" v-model.number="modalForm.money">
               </div>
             </div>
 
@@ -48,12 +52,12 @@
 
             <div class="modalRow row-2">
               <div class="column column-1">
-                <label for="money">사업비</label>
-                <input type="number" id="money" name="money" v-model.number="modalForm.money">
+                <label for="supervisor">주관부처</label>
+                <input type="text" id="supervisor" name="supervisor" v-model.number="modalForm.supervisor">
               </div>
               <div class="column column-1">
-                <label for="businessManager">담당자</label>
-                <input type="text" id="businessManager" name="businessManager" v-model.number="modalForm.businessManager">
+                <label for="specializedOrganization">전문기관</label>
+                <input type="text" id="specializedOrganization" name="specializedOrganization" v-model.number="modalForm.specializedOrganization">
               </div>
             </div>
           </fieldset>
@@ -70,18 +74,14 @@
               </div>
             </div>
 
-            <div class="modalRow row-3">
-              <div class="column column-1">
-                <label for="supervisor">주관부처</label>
-                <input type="text" id="supervisor" name="supervisor" v-model.number="modalForm.supervisor">
-              </div>
-              <div class="column column-1">
-                <label for="specializedOrganization">전문기관</label>
-                <input type="text" id="specializedOrganization" name="specializedOrganization" v-model.number="modalForm.specializedOrganization">
-              </div>
+            <div class="modalRow row-2">
               <div class="column column-1">
                 <label for="projectNo">과제번호</label>
                 <input type="text" id="projectNo" name="projectNo" v-model.number="modalForm.projectNo">
+              </div>
+              <div class="column column-1">
+                <label for="businessManager">담당자</label>
+                <input type="text" id="businessManager" name="businessManager" v-model.number="modalForm.businessManager">
               </div>
             </div>
           </fieldset>
