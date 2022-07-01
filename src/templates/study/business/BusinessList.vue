@@ -15,7 +15,7 @@
       <table>
         <caption>사업 리스트</caption>
         <colgroup>
-          <col style="width: 10rem;">
+          <col style="width: 5rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
@@ -26,21 +26,21 @@
         </colgroup>
         <thead>
           <tr>
+            <th scope="col">No</th>
             <th scope="col">사업명</th>
             <th scope="col">기간</th>
-            <th scope="col">과제번호</th>
             <th scope="col">과제명</th>
+            <th scope="col">사업비</th>
             <th scope="col">주관부처</th>
-            <th scope="col">전문기관</th>
-            <th scope="col">과제상태</th>
-            <th scope="col">발표상태</th>
+            <th scope="col">담당자</th>
+            <th scope="col">현황</th>
           </tr>
         </thead>
       </table>
       <div class="table_scroll">
         <table>
           <colgroup>
-            <col style="width: 10rem;">
+            <col style="width: 5rem;">
             <col style="width: 10rem;">
             <col style="width: 10rem;">
             <col style="width: 10rem;">
@@ -51,14 +51,14 @@
           </colgroup>
           <tbody>
             <tr v-for="(item, index) in contents" :key="index" @click="showModalBusinessUpdate(item.id)">
+              <Td>{{ item.id }}</Td>
               <Td>{{ item.businessTitle }}</Td>
               <Td>{{ item.startDate | dateFormat }} ~ {{ item.endDate | dateFormat }}</Td>
-              <Td>{{ item.projectNo }}</Td>
               <Td>{{ item.projectTitle }}</Td>
+              <Td>{{ item.money }}</Td>
               <Td>{{ item.supervisor }}</Td>
-              <Td>{{ item.specializedOrganization }}</Td>
-              <Td>{{ item.projectState }}</Td>
-              <Td>{{ item.presentationState }}</Td>
+              <Td>{{ item.businessManager }}</Td>
+              <Td>{{ item.projectState }} / {{ item.presentationState }}</Td>
             </tr>
             <no-data-message :list="contents" :colspan="8"></no-data-message>
           </tbody>
