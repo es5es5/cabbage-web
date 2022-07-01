@@ -50,7 +50,7 @@
             <col style="width: 8rem;">
           </colgroup>
           <tbody>
-            <Tr v-for="(item, index) in contents" :key="index" @click="showModalBusinessUpdate(item.id)" center>
+            <Tr v-for="(item, index) in contents" :key="index" @click.native="showModalBusinessUpdate(item.id)" center>
               <Td>{{ item.id }}</Td>
               <Td left>{{ item.businessTitle }}</Td>
               <Td>{{ item.startDate | dateFormat }} ~ {{ item.endDate | dateFormat }}</Td>

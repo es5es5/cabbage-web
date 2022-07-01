@@ -56,7 +56,7 @@
             <col style="width: 10rem;">
           </colgroup>
           <tbody>
-            <Tr v-for="(item, index) in contents" :key="index" @click="showModalBankUpdate(item.id)" center>
+            <Tr v-for="(item, index) in contents" :key="index" @click.native="showModalBankUpdate(item.id)" center>
               <Td>{{ item.code }}</Td>
               <Td>{{ item.genusInfo ? item.genusInfo.name : '' }}</Td>
               <Td>{{ item.speciesInfo ? item.speciesInfo.name : '' }}</Td>
