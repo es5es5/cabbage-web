@@ -24,8 +24,8 @@
             <legend>사업 정보</legend>
             <div class="modalRow row">
               <div class="column column">
-                <label for="title" class="required">사업명</label>
-                <input type="text" id="title" name="title" v-model="modalForm.title" v-validate="'required'">
+                <label for="businessTitle" class="required">사업명</label>
+                <input type="text" id="businessTitle" name="businessTitle" v-model="modalForm.businessTitle" v-validate="'required'">
               </div>
             </div>
 
@@ -184,7 +184,7 @@ export default {
   data () {
     return {
       modalForm: {
-        title: '',
+        businessTitle: '',
         startDate: '',
         endDate: '',
         money: 0,
@@ -213,7 +213,7 @@ export default {
     closeEvent () { this.$emit('callback') },
     initData () {
       this.modalForm = {
-        title: '',
+        businessTitle: '',
         startDate: '',
         endDate: '',
         money: 0,
