@@ -70,7 +70,7 @@
             <div class="modalRow row">
               <div class="column column">
                 <label for="projectTitle">과제명</label>
-                <textarea name="projectTitle" id="projectTitle" v-model="modalForm.projectTitle"></textarea>
+                <textarea name="projectTitle" id="projectTitle" class="_2" v-model="modalForm.projectTitle" />
               </div>
             </div>
 
@@ -136,6 +136,7 @@
                 <input type="text" id="supervisorStudyManager" name="supervisorStudyManager" v-model="modalForm.supervisorStudyManager">
               </div>
             </div>
+
             <div class="modalRow row-2">
               <div class="column column-1">
                 <label for="jointStudyDepartment">공동연구</label>
@@ -154,6 +155,13 @@
               <div class="column column-1">
                 <label for="rentStudyManager">책임자</label>
                 <input type="text" id="rentStudyManager" name="rentStudyManager" v-model="modalForm.rentStudyManager">
+              </div>
+            </div>
+
+            <div class="modalRow row">
+              <div class="column column-1">
+                <label for="memo">메모</label>
+                <textarea name="memo" id="memo" v-model="modalForm.memo" />
               </div>
             </div>
           </fieldset>
@@ -195,6 +203,7 @@ export default {
         jointStudyManager: '',
         rentStudyDepartment: '',
         rentStudyManager: '',
+        memo: '',
       }
     }
   },
@@ -222,6 +231,7 @@ export default {
         jointStudyManager: '',
         rentStudyDepartment: '',
         rentStudyManager: '',
+        memo: '',
       }
     },
     async doCreate ($event) {

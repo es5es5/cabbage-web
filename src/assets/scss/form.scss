@@ -69,6 +69,10 @@
       vertical-align: top;
       height: 90px;
       padding: 10px;
+
+      &._2 {
+        height: 48px;
+      }
     }
 
     + input, + select, + textarea {
