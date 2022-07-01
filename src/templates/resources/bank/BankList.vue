@@ -25,11 +25,6 @@
           <col style="width: 10rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
-          <col style="width: 10rem;">
         </colgroup>
         <thead>
           <tr>
@@ -43,22 +38,12 @@
             <th scope="col">보관 장소</th>
             <th scope="col">기탁 장소</th>
             <th scope="col">stock<br>(액체 / 분말)</th>
-            <th scope="col">sequencing</th>
-            <th scope="col">Whole Genome</th>
-            <th scope="col">Safety analysis</th>
-            <th scope="col">Immunary Test</th>
-            <th scope="col">기타활성</th>
           </tr>
         </thead>
       </table>
       <div class="table_scroll">
         <table>
           <colgroup>
-            <col style="width: 10rem;">
-            <col style="width: 10rem;">
-            <col style="width: 10rem;">
-            <col style="width: 10rem;">
-            <col style="width: 10rem;">
             <col style="width: 10rem;">
             <col style="width: 10rem;">
             <col style="width: 10rem;">
@@ -82,13 +67,8 @@
               <Td>{{ item.stockPlacementInfo ? item.stockPlacementInfo.name : '' }}</Td>
               <Td>{{ item.rentPlacementInfo ? item.rentPlacementInfo.name : '' }}</Td>
               <Td>{{ item.liquidCount }} / {{ item.powderCount }}</Td>
-              <Td>{{ item.sequencing }}</Td>
-              <Td>{{ item.wholeGenome }}</Td>
-              <Td>{{ item.safetyAnalysis }}</Td>
-              <Td>{{ item.immunaryTest }}</Td>
-              <Td>{{ item.etcActivity }}</Td>
             </Tr>
-            <no-data-message :list="contents" :colspan="15"></no-data-message>
+            <no-data-message :list="contents" :colspan="10"></no-data-message>
           </tbody>
         </table>
       </div>
