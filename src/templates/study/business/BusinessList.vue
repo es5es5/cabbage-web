@@ -56,7 +56,7 @@
               <Td>{{ item.projectNo }}</Td>
               <Td>{{ item.projectTitle }}</Td>
               <Td>{{ item.supervisor }}</Td>
-              <Td>{{ item.department }}</Td>
+              <Td>{{ item.specializedOrganization }}</Td>
               <Td>{{ item.projectState }}</Td>
               <Td>{{ item.presentationState }}</Td>
             </tr>
