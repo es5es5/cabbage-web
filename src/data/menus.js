@@ -45,6 +45,15 @@ export const MENUS = [
         subMenus: null
       },
       {
+        name: '국책사업',
+        route: '연구_사업',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
+      {
         name: '자료',
         route: 'NotFound',
         params: null,
@@ -55,15 +64,6 @@ export const MENUS = [
       },
       {
         name: '장비·시약',
-        route: 'NotFound',
-        params: null,
-        order: 0,
-        icon: null,
-        roles: [],
-        subMenus: null
-      },
-      {
-        name: '국책사업',
         route: 'NotFound',
         params: null,
         order: 0,

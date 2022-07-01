@@ -112,6 +112,25 @@ const routes = [
               },
             ]
           },
+          {
+            path: 'business',
+            name: '연구_사업',
+            redirect: 'business/list',
+            meta: {
+              title: '국책사업'
+            },
+            component: () => import('@/templates/study/StudyLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '연구_사업_리스트',
+                meta: {
+                  title: '국책사업'
+                },
+                component: () => import('@/templates/study/business/BusinessList')
+              },
+            ]
+          },
         ]
       },
       {
