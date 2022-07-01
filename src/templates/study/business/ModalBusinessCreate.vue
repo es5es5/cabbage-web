@@ -228,9 +228,7 @@ export default {
       $event.target.disabled = true
       if (await this.$validator.validate()) {
         const data = this.modalForm
-
-        data.consortiumSubs = this.consortiumSubs.map(item => item.name).join(',')
-        const url = `${this.ENV_CUOME}/study-Business`
+        const url = `${this.ENV_CUOME}/business`
 
         this.$axios({ method: 'post', url, data })
           .then(result => {

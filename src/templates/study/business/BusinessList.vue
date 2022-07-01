@@ -60,7 +60,7 @@
               <Td>{{ item.projectState }}</Td>
               <Td>{{ item.presentationState }}</Td>
             </tr>
-            <no-data-message :list="contents" :colspan="6"></no-data-message>
+            <no-data-message :list="contents" :colspan="8"></no-data-message>
           </tbody>
         </table>
       </div>
