@@ -229,6 +229,25 @@ const routes = [
               },
             ]
           },
+          {
+            path: 'users',
+            name: '관리_사용자',
+            redirect: 'users/list',
+            meta: {
+              title: '사용자'
+            },
+            component: () => import('@/templates/settings/SettingsLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '생물자원_사용자_리스트',
+                meta: {
+                  title: '사용자'
+                },
+                component: () => import('@/templates/settings/users/UsersList')
+              },
+            ]
+          },
         ]
       },
     ]

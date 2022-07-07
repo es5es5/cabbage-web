@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'StudyLayout'
+  name: 'StudyLayout',
 }
 </script>
 

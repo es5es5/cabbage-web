@@ -127,6 +127,15 @@ export const MENUS = [
         roles: [],
         subMenus: null
       },
+      {
+        name: '사용자',
+        route: '관리_사용자',
+        params: null,
+        order: 0,
+        icon: null,
+        roles: [],
+        subMenus: null
+      },
     ]
   },
 ]
