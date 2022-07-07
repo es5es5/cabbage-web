@@ -38,17 +38,17 @@
                 <div class="modalRow row-2">
                   <div class="column column-1">
                     <label for="password" class="required">현재<br>비밀번호</label>
-                    <input type="text" id="password" name="password" v-model="modalForm.password" v-validate="'required'">
+                    <input type="password" id="password" name="password" v-model="modalForm.password" v-validate="'required'">
                   </div>
                 </div>
                 <div class="modalRow row-2">
                   <div class="column column-1">
                     <label for="password1" class="required">비밀번호</label>
-                    <input type="password" id="password1" name="password1" v-model="password1" v-validate="'required'">
+                    <input type="password" id="password1" name="password1" v-model="changePasswordForm.password1" v-validate="'required'">
                   </div>
                   <div class="column column-1">
                     <label for="password2" class="required">비밀번호<br>확인</label>
-                    <input type="password" id="password2" name="password2" v-model="password2" v-validate="'required'">
+                    <input type="password" id="password2" name="password2" v-model="changePasswordForm.password2" v-validate="'required'">
                   </div>
                 </div>
               </div>
@@ -105,8 +105,13 @@ export default {
   data () {
     return {
       changePassword: false,
+      changePasswordForm: {
+        password1: '',
+        password2: '',
+      },
       modalForm: {
         username: '',
+        password: '',
         displayName: '',
         position: '',
         birthday: '',
@@ -145,41 +150,20 @@ export default {
         console.error(error)
       })
     },
-    async doDelete () {
-      if (confirm('삭제하시겠습니까?')) {
-        const data = {}
-        const apiURL = `${this.ENV_CUOME}/users/${this.id}`
-
-        this.$axios({
-          method: 'delete',
-          url: apiURL,
-          data
-        }).then(result => {
-          this.initData()
-          this.$toast.success(
-            '삭제되었습니다.',
-            this.ToastSettings
-          )
-          this.$modal.hide('ModalMySettings')
-        }).catch(error => {
-          throw new Error(error)
-        })
-      }
-    },
     async doUpdate ($event) {
       $event.target.disabled = true
       if (await this.$validator.validate()) {
-        const data = this.modalForm
-        const url = `${this.ENV_CUOME}/users/${this.id}`
+        const data = {
+          username: this.modalForm.username,
+          password: this.modalForm.password,
+          password1: this.changePasswordForm.password1,
+          password2: this.changePasswordForm.password2,
+        }
+        const url = `${this.ENV_CUOME}/auth/change-password`
 
         this.$axios({ method: 'put', url, data })
           .then(result => {
-            this.initData()
-            this.$toast.success(
-              '수정되었습니다.',
-              this.ToastSettings
-            )
-            this.$modal.hide('ModalMySettings')
+            console.log(result)
           }).catch(error => {
             throw new Error(error)
           })
