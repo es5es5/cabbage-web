@@ -12,8 +12,8 @@
           <template v-if="checkRoles(menu.roles)">
             <router-link v-if="menu.route" tag="a" class="menu-item" :to="{name: menu.route}" :key="`m_link_${menuIndex}`">
             <p class="menuTitle">
-              <!-- <img :src="`@/assets/images/menu/${menu.icon}.svg`" :alt="menu.icon"> -->
-              <img src="@/assets/images/menu/Distribution.svg" :alt="menu.icon" class="menuIcon">
+              <img :src="require(`@/assets/images/menu/${menu.icon}`)" :alt="menu.icon" class="menuIcon">
+              <!-- <img src="@/assets/images/menu/Settings.svg" :alt="menu.icon" class="menuIcon"> -->
               {{ menu.name }}
             </p>
             <ul class="subMenu" v-if="menu.subMenus && checkRoles(menu.roles)">
