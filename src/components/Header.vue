@@ -17,18 +17,27 @@
           <!-- <li class="setting-item" @click="showModalEmptySample">
             명세서
           </li> -->
+          <li class="setting-item" @click="showModalMySettings">
+            내 정보
+          </li>
           <li class="setting-item" @click="signout">
             로그아웃
           </li>
         </ul>
       </div>
     </div>
+    <ModalMySettings />
   </header>
 </template>
 
 <script>
+import ModalMySettings from './ModalMySettings'
+
 export default {
   name: 'Header',
+  components: {
+    ModalMySettings,
+  },
   created () {
   },
   mounted () {
@@ -52,9 +61,10 @@ export default {
   computed: {
     _user () { return this.$store.getters['user/getUser'] }
   },
-  components: {
-  },
   methods: {
+    showModalMySettings () {
+      this.$modal.show('ModalMySettings')
+    },
     throwError () {
       // console.error(`Sentry Error ${this.COMMON.UUID()}`)
       // throw new Error(`Sentry Error ${this.COMMON.UUID()}`)

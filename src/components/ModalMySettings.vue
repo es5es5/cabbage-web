@@ -1,6 +1,6 @@
 <template>
   <modal
-    name="ModalUsersCreate"
+    name="ModalMySettings"
     class="modal"
     adaptive
     reset
@@ -13,8 +13,8 @@
     >
 
     <div class="header_wrap">
-      <h3 class="header">사용자 등록</h3>
-      <div class="closeButton" @click="$modal.hide('ModalUsersCreate')"></div>
+      <h3 class="header">내 정보</h3>
+      <div class="closeButton" @click="$modal.hide('ModalMySettings')"></div>
     </div>
 
     <div class="content_wrap">
@@ -25,11 +25,7 @@
             <div class="modalRow row-2">
               <div class="column column-1">
                 <label for="username" class="required">아이디</label>
-                <input type="text" id="username" name="username" v-model="modalForm.username" v-validate="'required'">
-              </div>
-              <div class="column column-1">
-                <label for="password" class="required">초기<br>비밀번호</label>
-                <input type="text" id="password" name="password" v-model="modalForm.password" v-validate="'required'">
+                <input type="text" id="username" name="username" disabled v-model="modalForm.username" v-validate="'required'">
               </div>
             </div>
           </fieldset>
@@ -39,49 +35,51 @@
             <div class="modalRow row-2">
               <div class="column column-1">
                 <label for="displayName" class="required">이름</label>
-                <input type="text" id="displayName" name="displayName" v-model="modalForm.displayName" v-validate="'required'">
+                <input type="text" id="displayName" disabled name="displayName" v-model="modalForm.displayName" v-validate="'required'">
               </div>
               <div class="column column-1">
                 <label for="birthday">생년월일</label>
-                <input type="date" id="birthday" name="birthday" v-model="modalForm.birthday">
+                <input type="date" id="birthday" disabled name="birthday" v-model="modalForm.birthday">
               </div>
             </div>
 
             <div class="modalRow row">
               <div class="column column">
                 <label for="position">역할</label>
-                <input type="text" id="position" name="position" v-model="modalForm.position" placeholder="ex) 선임연구원, 장비관리, 업체선정">
-              </div>
-            </div>
-
-            <div class="modalRow row">
-              <div class="column column">
-                <label for="memo">메모</label>
-                <textarea name="memo" id="memo" v-model="modalForm.memo" />
+                <input type="text" id="position" disabled name="position" v-model="modalForm.position" placeholder="ex) 선임연구원, 장비관리, 업체선정">
               </div>
             </div>
           </fieldset>
         </form>
       </div>
-      <div class="action_wrap">
-        <button class="btn primary" @click="doCreate">등록</button>
-      </div>
+
+      <!-- <div class="action_wrap">
+        <button class="btn warning" @click="doUpdate">수정</button>
+      </div> -->
     </div>
   </modal>
 </template>
 
 <script>
 export default {
-  name: 'ModalUsersCreate',
+  name: 'ModalMySettings',
   created () {
   },
+  props: {
+    id: {
+      type: [String, Number],
+      require: true
+    }
+  },
   computed: {
+    _user () {
+      return this.$store.getters['user/getUser']
+    }
   },
   data () {
     return {
       modalForm: {
         username: '',
-        password: '',
         displayName: '',
         position: '',
         birthday: '',
@@ -91,7 +89,9 @@ export default {
     }
   },
   methods: {
-    openEvent () {},
+    openEvent () {
+      this.getContent()
+    },
     closeEvent () { this.$emit('callback') },
     initData () {
       this.modalForm = {
@@ -104,20 +104,55 @@ export default {
         use: true,
       }
     },
-    async doCreate ($event) {
+    async getContent () {
+      const data = {}
+      const apiURL = `${this.ENV_CUOME}/users/${this._user.id}`
+
+      this.$axios({
+        method: 'get',
+        url: apiURL,
+        data
+      }).then(result => {
+        this.modalForm = result.data
+      }).catch(error => {
+        console.error(error)
+      })
+    },
+    async doDelete () {
+      if (confirm('삭제하시겠습니까?')) {
+        const data = {}
+        const apiURL = `${this.ENV_CUOME}/users/${this.id}`
+
+        this.$axios({
+          method: 'delete',
+          url: apiURL,
+          data
+        }).then(result => {
+          this.initData()
+          this.$toast.success(
+            '삭제되었습니다.',
+            this.ToastSettings
+          )
+          this.$modal.hide('ModalMySettings')
+        }).catch(error => {
+          throw new Error(error)
+        })
+      }
+    },
+    async doUpdate ($event) {
       $event.target.disabled = true
       if (await this.$validator.validate()) {
         const data = this.modalForm
-        const url = `${this.ENV_CUOME}/auth/sign-in`
+        const url = `${this.ENV_CUOME}/users/${this.id}`
 
-        this.$axios({ method: 'post', url, data })
+        this.$axios({ method: 'put', url, data })
           .then(result => {
             this.initData()
             this.$toast.success(
-              '등록되었습니다.',
+              '수정되었습니다.',
               this.ToastSettings
             )
-            this.$modal.hide('ModalUsersCreate')
+            this.$modal.hide('ModalMySettings')
           }).catch(error => {
             throw new Error(error)
           })
