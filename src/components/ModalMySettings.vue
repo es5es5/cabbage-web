@@ -21,15 +21,39 @@
       <div class="modalForm_wrap">
         <form action="" class="form">
           <fieldset>
-            <legend>접속 정보</legend>
+            <Legend>
+              <span slot="title">접속 정보</span>
+              <div slot="action">
+                <button type="button" class="btn small" @click="changePassword = true">비밀번호 변경</button>
+              </div>
+            </Legend>
             <div class="modalRow row-2">
               <div class="column column-1">
                 <label for="username" class="required">아이디</label>
                 <input type="text" id="username" name="username" disabled v-model="modalForm.username" v-validate="'required'">
               </div>
             </div>
+            <transition name="fade">
+              <div v-if="changePassword">
+                <div class="modalRow row-2">
+                  <div class="column column-1">
+                    <label for="password" class="required">현재<br>비밀번호</label>
+                    <input type="text" id="password" name="password" v-model="modalForm.password" v-validate="'required'">
+                  </div>
+                </div>
+                <div class="modalRow row-2">
+                  <div class="column column-1">
+                    <label for="password1" class="required">비밀번호</label>
+                    <input type="password" id="password1" name="password1" v-model="password1" v-validate="'required'">
+                  </div>
+                  <div class="column column-1">
+                    <label for="password2" class="required">비밀번호<br>확인</label>
+                    <input type="password" id="password2" name="password2" v-model="password2" v-validate="'required'">
+                  </div>
+                </div>
+              </div>
+            </transition>
           </fieldset>
-
           <fieldset>
             <legend>사용자 정보</legend>
             <div class="modalRow row-2">
@@ -53,9 +77,11 @@
         </form>
       </div>
 
-      <!-- <div class="action_wrap">
-        <button class="btn warning" @click="doUpdate">수정</button>
-      </div> -->
+      <transition name="fade">
+        <div class="action_wrap" v-if="changePassword">
+          <button class="btn warning" @click="doUpdate">수정</button>
+        </div>
+      </transition>
     </div>
   </modal>
 </template>
@@ -78,6 +104,7 @@ export default {
   },
   data () {
     return {
+      changePassword: false,
       modalForm: {
         username: '',
         displayName: '',
