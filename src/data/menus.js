@@ -4,7 +4,7 @@ export const MENUS = [
     route: '생물자원',
     params: null,
     order: 0,
-    icon: 'Distribution.svg',
+    icon: 'dna.svg',
     roles: [],
     subMenus: [
       {
@@ -32,7 +32,7 @@ export const MENUS = [
     route: '연구',
     params: null,
     order: 0,
-    icon: 'Distribution.svg',
+    icon: 'research.svg',
     roles: [],
     subMenus: [
       {
@@ -78,7 +78,7 @@ export const MENUS = [
     route: '일정',
     params: null,
     order: 0,
-    icon: 'Distribution.svg',
+    icon: 'calendar.svg',
     roles: [],
     subMenus: [
       {
@@ -97,7 +97,7 @@ export const MENUS = [
     route: '관리',
     params: null,
     order: 0,
-    icon: 'Settings.svg',
+    icon: 'settings.svg',
     roles: [],
     subMenus: [
       {
@@ -146,7 +146,7 @@ export const OLD_MENUS = [
     route: '균주',
     params: null,
     order: 0,
-    icon: 'Distribution.svg',
+    icon: 'distribution.svg',
     roles: [],
     subMenus: [
       {
@@ -183,7 +183,7 @@ export const OLD_MENUS = [
     route: '식품',
     params: null,
     order: 0,
-    icon: 'Distribution.svg',
+    icon: 'distribution.svg',
     roles: [],
     subMenus: [
       {
@@ -211,7 +211,7 @@ export const OLD_MENUS = [
     route: '관리',
     params: null,
     order: 0,
-    icon: 'Distribution.svg',
+    icon: 'distribution.svg',
     roles: [],
     subMenus: [
       {
