@@ -32,7 +32,7 @@ export const MENUS = [
     route: '연구',
     params: null,
     order: 0,
-    icon: 'research.svg',
+    icon: 'laboratory.svg',
     roles: [],
     subMenus: [
       {
