@@ -44,11 +44,11 @@
                 <div class="modalRow row-2">
                   <div class="column column-1">
                     <label for="password1" class="required">비밀번호</label>
-                    <input type="password" id="password1" name="password1" v-model="changePasswordForm.password1" v-validate="'required'">
+                    <input type="password" id="password1" name="password1" min="4" v-model="changePasswordForm.password1" v-validate="'required|min:4'">
                   </div>
                   <div class="column column-1">
                     <label for="password2" class="required">비밀번호<br>확인</label>
-                    <input type="password" id="password2" name="password2" v-model="changePasswordForm.password2" v-validate="'required'">
+                    <input type="password" id="password2" name="password2" min="4" v-model="changePasswordForm.password2" v-validate="'required|min:4'">
                   </div>
                 </div>
               </div>
@@ -153,6 +153,7 @@ export default {
     async doUpdate ($event) {
       $event.target.disabled = true
       if (await this.$validator.validate()) {
+        this.$Progress.start()
         const data = {
           username: this.modalForm.username,
           password: this.modalForm.password,
@@ -162,15 +163,28 @@ export default {
         const url = `${this.ENV_CUOME}/auth/change-password`
 
         this.$axios({ method: 'put', url, data })
-          .then(result => {
-            console.log(result)
-          }).catch(error => {
-            throw new Error(error)
+          .then(() => {
+            this.$toast.success(
+              '내 정보가 변경되었습니다.',
+              this.ToastSettings
+            )
+            this.$Progress.finish()
+          })
+          .catch(error => {
+            if (error && error.response) {
+              console.log(error.response)
+              this.$toast.error(
+                error.response.data.message,
+                this.ToastSettings
+              )
+              this.$Progress.fail()
+              throw new Error(error.response)
+            }
           })
       } else {
         this.setValidateError()
-        $event.target.disabled = false
       }
+      $event.target.disabled = false
     },
   }
 }
