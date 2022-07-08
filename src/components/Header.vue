@@ -1,5 +1,5 @@
 <template>
-  <header id="header" @click="throwError">
+  <header id="header">
     <div class="header_wrap">
       <div class="left">
         <!-- <select name="brandList" id="brandList" v-model="brand" @change="changeBrand">
@@ -64,10 +64,7 @@ export default {
   methods: {
     showModalMySettings () {
       this.$modal.show('ModalMySettings')
-    },
-    throwError () {
-      // console.error(`Sentry Error ${this.COMMON.UUID()}`)
-      // throw new Error(`Sentry Error ${this.COMMON.UUID()}`)
+      this.isSettingOpen = false
     },
     handler () {
       if (this.isSettingOpen) this.isSettingOpen = false
