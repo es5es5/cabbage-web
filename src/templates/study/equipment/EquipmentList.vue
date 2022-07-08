@@ -13,7 +13,7 @@
     </div>
     <div class="table_wrap table-hover table_wrap-scoll-y">
       <table>
-        <caption>주제 리스트</caption>
+        <caption>장비 리스트</caption>
         <colgroup>
           <col style="width: 10rem;">
           <col style="width: 20rem;">

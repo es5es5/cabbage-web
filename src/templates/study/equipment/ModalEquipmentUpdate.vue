@@ -13,7 +13,7 @@
     >
 
     <div class="header_wrap">
-      <h3 class="header">주제 수정</h3>
+      <h3 class="header">장비·시약 수정</h3>
       <div class="closeButton" @click="$modal.hide('ModalEquipmentUpdate')"></div>
     </div>
 

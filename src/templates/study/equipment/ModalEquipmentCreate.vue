@@ -13,7 +13,7 @@
     >
 
     <div class="header_wrap">
-      <h3 class="header">사업 등록</h3>
+      <h3 class="header">장비·시약 등록</h3>
       <div class="closeButton" @click="$modal.hide('ModalEquipmentCreate')"></div>
     </div>
 
