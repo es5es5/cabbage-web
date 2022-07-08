@@ -131,6 +131,25 @@ const routes = [
               },
             ]
           },
+          {
+            path: 'equipment',
+            name: '연구_장비',
+            redirect: 'equipment/list',
+            meta: {
+              title: '장비·시약'
+            },
+            component: () => import('@/templates/study/StudyLayout'),
+            children: [
+              {
+                path: 'list',
+                name: '연구_장비_리스트',
+                meta: {
+                  title: '장비·시약'
+                },
+                component: () => import('@/templates/study/equipment/EquipmentList')
+              },
+            ]
+          },
         ]
       },
       {

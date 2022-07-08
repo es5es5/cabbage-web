@@ -64,7 +64,7 @@ export const MENUS = [
       },
       {
         name: '장비·시약',
-        route: 'NotFound',
+        route: '연구_장비',
         params: null,
         order: 0,
         icon: null,
