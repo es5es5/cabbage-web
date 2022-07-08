@@ -58,14 +58,29 @@ export default {
         setValidateError () {
           if (this.errors.items && this.errors.items.length > 0) {
             this.errors.items.forEach(item => {
-              this.$nextTick(() => {
-                document.getElementsByName(item.field)[0].classList.add('error')
-              })
+              this.$nextTick(() => { document.getElementsByName(item.field)[0].classList.add('error') })
             })
-            this.$toast.warning(
-              '필수값을 확인해주세요.',
-              this.ToastSettings
-            )
+            const message = this.errors.items[0].msg
+            switch (this.errors.items[0].rule) {
+              case 'required':
+                this.$toast.warning(
+                  '필수값을 확인해주세요.',
+                  this.ToastSettings
+                )
+                break
+              case 'min':
+                this.$toast.warning(
+                  `${message.split(' ')[7]}글자 이상 입력해야합니다.`,
+                  this.ToastSettings
+                )
+                break
+              case 'max':
+                this.$toast.warning(
+                  `${message.split(' ')[8]}글자 이하로 입력해야합니다.`,
+                  this.ToastSettings
+                )
+                break
+            }
           }
         }
       }

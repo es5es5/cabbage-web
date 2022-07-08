@@ -20,17 +20,11 @@ axios.interceptors.response.use(
   error => {
     if (error.response && error.response.status) {
       switch (error.response.status) {
-        case 400:
-          return
         case 401:
         case 403:
           // alert('사용자 정보가 없습니다.\n다시 로그인해주세요!')
           Vue.$cookies.remove('accessToken')
           location.href = '/login'
-          return
-        case 404:
-          return
-        case 500:
           return
       }
     }
