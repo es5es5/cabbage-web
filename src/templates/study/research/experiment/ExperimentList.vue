@@ -47,10 +47,10 @@
             <tr v-for="(item, index) in contents" :key="index" @click="showModalExperimentUpdate(item.id)">
               <Td>{{ item.id }}</Td>
               <Td>{{ item.title }}</Td>
-              <Td>{{ item.startDate }}</Td>
-              <Td>{{ item.writerInfo ? item.writerInfo.displayName : '' }}</Td>
-              <Td>{{ item.methods }}</Td>
-              <Td>{{ item.results }}</Td>
+              <Td>{{ item.startDate | dateFormat }}</Td>
+              <Td>{{ item.manager }}</Td>
+              <Td>{{ item.methodsLink }}</Td>
+              <Td>{{ item.resultsLink }}</Td>
             </tr>
             <no-data-message :list="contents" :colspan="6"></no-data-message>
           </tbody>
@@ -121,7 +121,7 @@ export default {
     getContents () {
       this.$Progress.start()
       this.$axios
-        .get(`${this.ENV_CUOME}/research`)
+        .get(`${this.ENV_CUOME}/research/experiment`)
         .then(result => {
           this.contents = result.data
           this.$Progress.finish()
