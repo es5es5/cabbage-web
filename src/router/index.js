@@ -150,6 +150,41 @@ const routes = [
               },
             ]
           },
+          {
+            path: 'research',
+            name: '연구_자료',
+            redirect: 'research/experiment',
+            meta: {
+              title: '자료'
+            },
+            component: () => import('@/templates/study/research/ResearchLayout'),
+            children: [
+              {
+                path: 'experiment',
+                name: '연구_자료_Experiment',
+                meta: {
+                  title: 'Experiment'
+                },
+                component: () => import('@/templates/study/research/experiment/ExperimentList'),
+              },
+              {
+                path: 'patent',
+                name: '연구_자료_Patent',
+                meta: {
+                  title: 'Patent'
+                },
+                component: () => import('@/templates/study/research/patent/PatentList'),
+              },
+              {
+                path: 'paper',
+                name: '연구_자료_Paper',
+                meta: {
+                  title: 'Paper'
+                },
+                component: () => import('@/templates/study/research/paper/PaperList'),
+              },
+            ]
+          },
         ]
       },
       {

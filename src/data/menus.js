@@ -55,7 +55,7 @@ export const MENUS = [
       },
       {
         name: '자료',
-        route: 'NotFound',
+        route: '연구_자료',
         params: null,
         order: 0,
         icon: null,
