@@ -163,7 +163,7 @@ const routes = [
                 path: 'experiment',
                 name: '연구_자료_Experiment',
                 meta: {
-                  title: 'Experiment'
+                  title: '자료'
                 },
                 component: () => import('@/templates/study/research/experiment/ExperimentList'),
               },
@@ -171,7 +171,7 @@ const routes = [
                 path: 'patent',
                 name: '연구_자료_Patent',
                 meta: {
-                  title: 'Patent'
+                  title: '자료'
                 },
                 component: () => import('@/templates/study/research/patent/PatentList'),
               },
@@ -179,7 +179,7 @@ const routes = [
                 path: 'paper',
                 name: '연구_자료_Paper',
                 meta: {
-                  title: 'Paper'
+                  title: '자료'
                 },
                 component: () => import('@/templates/study/research/paper/PaperList'),
               },
