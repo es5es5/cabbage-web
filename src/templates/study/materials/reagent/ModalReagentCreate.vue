@@ -13,7 +13,7 @@
     >
 
     <div class="header_wrap">
-      <h3 class="header">장비·시약 등록</h3>
+      <h3 class="header">시약 등록</h3>
       <div class="closeButton" @click="$modal.hide('ModalReagentCreate')"></div>
     </div>
 
@@ -114,7 +114,6 @@ export default {
     closeEvent () { this.$emit('callback') },
     initData () {
       this.modalForm = {
-        category: '장비',
         serialNumber: '',
         name: '',
         placement: '',

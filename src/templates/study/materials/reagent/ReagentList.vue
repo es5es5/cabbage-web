@@ -15,7 +15,6 @@
       <table>
         <caption>장비 리스트</caption>
         <colgroup>
-          <col style="width: 10rem;">
           <col style="width: 20rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
@@ -24,7 +23,6 @@
         </colgroup>
         <thead>
           <tr>
-            <th scope="col">구분</th>
             <th scope="col">이름</th>
             <th scope="col">보관장소</th>
             <th scope="col">개수</th>
@@ -36,7 +34,6 @@
       <div class="table_scroll">
         <table>
           <colgroup>
-            <col style="width: 10rem;">
             <col style="width: 20rem;">
             <col style="width: 10rem;">
             <col style="width: 10rem;">
@@ -45,14 +42,13 @@
           </colgroup>
           <tbody>
             <tr v-for="(item, index) in contents" :key="index" @click="showModalReagentUpdate(item.id)">
-              <Td>{{ item.category }}</Td>
               <Td>{{ item.name }}</Td>
               <Td>{{ item.placement }}</Td>
               <Td>{{ item.count }}</Td>
               <Td>{{ item.startDate | dateFormat }}</Td>
               <Td>{{ item.maker }}</Td>
             </tr>
-            <no-data-message :list="contents" :colspan="6"></no-data-message>
+            <no-data-message :list="contents" :colspan="5"></no-data-message>
           </tbody>
         </table>
       </div>

@@ -13,7 +13,7 @@
     >
 
     <div class="header_wrap">
-      <h3 class="header">장비·시약 등록</h3>
+      <h3 class="header">장비 등록</h3>
       <div class="closeButton" @click="$modal.hide('ModalEquipmentCreate')"></div>
     </div>
 
@@ -26,13 +26,6 @@
             </Legend>
 
             <div class="modalRow row-2">
-              <div class="column column-1">
-                <label for="category" class="required">구분</label>
-                <select name="category" id="category" v-model="modalForm.category">
-                  <option value="장비">장비</option>
-                  <option value="시약">시약</option>
-                </select>
-              </div>
               <div class="column column-1">
                 <label for="serialNumber">일련번호</label>
                 <input type="text" id="serialNumber" name="serialNumber" v-model="modalForm.serialNumber">
@@ -98,7 +91,6 @@ export default {
   data () {
     return {
       modalForm: {
-        category: '장비',
         serialNumber: '',
         name: '',
         placement: '',
@@ -114,7 +106,6 @@ export default {
     closeEvent () { this.$emit('callback') },
     initData () {
       this.modalForm = {
-        category: '장비',
         serialNumber: '',
         name: '',
         placement: '',
