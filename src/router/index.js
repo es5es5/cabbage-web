@@ -132,21 +132,21 @@ const routes = [
             ]
           },
           {
-            path: 'equipment',
-            name: '연구_장비',
-            redirect: 'equipment/list',
+            path: 'materials',
+            name: '연구_Materials',
+            redirect: 'materials/equipment',
             meta: {
-              title: '장비·시약'
+              title: 'Materials'
             },
-            component: () => import('@/templates/study/StudyLayout'),
+            component: () => import('@/templates/study/materials/MaterialsLayout'),
             children: [
               {
-                path: 'list',
-                name: '연구_장비_리스트',
+                path: 'equipment',
+                name: '연구_Materials_장비',
                 meta: {
-                  title: '장비·시약'
+                  title: '장비'
                 },
-                component: () => import('@/templates/study/equipment/EquipmentList')
+                component: () => import('@/templates/study/materials/equipment/EquipmentList'),
               },
             ]
           },

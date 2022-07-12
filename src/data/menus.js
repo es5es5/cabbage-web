@@ -63,8 +63,8 @@ export const MENUS = [
         subMenus: null
       },
       {
-        name: '장비·시약',
-        route: '연구_장비',
+        name: 'Materials',
+        route: '연구_Materials',
         params: null,
         order: 0,
         icon: null,
