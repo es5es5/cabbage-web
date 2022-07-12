@@ -148,6 +148,14 @@ const routes = [
                 },
                 component: () => import('@/templates/study/materials/equipment/EquipmentList'),
               },
+              {
+                path: 'reagent',
+                name: '연구_Materials_시약',
+                meta: {
+                  title: '시약'
+                },
+                component: () => import('@/templates/study/materials/reagent/ReagentList'),
+              },
             ]
           },
           {
