@@ -25,6 +25,7 @@
           <col style="width: 10rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
+          <col style="width: 10rem;">
         </colgroup>
         <thead>
           <tr>
@@ -38,12 +39,14 @@
             <th scope="col">보관 장소</th>
             <th scope="col">기탁 장소</th>
             <th scope="col">stock<br>(액체 / 분말)</th>
+            <th scope="col">입출입</th>
           </tr>
         </thead>
       </table>
       <div class="table_scroll">
         <table>
           <colgroup>
+            <col style="width: 10rem;">
             <col style="width: 10rem;">
             <col style="width: 10rem;">
             <col style="width: 10rem;">
@@ -67,8 +70,9 @@
               <Td>{{ item.stockPlacementInfo ? item.stockPlacementInfo.name : '' }}</Td>
               <Td>{{ item.rentPlacementInfo ? item.rentPlacementInfo.name : '' }}</Td>
               <Td>{{ item.liquidCount }} / {{ item.powderCount }}</Td>
+              <Td><button type="button" class="btn small" @click.stop="showModalBankHistory(item.id)">입출입</button></Td>
             </Tr>
-            <no-data-message :list="contents" :colspan="10"></no-data-message>
+            <no-data-message :list="contents" :colspan="11"></no-data-message>
           </tbody>
         </table>
       </div>
@@ -85,11 +89,12 @@
     </div>
     <ModalBankCreate :genusList="genusList" :placementList="placementList" :originList="originList" @callback="getContents" />
     <ModalBankUpdate :genusList="genusList" :placementList="placementList" :originList="originList" :id="selectedId" @callback="getContents" />
+    <ModalBankHistory :id="selectedId" />
   </main>
 </template>
 
 <script>
-
+import ModalBankHistory from './ModalBankHistory'
 import ModalBankCreate from './ModalBankCreate'
 import ModalBankUpdate from './ModalBankUpdate'
 
@@ -104,6 +109,7 @@ export default {
   watch: {
   },
   components: {
+    ModalBankHistory,
     ModalBankCreate,
     ModalBankUpdate,
   },
@@ -135,6 +141,10 @@ export default {
     },
     showModalBankCreate () {
       this.$modal.show('ModalBankCreate')
+    },
+    showModalBankHistory (id) {
+      this.selectedId = id
+      this.$modal.show('ModalBankHistory')
     },
     showModalBankUpdate (id) {
       this.selectedId = id
