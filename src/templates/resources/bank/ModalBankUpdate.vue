@@ -64,6 +64,56 @@
           </fieldset>
 
           <fieldset>
+            <Legend>
+              <span slot="title">보관 정보</span>
+              <div slot="action">
+                <button type="button" class="btn small" @click="addTable">추가</button>
+              </div>
+            </Legend>
+            <div class="table_wrap table-hover table_wrap-scoll-y">
+              <table>
+                <caption>보관 리스트</caption>
+                <colgroup>
+                  <col style="width: 2rem;">
+                  <col style="width: 10rem;">
+                  <col style="width: 3rem;">
+                  <col style="width: 3rem;">
+                  <col style="width: 2rem;">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">보관장소</th>
+                    <th scope="col">액체</th>
+                    <th scope="col">분말</th>
+                    <th scope="col">삭제</th>
+                  </tr>
+                </thead>
+              </table>
+              <div class="table_scroll">
+                <table>
+                  <colgroup>
+                    <col style="width: 2rem;">
+                    <col style="width: 10rem;">
+                    <col style="width: 3rem;">
+                    <col style="width: 3rem;">
+                    <col style="width: 2rem;">
+                  </colgroup>
+                  <tbody class="text-center">
+                    <tr v-for="(item, index) in 1" :key="index">
+                      <td>{{ index + 1 }}</td>
+                      <td><input type="text" class="full"></td>
+                      <td><input type="text" class="full"></td>
+                      <td><input type="text" class="full"></td>
+                      <td><button type="button" class="btn error small" @click="removeTable(index)">삭제</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- <fieldset>
             <legend>보관 정보</legend>
             <div class="modalRow row-3">
               <div class="column column-1">
@@ -98,7 +148,7 @@
                 <input type="number" id="powderCount" name="powderCount" v-model="modalForm.powderCount">
               </div>
             </div>
-          </fieldset>
+          </fieldset> -->
 
           <fieldset>
             <legend>특허 정보</legend>

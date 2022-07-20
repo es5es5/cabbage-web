@@ -51,14 +51,14 @@
           </colgroup>
           <tbody>
             <tr v-for="(item, index) in contents" :key="index" @click="showModalTopicUpdate(item.id)">
-              <Td>{{ item.title }}</Td>
-              <Td>{{ item.startDate | dateFormat }} ~ {{ item.endDate | dateFormat }}</Td>
-              <Td>{{ item.manager }}</Td>
-              <Td>{{ item.consortiumMain }}</Td>
-              <Td>{{ item.needs }}</Td>
-              <Td>{{ item.money | numberWithComma }}</Td>
-              <Td>{{ item.goal }}</Td>
-              <Td>{{ item.plan }}</Td>
+              <td><span>{{ item.title }}</span></td>
+              <td><span>{{ item.startDate | dateFormat }} ~ {{ item.endDate | dateFormat }}</span></td>
+              <td><span>{{ item.manager }}</span></td>
+              <td><span>{{ item.consortiumMain }}</span></td>
+              <td><span>{{ item.needs }}</span></td>
+              <td><span>{{ item.money | numberWithComma }}</span></td>
+              <td><span>{{ item.goal }}</span></td>
+              <td><span>{{ item.plan }}</span></td>
             </tr>
             <no-data-message :list="contents" :colspan="8"></no-data-message>
           </tbody>

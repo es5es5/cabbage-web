@@ -42,11 +42,11 @@
           </colgroup>
           <tbody>
             <tr v-for="(item, index) in contents" :key="index" @click="showModalEquipmentUpdate(item.id)">
-              <Td>{{ item.name }}</Td>
-              <Td>{{ item.placement }}</Td>
-              <Td>{{ item.count }}</Td>
-              <Td>{{ item.startDate | dateFormat }}</Td>
-              <Td>{{ item.maker }}</Td>
+              <td><span>{{ item.name }}</span></td>
+              <td><span>{{ item.placement }}</span></td>
+              <td><span>{{ item.count }}</span></td>
+              <td><span>{{ item.startDate | dateFormat }}</span></td>
+              <td><span>{{ item.maker }}</span></td>
             </tr>
             <no-data-message :list="contents" :colspan="5"></no-data-message>
           </tbody>

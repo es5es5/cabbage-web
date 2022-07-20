@@ -60,17 +60,18 @@
           </colgroup>
           <tbody>
             <Tr v-for="(item, index) in contents" :key="index" @click.native="showModalBankUpdate(item.id)" center>
-              <Td>{{ item.code }}</Td>
-              <Td>{{ item.genusInfo ? item.genusInfo.name : '' }}</Td>
-              <Td>{{ item.speciesInfo ? item.speciesInfo.name : '' }}</Td>
-              <Td>{{ item.bankNumber }}</Td>
-              <Td>{{ item.category }}</Td>
-              <Td>{{ item.originInfo ? item.originInfo.name : '' }}</Td>
-              <Td>{{ item.gettingDate | dateFormat }}</Td>
-              <Td>{{ item.stockPlacementInfo ? item.stockPlacementInfo.name : '' }}</Td>
-              <Td>{{ item.rentPlacementInfo ? item.rentPlacementInfo.name : '' }}</Td>
-              <Td>{{ item.liquidCount }} / {{ item.powderCount }}</Td>
-              <Td><button type="button" class="btn small" @click.stop="showModalBankHistory(item.id)">입출입</button></Td>
+              <td><input type="text" class="full"></td>
+              <!-- <td><span>{{ item.code }}</span></td> -->
+              <td><span>{{ item.genusInfo ? item.genusInfo.name : '' }}</span></td>
+              <td><span>{{ item.speciesInfo ? item.speciesInfo.name : '' }}</span></td>
+              <td><span>{{ item.bankNumber }}</span></td>
+              <td><span>{{ item.category }}</span></td>
+              <td><span>{{ item.originInfo ? item.originInfo.name : '' }}</span></td>
+              <td><span>{{ item.gettingDate | dateFormat }}</span></td>
+              <td><span>{{ item.stockPlacementInfo ? item.stockPlacementInfo.name : '' }}</span></td>
+              <td><span>{{ item.rentPlacementInfo ? item.rentPlacementInfo.name : '' }}</span></td>
+              <td><span>{{ item.liquidCount }} / {{ item.powderCount }}</span></td>
+              <td><button type="button" class="btn small" @click.stop="showModalBankHistory(item.id)">입출입</button></td>
             </Tr>
             <no-data-message :list="contents" :colspan="11"></no-data-message>
           </tbody>

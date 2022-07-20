@@ -51,14 +51,14 @@
           </colgroup>
           <tbody>
             <Tr v-for="(item, index) in contents" :key="index" @click.native="showModalBusinessUpdate(item.id)" center>
-              <Td>{{ item.id }}</Td>
+              <td><span>{{ item.id }}</span></td>
               <Td left>{{ item.businessTitle }}</Td>
-              <Td>{{ item.startDate | dateFormat }} ~ {{ item.endDate | dateFormat }}</Td>
+              <td><span>{{ item.startDate | dateFormat }} ~ {{ item.endDate | dateFormat }}</span></td>
               <Td left>{{ item.projectTitle }}</Td>
               <Td right>{{ item.money | numberWithComma }}</Td>
-              <Td>{{ item.supervisor }}</Td>
-              <Td>{{ item.businessManager }}</Td>
-              <Td>{{ item.projectState }} / {{ item.presentationState }}</Td>
+              <td><span>{{ item.supervisor }}</span></td>
+              <td><span>{{ item.businessManager }}</span></td>
+              <td><span>{{ item.projectState }} / {{ item.presentationState }}</span></td>
             </Tr>
             <no-data-message :list="contents" :colspan="8"></no-data-message>
           </tbody>

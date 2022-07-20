@@ -45,12 +45,12 @@
           </colgroup>
           <tbody>
             <tr v-for="(item, index) in contents" :key="index" @click="showModalExperimentUpdate(item.id)">
-              <Td>{{ item.id }}</Td>
-              <Td>{{ item.title }}</Td>
-              <Td>{{ item.startDate | dateFormat }}</Td>
-              <Td>{{ item.manager }}</Td>
-              <Td>{{ item.methodsLink }}</Td>
-              <Td>{{ item.resultsLink }}</Td>
+              <td><span>{{ item.id }}</span></td>
+              <td><span>{{ item.title }}</span></td>
+              <td><span>{{ item.startDate | dateFormat }}</span></td>
+              <td><span>{{ item.manager }}</span></td>
+              <td><span>{{ item.methodsLink }}</span></td>
+              <td><span>{{ item.resultsLink }}</span></td>
             </tr>
             <no-data-message :list="contents" :colspan="6"></no-data-message>
           </tbody>

@@ -1,6 +1,6 @@
 <template>
   <tr v-if="!_list || _list.length < 1">
-    <td :colspan="_colspan">{{ _loading ? loading_message : message }}</Td>
+    <Td :colspan="_colspan" center>{{ _loading ? loading_message : message }}</Td>
   </tr>
 </template>
 
