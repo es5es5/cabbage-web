@@ -67,18 +67,18 @@
             <Legend>
               <span slot="title">보관 정보</span>
               <div slot="action">
-                <button type="button" class="btn small" @click="addTable">추가</button>
+                <button type="button" class="btn small">추가</button>
               </div>
             </Legend>
             <div class="table_wrap table-hover table_wrap-scoll-y">
               <table>
                 <caption>보관 리스트</caption>
                 <colgroup>
-                  <col style="width: 2rem;">
+                  <col style="width: 1rem;">
                   <col style="width: 10rem;">
-                  <col style="width: 3rem;">
-                  <col style="width: 3rem;">
                   <col style="width: 2rem;">
+                  <col style="width: 2rem;">
+                  <col style="width: 1.5rem;">
                 </colgroup>
                 <thead>
                   <tr>
@@ -93,18 +93,23 @@
               <div class="table_scroll">
                 <table>
                   <colgroup>
-                    <col style="width: 2rem;">
+                    <col style="width: 1rem;">
                     <col style="width: 10rem;">
-                    <col style="width: 3rem;">
-                    <col style="width: 3rem;">
                     <col style="width: 2rem;">
+                    <col style="width: 2rem;">
+                    <col style="width: 1.5rem;">
                   </colgroup>
                   <tbody class="text-center">
                     <tr v-for="(item, index) in 1" :key="index">
                       <td>{{ index + 1 }}</td>
-                      <td><input type="text" class="full"></td>
-                      <td><input type="text" class="full"></td>
-                      <td><input type="text" class="full"></td>
+                      <td>
+                        <select name="stockPlacementId" id="stockPlacementId" v-model="modalForm.stockPlacementId">
+                          <option value="">선택</option>
+                          <option :value="item.id" v-for="(item, index) in placementList" :key="index">{{ item.name }}</option>
+                        </select>
+                      </td>
+                      <td><input type="number"></td>
+                      <td><input type="number"></td>
                       <td><button type="button" class="btn error small" @click="removeTable(index)">삭제</button></td>
                     </tr>
                   </tbody>
