@@ -60,8 +60,7 @@
           </colgroup>
           <tbody>
             <Tr v-for="(item, index) in contents" :key="index" @click.native="showModalBankUpdate(item.id)" center>
-              <td><input type="text" class="full"></td>
-              <!-- <td><span>{{ item.code }}</span></td> -->
+              <td><span>{{ item.code }}</span></td>
               <td><span>{{ item.genusInfo ? item.genusInfo.name : '' }}</span></td>
               <td><span>{{ item.speciesInfo ? item.speciesInfo.name : '' }}</span></td>
               <td><span>{{ item.bankNumber }}</span></td>
