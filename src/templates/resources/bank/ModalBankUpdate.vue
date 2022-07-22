@@ -103,7 +103,7 @@
                     <tr v-for="(stock, sIndex) in stockPlacementList" :key="sIndex">
                       <td>{{ sIndex + 1 }}</td>
                       <td>
-                        <select :name="`${stockPlacementId}_${sIndex}`" :id="`${stockPlacementId}_${sIndex}`" v-model="stock.stockPlacementId">
+                        <select :name="`stock_${sIndex}`" :id="`stock_${sIndex}`" v-model="stock.stockPlacementId">
                           <option value="">선택</option>
                           <option :value="place.id" v-for="(place, index) in placementList" :key="index">{{ place.name }}</option>
                         </select>
@@ -112,7 +112,7 @@
                       <td><input type="number" v-model="stock.powderCount"></td>
                       <td><button type="button" class="btn error small" @click="removeTable(index)">삭제</button></td>
                     </tr>
-                    <no-data-message :list="stockPlacementList" :colspan="5"></no-data-message>
+                    <no-data-message :list="stockPlacementList" :colspan="5" message="보관 정보가 없습니다"></no-data-message>
                   </tbody>
                 </table>
               </div>
@@ -234,7 +234,6 @@ export default {
         speciesId: '',
         originId: '',
         bankNumber: '',
-        stockPlacementId: '',
         rentPlacementId: '',
         gettingDate: '',
         liquidCount: 0,
@@ -259,7 +258,6 @@ export default {
         speciesId: '',
         originId: '',
         bankNumber: '',
-        stockPlacementId: '',
         rentPlacementId: '',
         gettingDate: '',
         liquidCount: 0,
@@ -308,6 +306,8 @@ export default {
     },
     async doUpdate ($event) {
       $event.target.disabled = true
+      if (!this.postBankStockPlacementList()) return false
+      console.log(await this.$validator.validate())
       if (await this.$validator.validate()) {
         const data = this.modalForm
         const url = `${this.ENV_CUOME}/bank/${this.id}`
@@ -328,9 +328,20 @@ export default {
         $event.target.disabled = false
       }
     },
+    async postBankStockPlacementList () {
+      if (this.stockPlacementList.some(item => item.stockPlacementId === '')) {
+        this.$toast.warning(
+          '보관 정보를 입력하세요',
+          this.ToastSettings
+        )
+        return true
+      }
+      return true
+    },
     addTable () {
       this.stockPlacementList.push({
         id: this.COMMON.UUID(),
+        bankId: this.id,
         stockPlacementId: '',
         liquidCount: 0,
         powderCount: 0,
@@ -344,4 +355,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.table_scroll {
+  max-height: 180px;
+  margin-bottom: 20px;
+}
 </style>
