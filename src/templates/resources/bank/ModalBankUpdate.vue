@@ -67,7 +67,7 @@
             <Legend>
               <span slot="title">보관 정보</span>
               <div slot="action">
-                <button type="button" class="btn small">추가</button>
+                <button type="button" class="btn small" @click="addTable">추가</button>
               </div>
             </Legend>
             <div class="table_wrap table-hover table_wrap-scoll-y">
@@ -100,18 +100,19 @@
                     <col style="width: 1.5rem;">
                   </colgroup>
                   <tbody class="text-center">
-                    <tr v-for="(item, index) in 1" :key="index">
-                      <td>{{ index + 1 }}</td>
+                    <tr v-for="(stock, sIndex) in stockPlacementList" :key="sIndex">
+                      <td>{{ sIndex + 1 }}</td>
                       <td>
-                        <select name="stockPlacementId" id="stockPlacementId" v-model="modalForm.stockPlacementId">
+                        <select :name="`${stockPlacementId}_${sIndex}`" :id="`${stockPlacementId}_${sIndex}`" v-model="stock.stockPlacementId">
                           <option value="">선택</option>
-                          <option :value="item.id" v-for="(item, index) in placementList" :key="index">{{ item.name }}</option>
+                          <option :value="place.id" v-for="(place, index) in placementList" :key="index">{{ place.name }}</option>
                         </select>
                       </td>
-                      <td><input type="number"></td>
-                      <td><input type="number"></td>
+                      <td><input type="number" v-model="stock.liquidCount"></td>
+                      <td><input type="number" v-model="stock.powderCount"></td>
                       <td><button type="button" class="btn error small" @click="removeTable(index)">삭제</button></td>
                     </tr>
+                    <no-data-message :list="stockPlacementList" :colspan="5"></no-data-message>
                   </tbody>
                 </table>
               </div>
@@ -226,6 +227,7 @@ export default {
   },
   data () {
     return {
+      stockPlacementList: [],
       modalForm: {
         category: '',
         genusId: '',
@@ -326,6 +328,17 @@ export default {
         $event.target.disabled = false
       }
     },
+    addTable () {
+      this.stockPlacementList.push({
+        id: this.COMMON.UUID(),
+        stockPlacementId: '',
+        liquidCount: 0,
+        powderCount: 0,
+      })
+    },
+    removeTable (index) {
+      this.stockPlacementList.splice(index, 1)
+    }
   }
 }
 </script>

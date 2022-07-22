@@ -63,7 +63,7 @@
             </div>
           </fieldset>
 
-          <fieldset>
+          <!-- <fieldset>
             <legend>보관 정보</legend>
             <div class="modalRow row-3">
               <div class="column column-1">
@@ -98,7 +98,7 @@
                 <input type="number" id="powderCount" name="powderCount" v-model="modalForm.powderCount">
               </div>
             </div>
-          </fieldset>
+          </fieldset> -->
 
           <fieldset>
             <legend>특허 정보</legend>
