@@ -115,10 +115,17 @@ export default {
       this.$modal.show('ModalEquipmentUpdate')
     },
     getContents () {
+      this.$Progress.start()
       this.$axios
         .get(`${this.ENV_CUOME}/equipment`)
-        .then(result => { this.contents = result.data })
-        .catch(error => { throw new Error(error) })
+        .then(result => {
+          this.contents = result.data
+          this.$Progress.finish()
+        })
+        .catch(error => {
+          this.$Progress.fail()
+          throw new Error(error)
+        })
     }
   }
 }

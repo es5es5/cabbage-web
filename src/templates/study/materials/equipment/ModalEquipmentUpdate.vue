@@ -35,7 +35,7 @@
             <div class="modalRow row">
               <div class="column column">
                 <label for="name" class="required">이름</label>
-                <input type="text" id="name" name="name" v-model="modalForm.name">
+                <input type="text" id="name" name="name" v-model="modalForm.name" v-validate="'required'">
               </div>
             </div>
 
