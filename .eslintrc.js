@@ -12,6 +12,7 @@ module.exports = {
   },
   rules: {
     'comma-dangle': 0,
+    'prefer-promise-reject-errors': 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
   },

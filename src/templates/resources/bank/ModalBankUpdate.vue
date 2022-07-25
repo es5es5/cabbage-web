@@ -236,8 +236,6 @@ export default {
         bankNumber: '',
         rentPlacementId: '',
         gettingDate: '',
-        liquidCount: 0,
-        powderCount: 0,
         sequencing: '',
         safetyAnalysis: '',
         immunaryTest: '',
@@ -249,9 +247,11 @@ export default {
   methods: {
     openEvent () {
       this.getContent()
+      this.getBankStockPlacementList()
     },
     closeEvent () { this.$emit('callback') },
     initData () {
+      this.stockPlacementList = []
       this.modalForm = {
         category: '',
         genusId: '',
@@ -260,8 +260,6 @@ export default {
         bankNumber: '',
         rentPlacementId: '',
         gettingDate: '',
-        liquidCount: 0,
-        powderCount: 0,
         sequencing: '',
         safetyAnalysis: '',
         immunaryTest: '',
@@ -279,6 +277,20 @@ export default {
         data
       }).then(result => {
         this.modalForm = result.data
+      }).catch(error => {
+        console.error(error)
+      })
+    },
+    async getBankStockPlacementList () {
+      const data = {}
+      const apiURL = `${this.ENV_CUOME}/bank/${this.id}/stock-placement`
+
+      this.$axios({
+        method: 'get',
+        url: apiURL,
+        data
+      }).then(result => {
+        this.stockPlacementList = result.data
       }).catch(error => {
         console.error(error)
       })
@@ -305,9 +317,8 @@ export default {
       }
     },
     async doUpdate ($event) {
-      $event.target.disabled = true
-      if (!this.postBankStockPlacementList()) return false
-      console.log(await this.$validator.validate())
+      const a = await this.postBankStockPlacementList()
+      console.log(a)
       if (await this.$validator.validate()) {
         const data = this.modalForm
         const url = `${this.ENV_CUOME}/bank/${this.id}`
@@ -325,7 +336,6 @@ export default {
           })
       } else {
         this.setValidateError()
-        $event.target.disabled = false
       }
     },
     async postBankStockPlacementList () {
@@ -334,14 +344,28 @@ export default {
           '보관 정보를 입력하세요',
           this.ToastSettings
         )
-        return true
+        return Promise.reject(false)
+      } else {
+        const data = this.stockPlacementList
+        const url = `${this.ENV_CUOME}/bank/${this.id}/stock-placement`
+
+        this.$axios({ method: 'post', url, data })
+          .then(result => {
+            this.initData()
+            this.$toast.success(
+              '수정되었습니다.',
+              this.ToastSettings
+            )
+            this.$modal.hide('ModalBankUpdate')
+            return Promise.resolve(true)
+          }).catch(error => {
+            return Promise.reject(error)
+          })
       }
-      return true
     },
     addTable () {
       this.stockPlacementList.push({
         id: this.COMMON.UUID(),
-        bankId: this.id,
         stockPlacementId: '',
         liquidCount: 0,
         powderCount: 0,

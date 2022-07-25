@@ -63,43 +63,6 @@
             </div>
           </fieldset>
 
-          <!-- <fieldset>
-            <legend>보관 정보</legend>
-            <div class="modalRow row-3">
-              <div class="column column-1">
-                <label for="stockPlacementId" class="required">보관 장소</label>
-                <select name="stockPlacementId" id="stockPlacementId" v-model="modalForm.stockPlacementId">
-                  <option value="">선택</option>
-                  <option :value="item.id" v-for="(item, index) in placementList" :key="index">{{ item.name }}</option>
-                </select>
-              </div>
-              <div class="column column-1">
-                <label for="rentPlacementId" class="required">기탁 장소</label>
-                <select name="rentPlacementId" id="rentPlacementId" v-model="modalForm.rentPlacementId" v-validate="'required'">
-                  <option value="">선택</option>
-                  <option :value="item.id" v-for="(item, index) in placementList" :key="index">{{ item.name }}</option>
-                </select>
-              </div>
-              <div class="column column-1">
-                <label for="확보일-input">확보일</label>
-                <DatePicker
-                  id="확보일"
-                  v-model="modalForm.gettingDate"
-                />
-              </div>
-            </div>
-            <div class="modalRow row-3">
-              <div class="column column-1">
-                <label for="liquidCount" class="required">액체</label>
-                <input type="number" id="liquidCount" name="liquidCount" v-model="modalForm.liquidCount">
-              </div>
-              <div class="column column-1">
-                <label for="powderCount" class="required">분말</label>
-                <input type="number" id="powderCount" name="powderCount" v-model="modalForm.powderCount">
-              </div>
-            </div>
-          </fieldset> -->
-
           <fieldset>
             <legend>특허 정보</legend>
             <div class="modalRow row-3">
@@ -132,6 +95,7 @@
             </div>
           </fieldset>
         </form>
+        <p style="font-weight: bold;">※보관 정보 입력은 등록 후에 해주세요.</p>
       </div>
       <div class="action_wrap">
         <button class="btn primary" @click="doCreate">등록</button>
