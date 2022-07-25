@@ -25,7 +25,6 @@
           <col style="width: 10rem;">
           <col style="width: 10rem;">
           <col style="width: 10rem;">
-          <col style="width: 10rem;">
         </colgroup>
         <thead>
           <tr>
@@ -39,14 +38,12 @@
             <th scope="col">보관 장소</th>
             <th scope="col">기탁 장소</th>
             <th scope="col">stock<br>(액체 / 분말)</th>
-            <th scope="col">입출입</th>
           </tr>
         </thead>
       </table>
       <div class="table_scroll">
         <table>
           <colgroup>
-            <col style="width: 10rem;">
             <col style="width: 10rem;">
             <col style="width: 10rem;">
             <col style="width: 10rem;">
@@ -70,9 +67,8 @@
               <td><span>{{ item.stockPlacementInfo ? item.stockPlacementInfo.name : '' }}</span></td>
               <td><span>{{ item.rentPlacementInfo ? item.rentPlacementInfo.name : '' }}</span></td>
               <td><span>{{ item.liquidCount }} / {{ item.powderCount }}</span></td>
-              <td><button type="button" class="btn small" @click.stop="showModalBankHistory(item.id)">입출입</button></td>
             </Tr>
-            <no-data-message :list="contents" :colspan="11"></no-data-message>
+            <no-data-message :list="contents" :colspan="10"></no-data-message>
           </tbody>
         </table>
       </div>
