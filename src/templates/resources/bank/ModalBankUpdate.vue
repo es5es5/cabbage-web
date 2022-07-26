@@ -101,7 +101,7 @@
                   </colgroup>
                   <tbody class="text-center">
                     <tr v-for="(stock, sIndex) in stockPlacementList" :key="sIndex">
-                      <td>{{ sIndex + 1 }}</td>
+                      <td><span>{{ sIndex + 1 }}</span></td>
                       <td>
                         <select :name="`stock_${sIndex}`" :id="`stock_${sIndex}`" v-model="stock.stockPlacementId">
                           <option value="">선택</option>
@@ -116,45 +116,25 @@
                   </tbody>
                 </table>
               </div>
+              <table v-if="stockPlacementList !== []">
+                <colgroup>
+                  <col style="width: 1rem;">
+                  <col style="width: 10rem;">
+                  <col style="width: 2rem;">
+                  <col style="width: 2rem;">
+                  <col style="width: 1.5rem;">
+                </colgroup>
+                <tfoot>
+                  <tr>
+                    <td colspan="2"><strong>Total</strong></td>
+                    <td><span>{{ modalForm.liquidCountTotal }}</span></td>
+                    <td><span>{{ modalForm.powderCountTotal }}</span></td>
+                    <td></td>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
           </fieldset>
-
-          <!-- <fieldset>
-            <legend>보관 정보</legend>
-            <div class="modalRow row-3">
-              <div class="column column-1">
-                <label for="stockPlacementId" class="required">보관 장소</label>
-                <select name="stockPlacementId" id="stockPlacementId" v-model="modalForm.stockPlacementId">
-                  <option value="">선택</option>
-                  <option :value="item.id" v-for="(item, index) in placementList" :key="index">{{ item.name }}</option>
-                </select>
-              </div>
-              <div class="column column-1">
-                <label for="rentPlacementId" class="required">기탁 장소</label>
-                <select name="rentPlacementId" id="rentPlacementId" v-model="modalForm.rentPlacementId" v-validate="'required'">
-                  <option value="">선택</option>
-                  <option :value="item.id" v-for="(item, index) in placementList" :key="index">{{ item.name }}</option>
-                </select>
-              </div>
-              <div class="column column-1">
-                <label for="확보일-input">확보일</label>
-                <DatePicker
-                  id="확보일"
-                  v-model="modalForm.gettingDate"
-                />
-              </div>
-            </div>
-            <div class="modalRow row-3">
-              <div class="column column-1">
-                <label for="liquidCount" class="required">액체</label>
-                <input type="number" id="liquidCount" name="liquidCount" v-model="modalForm.liquidCount">
-              </div>
-              <div class="column column-1">
-                <label for="powderCount" class="required">분말</label>
-                <input type="number" id="powderCount" name="powderCount" v-model="modalForm.powderCount">
-              </div>
-            </div>
-          </fieldset> -->
 
           <fieldset>
             <legend>특허 정보</legend>
@@ -381,6 +361,5 @@ export default {
 <style lang="scss" scoped>
 .table_scroll {
   max-height: 180px;
-  margin-bottom: 20px;
 }
 </style>
