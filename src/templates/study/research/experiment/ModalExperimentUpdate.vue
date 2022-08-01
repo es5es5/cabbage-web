@@ -13,7 +13,7 @@
     >
 
     <div class="header_wrap">
-      <h3 class="header">장비·시약 수정</h3>
+      <h3 class="header">Experiment 수정</h3>
       <div class="closeButton" @click="$modal.hide('ModalExperimentUpdate')"></div>
     </div>
 
@@ -25,41 +25,16 @@
               <span slot="title">기본 정보</span>
             </Legend>
 
-            <div class="modalRow row-2">
-              <div class="column column-1">
-                <label for="category" class="required">구분</label>
-                <select name="category" id="category" v-model="modalForm.category">
-                  <option value="장비">장비</option>
-                  <option value="시약">시약</option>
-                </select>
-              </div>
-              <div class="column column-1">
-                <label for="serialNumber">일련번호</label>
-                <input type="text" id="serialNumber" name="serialNumber" v-model="modalForm.serialNumber">
-              </div>
-            </div>
-
             <div class="modalRow row">
               <div class="column column">
-                <label for="name" class="required">이름</label>
-                <input type="text" id="name" name="name" v-model="modalForm.name">
+                <label for="title" class="required">제목</label>
+                <input type="text" id="title" name="title" v-model="modalForm.title">
               </div>
             </div>
 
             <div class="modalRow row-2">
               <div class="column column-1">
-                <label for="placement">보관장소</label>
-                <input type="text" id="placement" name="placement" v-model="modalForm.placement">
-              </div>
-              <div class="column column-1">
-                <label for="count">개수</label>
-                <input type="text" id="count" name="count" v-model="modalForm.count">
-              </div>
-            </div>
-
-            <div class="modalRow row-2">
-              <div class="column column-1">
-                <label for="startDate-input">취득일자</label>
+                <label for="startDate">일자</label>
                 <DatePicker
                   id="startDate"
                   v-model="modalForm.startDate"
@@ -67,8 +42,22 @@
                 />
               </div>
               <div class="column column-1">
-                <label for="maker">제조사</label>
-                <input type="text" id="maker" name="maker" v-model="modalForm.maker">
+                <label for="manager" class="required">담당자</label>
+                <input type="text" id="manager" name="manager" v-model="modalForm.manager">
+              </div>
+            </div>
+
+            <div class="modalRow row">
+              <div class="column column">
+                <label for="methodsLink" class="required">Methods</label>
+                <input type="text" id="methodsLink" name="methodsLink" v-model="modalForm.methodsLink">
+              </div>
+            </div>
+
+            <div class="modalRow row">
+              <div class="column column">
+                <label for="resultsLink" class="required">Results</label>
+                <input type="text" id="resultsLink" name="resultsLink" v-model="modalForm.resultsLink">
               </div>
             </div>
 
@@ -106,13 +95,11 @@ export default {
   data () {
     return {
       modalForm: {
-        category: '장비',
-        serialNumber: '',
-        name: '',
-        placement: '',
-        count: '0',
+        title: '',
         startDate: '',
-        maker: '',
+        manager: '',
+        methodsLink: '',
+        resultsLink: '',
         memo: '',
       }
     }
@@ -124,13 +111,11 @@ export default {
     closeEvent () { this.$emit('callback') },
     initData () {
       this.modalForm = {
-        category: '장비',
-        serialNumber: '',
-        name: '',
-        placement: '',
-        count: '0',
+        title: '',
         startDate: '',
-        maker: '',
+        manager: '',
+        methodsLink: '',
+        resultsLink: '',
         memo: '',
       }
     },
