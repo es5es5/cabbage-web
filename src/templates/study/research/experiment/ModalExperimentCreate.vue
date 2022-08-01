@@ -103,7 +103,7 @@ export default {
       $event.target.disabled = true
       if (await this.$validator.validate()) {
         const data = this.modalForm
-        const url = `${this.ENV_CUOME}/equipment`
+        const url = `${this.ENV_CUOME}/research/experiment`
 
         this.$axios({ method: 'post', url, data })
           .then(result => {

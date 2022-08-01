@@ -136,7 +136,7 @@ export default {
     },
     async getContent () {
       const data = {}
-      const apiURL = `${this.ENV_CUOME}/research/${this.id}`
+      const apiURL = `${this.ENV_CUOME}/research/experiment/${this.id}`
 
       this.$axios({
         method: 'get',
@@ -151,7 +151,7 @@ export default {
     async doDelete () {
       if (confirm('삭제하시겠습니까?')) {
         const data = {}
-        const apiURL = `${this.ENV_CUOME}/research/${this.id}`
+        const apiURL = `${this.ENV_CUOME}/research/experiment/${this.id}`
 
         this.$axios({
           method: 'delete',
@@ -173,7 +173,7 @@ export default {
       $event.target.disabled = true
       if (await this.$validator.validate()) {
         const data = this.modalForm
-        const url = `${this.ENV_CUOME}/research/${this.id}`
+        const url = `${this.ENV_CUOME}/research/experiment/${this.id}`
 
         this.$axios({ method: 'put', url, data })
           .then(result => {
